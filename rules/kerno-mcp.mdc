@@ -1,0 +1,18 @@
+---
+description: When using Kerno MCP tools from aicore-agent, follow tool ordering and async job rules
+globs:
+alwaysApply: true
+---
+
+# Kerno MCP
+
+- **URL:** MCP is at `POST /mcp` on the agent `PORT` (or `MCP_PORT` if set). Server name: `kerno-aicore-agent`.
+- **Workspace:** Tools require `workspace_path` matching the agent `WORKSPACE` unless the tool defaults (see `kerno_healthcheck`).
+
+Order: `kerno_healthcheck` → `kerno_get_applications` → optional `kerno_list_endpoints` → `kerno_start_environment` → `kerno_job` until terminal → after **handler or API changes**, call **`kerno_validate`** (then `kerno_job`) before editing anything under `.kerno/scenarios/` → (optional) `kerno_capture_baseline` when scenarios must be regenerated → `kerno_job` until terminal → optional `kerno_approve` / `kerno_reject` → `kerno_compose_status`, logs, etc. Use the same `workspace_path` and `app` model as `kerno_start_environment` for `kerno_capture_baseline`. Plugin: **`skills/kerno-mcp-validate/SKILL.md`**, **`skills/kerno-mcp-capture-baseline/SKILL.md`**, **`references/capture-baseline.md`**.
+
+**Do not** hand-edit `.kerno/scenarios/**/*.scenario.ts` (baselines, asserts) to match API changes—run **`kerno_validate`** first, then **`kerno_capture_baseline`** with the same scope if Kerno should rewrite scenarios.
+
+**Do not** call `kerno_compose_up` / `kerno_compose_down` for an app while `kerno_start_environment` is still running for that app; wait for `kerno_job` first.
+
+`kerno_start_environment` can run **many minutes** (often past 15). MCP **hosts** usually cap one tool call around **~60s**; use **`kerno_job`** with **`wait=false`** every few minutes or read **`log_path`**. **Do not** spam **`kerno_job`** in a tight loop (token cost).
