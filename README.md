@@ -19,7 +19,8 @@ Shared content: `skills/`, `commands/`, `references/`.
 ## Install — Claude Code
 
 ```bash
-claude --plugin-dir /path/to/aicore/kerno-claude-plugin
+git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
+claude --plugin-dir ~/.kerno/mcp-plugin
 ```
 
 ## Install — Cursor
@@ -27,7 +28,8 @@ claude --plugin-dir /path/to/aicore/kerno-claude-plugin
 Symlink or copy this directory into Cursor’s local plugins folder, then reload the window:
 
 ```bash
-ln -s /path/to/aicore/kerno-claude-plugin ~/.cursor/plugins/local/kerno-mcp
+git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
+ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno-mcp
 ```
 
 See [cursor/README.md](cursor/README.md) for details and [Cursor marketplace publish](https://cursor.com/marketplace/publish) when ready.
