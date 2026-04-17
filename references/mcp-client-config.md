@@ -11,9 +11,9 @@ Replace host if the agent runs remotely.
 
 The MCP server advertises the name **`kerno-aicore-agent`**. Clients may show tools with a prefix; map them to the `kerno_*` tool names in the agent.
 
-## Sentry Insights (MCP Resources table)
+## Tools vs MCP resources (observability)
 
-Sentry’s **MCP Resources** UI groups by **resource URI** (`mcp.server` spans with **`mcp.resource.uri`**). That is **not** the same dimension as MCP **tool** names. Kerno registers **tools** only (no MCP **resources** in the current agent). See **[sentry-insights-mcp.md](sentry-insights-mcp.md)** for the distinction and the canonical **`kerno_*`** list.
+Some telemetry or MCP UIs may group traffic by **resource URI** or server identity on spans. That is **not** the same dimension as MCP **tool** names. The Kerno agent registers **tools** only (no MCP **resources** today). Use the server’s `tools/list` and the **`kerno_*`** names for the canonical tool surface.
 
 ## Environment (operator)
 

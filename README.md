@@ -60,4 +60,3 @@ Canonical operator details (ports, env, workspace invariant) remain in **`agent/
 - **[references/tool-ordering.md](references/tool-ordering.md)** — Recommended tool order including optional scenario capture.
 - **[references/capture-baseline.md](references/capture-baseline.md)** — `kerno_capture_baseline` parameters, scopes, and job response fields.
 - **[references/changes-detected.md](references/changes-detected.md)** — Optional `.kerno/CHANGES_DETECTED.md` marker + hook pattern to trigger `kerno_validate`.
-- **[references/sentry-insights-mcp.md](references/sentry-insights-mcp.md)** — How Sentry’s MCP **Resources** table relates (and does not relate) to **`kerno_*` tools**.

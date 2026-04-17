@@ -20,7 +20,7 @@ The aicore-agent binary is not included.
 | `.cursor-plugin/plugin.json` | Cursor manifest |
 | `commands/*.md` | Slash commands (both ecosystems where supported) |
 | `skills/*/SKILL.md` | Procedural skills |
-| `references/*.md` | Long-form client config, ordering, tool-specific notes (e.g. `capture-baseline.md`), and Sentry MCP UI notes (`sentry-insights-mcp.md`) |
+| `references/*.md` | Long-form client config, ordering, and tool-specific notes (e.g. `capture-baseline.md`) |
 | `rules/*.mdc` | Cursor-discovered rules |
 | `mcp.json` | MCP server template at plugin root (Cursor) |
 | `cursor/README.md` | Cursor install notes |

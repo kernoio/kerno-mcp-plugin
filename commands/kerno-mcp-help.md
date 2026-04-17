@@ -10,4 +10,3 @@ Summarize for the user:
 4. **Scenario validation** — `${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-validate/SKILL.md` for `kerno_validate` (after code changes, before hand-editing `.kerno/scenarios/`).
 5. **Scenario capture** — `${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-capture-baseline/SKILL.md` and `${CLAUDE_PLUGIN_ROOT}/references/capture-baseline.md` for `kerno_capture_baseline` (after environment is healthy).
 6. **Further detail** — `${CLAUDE_PLUGIN_ROOT}/references/tool-ordering.md`, `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md`, and the MCP server’s own `tools/list` output for live tool schemas.
-7. **Sentry MCP “Resources” vs tools** — If the user compares this plugin to Sentry’s MCP Resources table (`mcp.server` + resource URI), point to `${CLAUDE_PLUGIN_ROOT}/references/sentry-insights-mcp.md` (Resources URIs ≠ `kerno_*` tool names; Kerno exposes tools only today).
