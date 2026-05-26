@@ -12,6 +12,12 @@ The aicore-agent binary is not included.
 - **Agent + MCP:** `agent/apps/agent/docs/mcp.md` in the aicore repo.
 - **Tool names and descriptions:** `agent/libs/kerno-mcp/.../KernoMcpRegistration.kt`.
 
+## Where to start (user onboarding)
+
+1. Install the plugin (see root README).
+2. Run **`/install-kerno`** — skill `skills/install-kerno/SKILL.md`.
+3. User must open their MCP host in the **same workspace** bound by `kerno mcp -w`.
+
 ## Layout
 
 | Path | Role |
@@ -19,8 +25,10 @@ The aicore-agent binary is not included.
 | `.claude-plugin/plugin.json` | Claude Code manifest |
 | `.cursor-plugin/plugin.json` | Cursor manifest |
 | `commands/*.md` | Slash commands (both ecosystems where supported) |
+| `skills/install-kerno/SKILL.md` | First-time CLI + MCP install |
 | `skills/*/SKILL.md` | Procedural skills |
-| `references/*.md` | Long-form client config, ordering, and tool-specific notes (e.g. `capture-baseline.md`) |
+| `references/mcp-client-config.md` | CLI install, host registration, operator config, client timeouts |
+| `references/*.md` | Tool ordering and tool-specific notes (e.g. `capture-baseline.md`) |
 | `rules/*.mdc` | Cursor-discovered rules |
 | `mcp.json` | MCP server template at plugin root (Cursor) |
 | `cursor/README.md` | Cursor install notes |

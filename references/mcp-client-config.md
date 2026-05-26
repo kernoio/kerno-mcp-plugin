@@ -1,9 +1,110 @@
 # MCP client configuration (Kerno)
 
-## URL
+Single reference for connecting an MCP host to Kerno — CLI install, host registration, operator setup, and client limits.
+
+For the full install procedure, use **`/install-kerno`** (`skills/install-kerno/SKILL.md`). Read sections below as needed.
+
+---
+
+## Install (CLI)
+
+Install and start via **`@kerno/cli`**:
+
+```bash
+npm install -g @kerno/cli
+kerno login
+kerno mcp -w /absolute/path/to/your/repo
+```
+
+Read the **full command output** before proposing MCP config. The port is **session-specific** — never copy a port from docs or old config.
+
+### Parse `MCP_URL` from CLI output
+
+The agent listens on **loopback** at a URL ending in `/mcp`. Prefer, in order:
+
+1. A full URL in a printed registration snippet (`http://127.0.0.1:<port>/mcp` or `http://localhost:<port>/mcp`)
+2. A line like `MCP server running on port <N>` → `http://127.0.0.1:<N>/mcp`
+
+Also confirm: **Agent started successfully** and the **Workspace** line matches the absolute path you passed to `-w`.
+
+If the port changes after restart, re-parse and update host config.
+
+### Register with your MCP host
+
+Read this section **after** the user names their host. Do not assume a host from the current session.
+
+1. Run `kerno mcp -w "$WORKSPACE"` and parse `MCP_URL`.
+2. Find the host's MCP config location or CLI for the chosen scope (project/repo vs user/machine).
+3. Merge the server entry below; do not overwrite unrelated servers.
+4. Add transport/type fields only if the host rejects url-only config.
+5. Refresh or reconnect the host if tools are not visible.
+6. Resolve the MCP server id from the host's tool descriptors before calling tools.
+
+```json
+{
+  "mcpServers": {
+    "kerno": {
+      "url": "<MCP_URL from CLI output>"
+    }
+  }
+}
+```
+
+The CLI may print ready-made snippets for common hosts — prefer those when the user chose that host, after confirming scope.
+
+**Server id:** parent folder name of `kerno_get_applications.json` in the host's MCP descriptor tree.
+
+#### Scope aliases
+
+| User says | Means |
+|-----------|-------|
+| global, user-level, machine-wide, machine | User/machine scope |
+| project, repo, workspace | Project/repo scope |
+
+Register at **exactly one** scope per setup. If Kerno exists at the other scope, tell the user and remove only with explicit approval.
+
+#### Host examples
+
+Substitute **`MCP_URL`** everywhere.
+
+| Host | Project/repo scope | User/machine scope | Refresh if tools missing |
+|------|-------------------|--------------------|----------------------------|
+| **Cursor** | `<workspace>/.cursor/mcp.json` | `~/.cursor/mcp.json` | Reload window |
+| **Claude Code** | `claude mcp add --transport http kerno --scope project <MCP_URL>` | `claude mcp add --transport http kerno --scope local <MCP_URL>` | Restart or reopen in project |
+| **Codex / OpenCode / Gemini CLI** | Follow host MCP docs for workspace config | Follow host MCP docs for user config | Per host docs |
+| **Other** | Ask user | Ask user | Follow host MCP docs |
+
+Some hosts require extra JSON fields (`transport`, `type`, etc.) — add only what that host's docs specify.
+
+#### Install troubleshooting
+
+| Symptom | Action |
+|---------|--------|
+| MCP fails but something is listening | Re-run `kerno mcp -w "$WORKSPACE"`, re-parse `MCP_URL`, update config if port changed |
+| Tools not visible after register | Confirm config uses current `MCP_URL`, refresh host |
+| `workspace not found` | Same absolute path in `kerno mcp -w` and every MCP call |
+| Two Kerno entries | Duplicate at project + user scope — ask which to keep |
+| `kerno start` + `kerno mcp` race | `kerno stop`; run `kerno mcp -w "$WORKSPACE"` alone |
+| Stale URL in config | Re-parse from fresh CLI output |
+
+#### CLI maintenance
+
+| Action | Command |
+|--------|---------|
+| Stop | `kerno stop` |
+| Re-bind + refresh URL | `kerno mcp -w "$WORKSPACE"` |
+| Logs (user terminal) | `kerno logs` |
+| Sign out | `kerno logout` |
+
+---
+
+## Connection (advanced / self-hosted)
+
+For running **aicore-agent** directly (dev or custom deploy), not via `@kerno/cli`:
 
 - **Streamable HTTP:** `POST http://127.0.0.1:<PORT>/mcp` when MCP shares the main agent port.
-- **Dedicated MCP port:** If `MCP_PORT` is set and differs from `PORT`, use `http://127.0.0.1:<MCP_PORT>/mcp` for MCP only.
+- **Dedicated MCP port:** If `MCP_PORT` differs from `PORT`, use `http://127.0.0.1:<MCP_PORT>/mcp`.
+- **Docs default:** often port 8086 — treat as documentation only when using the CLI path above.
 
 Replace host if the agent runs remotely.
 
@@ -17,28 +118,12 @@ Some telemetry or MCP UIs may group traffic by **resource URI** or server identi
 
 ## Environment (operator)
 
-Typical variables (see `AgentConfig` in the main repo):
+Typical variables when running the agent directly (see `AgentConfig` in the main repo):
 
 - `ENABLE_MCP=true`
 - `WORKSPACE` — absolute path to workspace root
 - `PORT` — main HTTP port (default 8086)
 - `MCP_PORT` — optional dedicated MCP port
-
-## JSON example (illustrative)
-
-Clients vary; use your product’s MCP config format. The plugin root includes [`mcp.json`](../mcp.json) with the same shape:
-
-```json
-{
-  "mcpServers": {
-    "kerno": {
-      "url": "http://127.0.0.1:8086/mcp"
-    }
-  }
-}
-```
-
-Some clients use `type: "http"` or SSE variants—match the transport your client supports for **Streamable HTTP** to `POST /mcp`.
 
 ## Smoke
 
@@ -51,7 +136,7 @@ Send JSON-RPC `initialize` with:
 
 **Per-tool-call limit is usually on the MCP host (client),** not the agent. Many hosts end a single tool HTTP round-trip around **~60 seconds**, regardless of how long the server would otherwise wait. **`kerno_job`** cannot rely on one blocking call lasting through a **15+ minute** `kerno_start_environment`; jobs often run **many minutes** and may **exceed 15 minutes**.
 
-**`MCP_TIMEOUT`** in Claude Code applies to **MCP server startup**, not how long an individual tool call may run.
+**`MCP_TIMEOUT`** in some hosts applies to **MCP server startup**, not how long an individual tool call may run.
 
 **Practical pattern:** use **`kerno_job`** with **`wait=false`** and check again **every few minutes**, or read **`log_path`**. **Do not** invoke **`kerno_job`** in a **tight loop**—each call costs tokens.
 
