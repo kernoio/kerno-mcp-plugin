@@ -24,3 +24,6 @@ Use this as a **default** sequence when the user does not specify otherwise. Det
 - Launch a second **`plan_baseline`** or **`implement_baseline`** while one is already running for the same workspace + scope + app selection (deduped; see `mcp.md`).
 - Call **`kerno_start_environment`** without user-approved compose plan on first setup.
 - Treat compose **`status: Up`** or **`healthy`** job status as ready for validate/implement without checking **`ready_for_validation`**.
+- Treating “setup the env” / “bootstrap” / “start the stack” as approval of the compose plan or its open questions.
+- Calling **`kerno_start_environment`** without pasting **Open Questions** to the user (verbatim or faithfully extracted).
+- Continuing **`kerno_job`** polling when status is **`needs_user_feedback`**.

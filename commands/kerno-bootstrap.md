@@ -1,5 +1,5 @@
 ---
-description: Run the recommended Kerno MCP workflow (healthcheck, get_applications, start environment, wait for job)
+description: Verify Kerno MCP connectivity (healthcheck, get_applications, optional endpoint listing)
 argument-hint: "[workspace_path] [app]"
 ---
 

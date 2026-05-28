@@ -62,7 +62,7 @@ Work in this repository root unless I specify another path.
 2. **First thing after the plugin is installed:** run **install-kerno** (`/install-kerno` or `@install-kerno`).
 3. **Open your assistant in the same workspace** you bound with `kerno mcp -w <path>`.
 
-After MCP is connected, use `/kerno-bootstrap` or other skills for environment setup, endpoints, and validation.
+After MCP is connected, use `/kerno-bootstrap` to verify connectivity, then `/kerno-env` for environment setup, or other skills for endpoints and validation.
 
 Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)
 
@@ -119,7 +119,8 @@ Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 | Command | Purpose |
 |---------|---------|
 | `/install-kerno` | First-time setup: CLI, agent, MCP registration, verification, next steps |
-| `/kerno-bootstrap` | Run the recommended Kerno MCP workflow (healthcheck → get_applications → environment → job) |
+| `/kerno-bootstrap` | Verify MCP connectivity (healthcheck → get_applications → optional endpoints) |
+| `/kerno-env` | Environment setup with compose plan approval gate → start environment |
 | `/kerno-mcp-plan-implement-baseline` | Plan and implement scenario tests via **`kerno_plan_baseline`** + **`kerno_implement_baseline`** |
 | `/kerno-mcp-capture-baseline` | Deprecated alias — use **`/kerno-mcp-plan-implement-baseline`** |
 | `/kerno-mcp-help` | Pointers to MCP setup, job semantics, and references |
@@ -127,7 +128,8 @@ Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 ## Skills
 
 - **install-kerno** — Step-by-step install and MCP connection for a workspace ([GitBook guide](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)). **Run this first** after adding the plugin.
-- **kerno-mcp-bootstrap** — Full bootstrap procedure aligned with `mcp.md`.
+- **kerno-mcp-bootstrap** — Connectivity/bootstrap checks (no environment bring-up).
+- **kerno-mcp-environment-setup** — Compose plan approval gate + start environment (recommended for “setup the env” requests).
 - **kerno-mcp-background-job** — How to use `kerno_start_environment` + `kerno_job` (wait, timeouts, logs).
 - **kerno-mcp-validate** — Run **`kerno_validate`** after code changes; do not patch **`.kerno/scenarios/`** before validate / plan-implement.
 - **kerno-mcp-plan-implement-baseline** — When and how to use **`kerno_plan_baseline`** and **`kerno_implement_baseline`** (two-stage scenario authoring).
