@@ -2,6 +2,8 @@
 
 **GitHub:** [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
 
+**Fastest:** paste [prompts/install-claude.md](../prompts/install-claude.md) into Claude Code.
+
 Manifest: [`.claude-plugin/plugin.json`](../.claude-plugin/plugin.json). Shared skills and commands live at the [plugin root](../README.md).
 
 ## Install the plugin

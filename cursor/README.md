@@ -2,6 +2,10 @@
 
 **GitHub:** [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
 
+**Fastest:** paste [prompts/install-cursor.md](../prompts/install-cursor.md) into Cursor Agent.
+
+**Optional MCP deeplink:** [Add Kerno MCP in Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=kerno&config=eyJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjgwODYvbWNwIn0=) (placeholder URL — run `/install-kerno` for the real session port). Does not install plugin skills; use the prompt for full setup.
+
 Manifest: [`.cursor-plugin/plugin.json`](../.cursor-plugin/plugin.json). Shared skills, commands, and rules live at the [plugin root](../README.md).
 
 ## Install the plugin

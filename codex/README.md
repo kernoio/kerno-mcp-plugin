@@ -4,6 +4,8 @@ This package is a [Codex plugin](https://developers.openai.com/codex/plugins/): 
 
 **GitHub:** [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
 
+**Fastest:** paste [prompts/install-codex.md](../prompts/install-codex.md) into Codex.
+
 ## First step after installing the plugin
 
 Installing **kerno-mcp** only adds skills and references. The **first thing to do next** is run the **install-kerno** skill in the workspace you want to validate:
