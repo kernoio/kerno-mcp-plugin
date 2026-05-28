@@ -1,9 +1,10 @@
 # CLAUDE.md — kerno-claude-plugin
 
-This directory ships **two** plugin manifests for the same assets:
+This directory ships **three** plugin manifests for the same assets:
 
 - **Claude Code:** `.claude-plugin/plugin.json`
 - **Cursor:** `.cursor-plugin/plugin.json`
+- **Codex:** `.codex-plugin/plugin.json`
 
 The aicore-agent binary is not included.
 
@@ -24,17 +25,14 @@ The aicore-agent binary is not included.
 |------|------|
 | `.claude-plugin/plugin.json` | Claude Code manifest |
 | `.cursor-plugin/plugin.json` | Cursor manifest |
-| `.codex-plugin/plugin.json` | Codex manifest |
-| `.agents/plugins/marketplace.json` | Codex repo marketplace catalog |
-| `commands/*.md` | Slash commands (Claude Code / Cursor where supported) |
+| `commands/*.md` | Slash commands (both ecosystems where supported) |
 | `skills/install-kerno/SKILL.md` | First-time CLI + MCP install |
 | `skills/*/SKILL.md` | Procedural skills |
 | `references/mcp-client-config.md` | CLI install, host registration, operator config, client timeouts |
 | `references/*.md` | Tool ordering and tool-specific notes (e.g. `capture-baseline.md`) |
 | `rules/*.mdc` | Cursor-discovered rules |
-| `.mcp.json` | MCP server template (Codex bundle; Cursor-compatible shape) |
+| `mcp.json` | MCP server template at plugin root (Cursor) |
 | `cursor/README.md` | Cursor install notes |
-| `codex/README.md` | Codex install, marketplace, and plugin management |
 
 ## Conventions
 

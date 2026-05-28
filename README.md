@@ -6,10 +6,11 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 ## Where to start
 
-1. **Install this plugin** in your assistant (Claude Code, Cursor, or Codex) — see [Install](#install--claude-code) below. For Codex, add the marketplace from [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin): `codex plugin marketplace add kernoio/kerno-mcp-plugin`, then install **kerno-mcp** from `/plugins` ([details](codex/README.md)).
-2. **First thing after the plugin is installed:** run the **install-kerno** skill. It installs `@kerno/cli`, logs you in, starts the agent on your workspace, and registers MCP with your host.
-   - Claude Code / Cursor: `/install-kerno`
-   - Codex: `@install-kerno` (or ask to “set up Kerno MCP”)
+1. **Install the plugin** for your assistant — follow the guide for your host:
+   - [Claude Code](claude/README.md)
+   - [Cursor](cursor/README.md)
+   - [Codex](codex/README.md)
+2. **First thing after the plugin is installed:** run the **install-kerno** skill (`/install-kerno` or `@install-kerno`, depending on host). Each client guide above calls this out.
 3. **Open your assistant in the same workspace** you bound with `kerno mcp -w <path>`. Kerno MCP tools only work when the session matches that folder.
 
 After MCP is connected, use `/kerno-bootstrap` or other skills for environment setup, endpoints, and validation.
@@ -18,11 +19,11 @@ Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mc
 
 ## Layout (one repo, three manifests)
 
-| Client | Manifest | Discovery / install |
-|--------|----------|---------------------|
-| Claude Code | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) | `commands/`, `skills/`, `references/` |
-| Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | `rules/`, `skills/`, `commands/`, [`.mcp.json`](.mcp.json) |
-| Codex | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) | `skills/`, [marketplace](.agents/plugins/marketplace.json) — [codex/README.md](codex/README.md) |
+| Client | Install guide | Manifest |
+|--------|---------------|----------|
+| Claude Code | [claude/README.md](claude/README.md) | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) |
+| Cursor | [cursor/README.md](cursor/README.md) | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) |
+| Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) |
 
 Shared content: `skills/`, `commands/`, `references/`.
 
@@ -34,43 +35,6 @@ Shared content: `skills/`, `commands/`, `references/`.
 - MCP registered in your editor — **install-kerno** handles this step by step.
 
 For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md) and aicore `agent/apps/agent/docs/mcp.md`.
-
-## Install — Claude Code
-
-Clone from [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin):
-
-```bash
-git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
-claude --plugin-dir ~/.kerno/mcp-plugin
-```
-
-Then run **`/install-kerno`**.
-
-## Install — Cursor
-
-Symlink or copy this directory into Cursor’s local plugins folder, then reload the window:
-
-```bash
-git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
-ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno-mcp
-```
-
-Then run **`/install-kerno`**.
-
-See [cursor/README.md](cursor/README.md) for details and [Cursor marketplace publish](https://cursor.com/marketplace/publish) when ready.
-
-## Install — Codex
-
-Plugin source: **[kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)** on GitHub. Codex loads it via the marketplace in that repo (no separate publish host required).
-
-```bash
-codex plugin marketplace add kernoio/kerno-mcp-plugin
-# In Codex CLI: /plugins → Kerno MCP → Install kerno-mcp
-```
-
-**Right after install:** invoke **`@install-kerno`** in your project workspace (the same folder you will bind with `kerno mcp -w`). The plugin bundles skills and an MCP template; it does not install the Kerno CLI or start the agent by itself.
-
-Full steps (trust, enable/disable, `config.toml`): **[codex/README.md](codex/README.md)**.
 
 ## Commands
 

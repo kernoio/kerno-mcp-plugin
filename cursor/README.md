@@ -1,23 +1,37 @@
-# Cursor — legacy templates
+# Cursor — install
 
-**Prefer the Cursor plugin layout at this package root:** `.cursor-plugin/plugin.json`, `rules/`, `mcp.json`, `skills/`, `commands/` (see [README.md](../README.md)).
+**GitHub:** [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
 
-## Cursor plugin (recommended)
+Manifest: [`.cursor-plugin/plugin.json`](../.cursor-plugin/plugin.json). Shared skills, commands, and rules live at the [plugin root](../README.md).
 
-1. Symlink or copy this folder into Cursor’s local plugins directory:
+## Install the plugin
 
-   ```bash
-   ln -s /path/to/aicore/kerno-claude-plugin ~/.cursor/plugins/local/kerno-mcp
-   ```
+Symlink or copy a checkout into Cursor’s local plugins folder, then reload the window:
 
-2. Restart Cursor or run **Developer: Reload Window**.
+```bash
+git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
+ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno-mcp
+```
 
-3. Components are discovered from default directories (`rules/`, `skills/`, `commands/`). Point MCP at Kerno using workspace `.cursor/mcp.json` or user `~/.cursor/mcp.json` (same JSON shape as root [`.mcp.json`](../.mcp.json); replace the URL after `kerno mcp -w`). See [Cursor plugin docs](https://cursor.com) for manifest fields and optional custom paths.
+Restart Cursor or run **Developer: Reload Window**.
 
-## Files in this folder
+Components are discovered from `rules/`, `skills/`, and `commands/` at the plugin root. See [Cursor plugin docs](https://cursor.com) for manifest details and [marketplace publish](https://cursor.com/marketplace/publish) when ready.
 
-| File | Purpose |
-|------|---------|
-| [mcp.json.example](mcp.json.example) | Same shape as root [mcp.json](../mcp.json); kept for docs that linked here earlier |
+## First step after installing the plugin
 
-Canonical rule content lives in [rules/kerno-mcp.mdc](../rules/kerno-mcp.mdc).
+Run **`/install-kerno`**. That skill installs `@kerno/cli`, runs `kerno login`, starts the agent with `kerno mcp -w <path>`, and registers MCP for Cursor.
+
+## MCP
+
+Point Kerno at your workspace using `.cursor/mcp.json` or `~/.cursor/mcp.json` (same JSON shape as root [`.mcp.json`](../.mcp.json); replace the URL after `kerno mcp -w`). Details: [references/mcp-client-config.md](../references/mcp-client-config.md) (**Cursor** row).
+
+Example shape: [mcp.json.example](mcp.json.example).
+
+## Rules
+
+Canonical rule content: [rules/kerno-mcp.mdc](../rules/kerno-mcp.mdc).
+
+## Further reading
+
+- [Plugin root README](../README.md)
+- [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)
