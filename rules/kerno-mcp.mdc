@@ -11,6 +11,8 @@ alwaysApply: true
 
 Order: `kerno_healthcheck` → `kerno_get_applications` → optional `kerno_list_endpoints` (**`scope` required**) → prefer `kerno_compose_up` when compose files exist, else compose-plan workflow → `kerno_start_environment` when needed → `kerno_job` until terminal → confirm **`ready_for_validation`** → after **handler or API changes**, call **`kerno_validate`** (then `kerno_job`) before editing anything under `.kerno/scenarios/` → (optional) **`kerno_plan_baseline`** then **`kerno_implement_baseline`** when scenarios must be regenerated → `kerno_job` until terminal → optional `kerno_approve` / `kerno_reject` → `kerno_compose_status`, logs, etc. Use **`kerno_cancel`** to stop in-flight jobs. Plugin: **`skills/kerno-mcp-validate/SKILL.md`**, **`skills/kerno-mcp-plan-implement-baseline/SKILL.md`**, **`references/plan-implement-baseline.md`**, **`references/compose-plan.md`**.
 
+If tools behave as if they are operating on old code (stale analysis/snapshot), call **`kerno_sync_workspace`** first (optionally inspect snapshot state via **`kerno_list_workspaces`**), then retry.
+
 **Do not** hand-edit `.kerno/scenarios/**/*.scenario.ts` (baselines, asserts) to match API changes—run **`kerno_validate`** first, then **`kerno_plan_baseline`** / **`kerno_implement_baseline`** with the same scope if Kerno should rewrite scenarios.
 
 **Do not** call `kerno_compose_up` / `kerno_compose_down` for an app while `kerno_start_environment` is still running for that app; wait for `kerno_job` first.

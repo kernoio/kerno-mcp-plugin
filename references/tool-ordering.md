@@ -4,6 +4,7 @@ Use this as a **default** sequence when the user does not specify otherwise. Det
 
 1. **`kerno_healthcheck`** — Docker, git, auth (optional `workspace_path`). Intentionally waits **120 seconds** (SSE timeout testing).
 2. **`kerno_get_applications`** — Analyze workspace; note `workspace_id` if you will pass it to later tools.
+   - If you changed code since Kerno last analyzed/snapshotted the workspace (or results look stale), call **`kerno_sync_workspace`** first (optionally inspect snapshot state via **`kerno_list_workspaces`**) before continuing.
 3. Optionally **`kerno_list_endpoints`** — **requires `scope`** (`all`, `changed`, `file:…`, `endpoint:…`); routes + **`existingTests`** per endpoint.
 4. **Bring the stack up** for one `app`:
    - Prefer **`kerno_compose_up`** when compose files already exist (synchronous).

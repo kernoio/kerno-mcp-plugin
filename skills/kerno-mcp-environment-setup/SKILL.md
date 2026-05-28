@@ -11,7 +11,8 @@ Use this workflow whenever the user asks to “set up the env”, “bootstrap�
 ## Preconditions
 
 1. `kerno_healthcheck`
-2. `kerno_get_applications` → pick **`app`**
+2. If you changed code since Kerno last analyzed/snapshotted the workspace (or results look stale), call **`kerno_sync_workspace`** first (optionally inspect snapshot state via **`kerno_list_workspaces`**).
+3. `kerno_get_applications` → pick **`app`**
 
 ## Plan gate (mandatory — do not skip)
 

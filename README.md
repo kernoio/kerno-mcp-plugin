@@ -6,6 +6,28 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 ## Give this repo to your coding tool
 
+### Quick install (Skills CLI)
+
+From your project root (or use `-g` for a user-wide install), install the plugin skills into the agents the CLI detects (Cursor, Claude Code, Codex, and others):
+
+```bash
+npx skills add kernoio/kerno-mcp-plugin
+```
+
+Then run **`/install-kerno`** (or **`@install-kerno`** in Codex) in that workspace to install `@kerno/cli`, start the agent with `kerno mcp -w`, and register MCP.
+
+To refresh after upstream changes:
+
+```bash
+npx skills update kernoio/kerno-mcp-plugin
+```
+
+Useful flags: `-g` / `--global`, `-a cursor` (or `claude-code`, `codex`, …), `-y` to skip prompts. See [vercel-labs/skills](https://github.com/vercel-labs/skills).
+
+This path installs **skills** (procedures). Slash commands, Cursor rules, and full plugin manifests still use the [per-client install](#install--claude-code) steps below if you need them.
+
+### Or: paste a prompt into your assistant
+
 Paste **one** prompt below into your assistant (Agent chat, Claude Code, Codex, etc.). It should clone or register this plugin, then run **install-kerno** to install the CLI, start the agent, and connect MCP for your workspace.
 
 | Tool | Copy-paste prompt |
@@ -58,7 +80,7 @@ Work in this repository root unless I specify another path.
 
 ## Where to start
 
-1. **Install the plugin** — use a [prompt above](#give-this-repo-to-your-coding-tool), or the minimal steps under [Install](#install--claude-code) ([Claude](#install--claude-code) · [Cursor](#install--cursor) · [Codex](#install--codex)).
+1. **Install the plugin** — [`npx skills add`](#quick-install-skills-cli) (fastest), a [prompt](#or-paste-a-prompt-into-your-assistant), or the minimal steps under [Install](#install--claude-code) ([Claude](#install--claude-code) · [Cursor](#install--cursor) · [Codex](#install--codex)).
 2. **First thing after the plugin is installed:** run **install-kerno** (`/install-kerno` or `@install-kerno`).
 3. **Open your assistant in the same workspace** you bound with `kerno mcp -w <path>`.
 
