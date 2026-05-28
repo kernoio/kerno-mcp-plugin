@@ -2,15 +2,25 @@
 
 This package is a [Codex plugin](https://developers.openai.com/codex/plugins/): manifest at [`.codex-plugin/plugin.json`](../.codex-plugin/plugin.json), skills under `skills/`, and an optional bundled MCP template at [`.mcp.json`](../.mcp.json).
 
+**GitHub:** [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
+
+## First step after installing the plugin
+
+Installing **kerno-mcp** only adds skills and references. The **first thing to do next** is run the **install-kerno** skill in the workspace you want to validate:
+
+- Type `@` and choose **install-kerno**, or ask Codex to “set up Kerno MCP”.
+
+That skill installs `@kerno/cli`, runs `kerno login`, starts the agent with `kerno mcp -w <path>`, and registers the session MCP URL in Codex. See [Connect Kerno MCP](#connect-kerno-mcp) below.
+
 ## Prerequisites
 
 - [Codex CLI](https://developers.openai.com/codex/cli/) installed and signed in (`codex login`)
 - Node.js ≥ 18, Docker, and a git repo for the target project
-- **`@kerno/cli`** for the Kerno agent (see [README.md](../README.md))
+- **`@kerno/cli`** for the Kerno agent — installed by the **install-kerno** skill (see [README.md](../README.md))
 
 ## Install the plugin
 
-Pick one path. After any install, **start a new Codex thread** or restart Codex so skills and MCP entries load.
+Pick one path. After any install, **start a new Codex thread** or restart Codex so skills load. Then run **`@install-kerno`** (see above).
 
 ### Option A — Plugin directory (recommended)
 
@@ -21,7 +31,7 @@ codex
 /plugins
 ```
 
-1. Add this repo as a marketplace source (once per machine):
+1. Add the [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin) repo as a marketplace source (once per machine):
 
    ```bash
    codex plugin marketplace add kernoio/kerno-mcp-plugin
@@ -30,6 +40,8 @@ codex
    To pin a branch: `codex plugin marketplace add kernoio/kerno-mcp-plugin --ref main`
 
 2. In `/plugins`, select the **Kerno MCP** marketplace, open **kerno-mcp**, and choose **Install plugin**.
+
+3. Run **`@install-kerno`** in your project ([First step after installing the plugin](#first-step-after-installing-the-plugin)).
 
 Manage marketplaces from the CLI:
 
@@ -71,11 +83,11 @@ Merge into `~/.agents/plugins/marketplace.json` (create the file if needed):
 }
 ```
 
-Adjust `source.path` so it resolves from `~/.agents/plugins/` to your clone. Restart Codex, then install **kerno-mcp** from `/plugins`.
+Adjust `source.path` so it resolves from `~/.agents/plugins/` to your clone. Restart Codex, install **kerno-mcp** from `/plugins`, then run **`@install-kerno`**.
 
 ### Option C — Repo marketplace (monorepo / this checkout)
 
-When this repository is your project root, Codex can read [`.agents/plugins/marketplace.json`](../.agents/plugins/marketplace.json). The entry points at `./` (this repo). Trust the project (see below), restart Codex, open `/plugins`, select the **Kerno MCP** marketplace, and install **kerno-mcp**.
+When this repository is your project root, Codex can read [`.agents/plugins/marketplace.json`](../.agents/plugins/marketplace.json). The entry points at `./` (this repo). Trust the project (see below), restart Codex, open `/plugins`, select the **Kerno MCP** marketplace, install **kerno-mcp**, then run **`@install-kerno`**.
 
 ## Enable, disable, or remove
 
@@ -98,9 +110,9 @@ trust_level = "trusted"
 
 ## Connect Kerno MCP
 
-Installing the plugin does **not** start the Kerno agent. The bundled [`.mcp.json`](../.mcp.json) is a template; the MCP port is **session-specific**.
+Installing the plugin does **not** start the Kerno agent. Use the **install-kerno** skill first. The bundled [`.mcp.json`](../.mcp.json) is a template; the MCP port is **session-specific**.
 
-1. In Codex, invoke the **install-kerno** skill (e.g. type `@` and choose **install-kerno**, or ask to “set up Kerno MCP”).
+1. In Codex, invoke **install-kerno** (`@install-kerno` or “set up Kerno MCP”).
 2. Follow the skill: install `@kerno/cli`, run `kerno mcp -w <workspace>`, parse `MCP_URL` from CLI output.
 3. Register that URL in Codex — see [references/mcp-client-config.md](../references/mcp-client-config.md) (**Codex** row).
 
@@ -119,7 +131,7 @@ User-scoped alternative: same `[mcp_servers.kerno]` block in `~/.codex/config.to
 
 | Skill | Use when |
 |-------|----------|
-| **install-kerno** | First-time CLI, agent, and MCP registration |
+| **install-kerno** | **First** — CLI, agent, and MCP registration |
 | **kerno-mcp-bootstrap** | Recommended bootstrap workflow |
 | **kerno-mcp-background-job** | `kerno_start_environment` + `kerno_job` |
 | **kerno-mcp-validate** | After code changes |
