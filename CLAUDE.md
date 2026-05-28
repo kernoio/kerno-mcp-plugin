@@ -16,6 +16,7 @@ The aicore-agent binary is not included.
 ## Where to start (user onboarding)
 
 1. Install the plugin — [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), or [codex/README.md](codex/README.md).
+| `prompts/*.md` | Copy-paste install prompts per host |
 2. Run **`/install-kerno`** — skill `skills/install-kerno/SKILL.md`.
 3. User must open their MCP host in the **same workspace** bound by `kerno mcp -w`.
 
@@ -37,6 +38,7 @@ The aicore-agent binary is not included.
 | `claude/README.md` | Claude Code install |
 | `cursor/README.md` | Cursor install |
 | `codex/README.md` | Codex install, marketplace, and plugin management |
+| `prompts/*.md` | Copy-paste install prompts per host |
 
 ## Conventions
 
