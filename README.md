@@ -6,11 +6,8 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 ## Where to start
 
-1. **Install the plugin** for your assistant — follow the guide for your host:
-   - [Claude Code](claude/README.md)
-   - [Cursor](cursor/README.md)
-   - [Codex](codex/README.md)
-2. **First thing after the plugin is installed:** run the **install-kerno** skill (`/install-kerno` or `@install-kerno`, depending on host). Each client guide above calls this out.
+1. **Install the plugin** for your assistant — [Claude Code](#install--claude-code), [Cursor](#install--cursor), or [Codex](#install--codex) below (more in [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), [codex/README.md](codex/README.md)).
+2. **First thing after the plugin is installed:** run the **install-kerno** skill (`/install-kerno` or `@install-kerno`, depending on host).
 3. **Open your assistant in the same workspace** you bound with `kerno mcp -w <path>`. Kerno MCP tools only work when the session matches that folder.
 
 After MCP is connected, use `/kerno-bootstrap` or other skills for environment setup, endpoints, and validation.
@@ -35,6 +32,35 @@ Shared content: `skills/`, `commands/`, `references/`.
 - MCP registered in your editor — **install-kerno** handles this step by step.
 
 For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md) and aicore `agent/apps/agent/docs/mcp.md`.
+
+## Install — Claude Code
+
+```bash
+git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
+claude --plugin-dir ~/.kerno/mcp-plugin
+```
+
+Then run **`/install-kerno`**. Details: [claude/README.md](claude/README.md).
+
+## Install — Cursor
+
+Symlink or copy the repo into Cursor’s local plugins folder, then reload the window:
+
+```bash
+git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
+ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno-mcp
+```
+
+Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md).
+
+## Install — Codex
+
+```bash
+codex plugin marketplace add kernoio/kerno-mcp-plugin
+# In Codex CLI: /plugins → Kerno MCP → Install kerno-mcp
+```
+
+Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 
 ## Commands
 
