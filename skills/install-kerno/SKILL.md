@@ -126,6 +126,8 @@ The CLI may print host-specific registration snippets in its output — use them
 6. Resolve MCP server id from host tool descriptors (e.g. `kerno_get_applications.json` parent folder)
 7. If tools not visible → user refreshes or reconnects the host per its MCP docs **(user)**
 
+**Codex:** merge `[mcp_servers.kerno]` with `url = "<MCP_URL>"` into `.codex/config.toml` (project) or `~/.codex/config.toml` (user). If using project scope, confirm `trust_level = "trusted"` for `$WORKSPACE` in `~/.codex/config.toml`. Install the plugin first via [codex/README.md](../codex/README.md) if skills are missing. Restart Codex or start a new thread after config changes.
+
 ## Phase 5 — Verify
 
 Call **`kerno_get_applications`** with `workspace_path: "$WORKSPACE"`. Save `workspace_id` and supported apps.

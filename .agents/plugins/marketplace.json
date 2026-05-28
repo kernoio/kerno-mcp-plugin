@@ -1,0 +1,20 @@
+{
+  "name": "kerno-mcp",
+  "interface": {
+    "displayName": "Kerno MCP"
+  },
+  "plugins": [
+    {
+      "name": "kerno-mcp",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

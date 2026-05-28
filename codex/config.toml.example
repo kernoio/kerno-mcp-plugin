@@ -1,0 +1,7 @@
+# Example project-scoped Codex config for Kerno MCP.
+# Copy to <your-repo>/.codex/config.toml and replace <port> with the value
+# from `kerno mcp -w` output. Trust the project in ~/.codex/config.toml first.
+
+[mcp_servers.kerno]
+url = "http://127.0.0.1:<port>/mcp"
+enabled = true
