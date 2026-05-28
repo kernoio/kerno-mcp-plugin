@@ -1,4 +1,4 @@
-# Kerno MCP (Claude Code + Cursor plugin)
+# Kerno MCP (Claude Code + Cursor + Codex plugin)
 
 Markdown-only plugin: slash commands, skills, and rules that guide use of the **Kerno MCP** tools. The agent runtime is **not** included here — install and start it with **`@kerno/cli`**.
 

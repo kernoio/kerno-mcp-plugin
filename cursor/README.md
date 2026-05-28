@@ -12,7 +12,7 @@
 
 2. Restart Cursor or run **Developer: Reload Window**.
 
-3. Components are discovered from default directories (`rules/`, `skills/`, `commands/`, root `mcp.json`). See [Cursor plugin docs](https://cursor.com) for manifest fields and optional custom paths.
+3. Components are discovered from default directories (`rules/`, `skills/`, `commands/`). Point MCP at Kerno using workspace `.cursor/mcp.json` or user `~/.cursor/mcp.json` (same JSON shape as root [`.mcp.json`](../.mcp.json); replace the URL after `kerno mcp -w`). See [Cursor plugin docs](https://cursor.com) for manifest fields and optional custom paths.
 
 ## Files in this folder
 

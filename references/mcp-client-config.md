@@ -76,6 +76,29 @@ Substitute **`MCP_URL`** everywhere.
 
 Some hosts require extra JSON fields (`transport`, `type`, etc.) — add only what that host's docs specify.
 
+#### Codex (`config.toml`)
+
+Project-scoped MCP lives in `.codex/config.toml` at the repo root. Codex loads it only when the project is trusted in `~/.codex/config.toml`:
+
+```toml
+[projects."/absolute/path/to/your/repo"]
+trust_level = "trusted"
+```
+
+Register Kerno with the parsed **`MCP_URL`** (substitute `<port>` from CLI output):
+
+```toml
+[mcp_servers.kerno]
+url = "http://127.0.0.1:<port>/mcp"
+enabled = true
+```
+
+User-scoped: put the same `[mcp_servers.kerno]` block in `~/.codex/config.toml` instead.
+
+**Plugin install:** see [codex/README.md](../codex/README.md) — `codex plugin marketplace add kernoio/kerno-mcp-plugin`, then `/plugins` → install **kerno-mcp**. The plugin may ship a bundled [`.mcp.json`](../.mcp.json) template; still update the URL after `kerno mcp -w` because the port is session-specific.
+
+**Plugin MCP policy** (optional, after install): `~/.codex/config.toml` may include `[plugins."kerno-mcp@…".mcp_servers.kerno]` — see [Codex plugin MCP docs](https://developers.openai.com/codex/plugins/build).
+
 #### Install troubleshooting
 
 | Symptom | Action |
