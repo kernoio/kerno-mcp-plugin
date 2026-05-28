@@ -120,7 +120,8 @@ Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 |---------|---------|
 | `/install-kerno` | First-time setup: CLI, agent, MCP registration, verification, next steps |
 | `/kerno-bootstrap` | Run the recommended Kerno MCP workflow (healthcheck → get_applications → environment → job) |
-| `/kerno-mcp-capture-baseline` | Point the agent at **`kerno_capture_baseline`** (scopes, async job, prerequisites) |
+| `/kerno-mcp-plan-implement-baseline` | Plan and implement scenario tests via **`kerno_plan_baseline`** + **`kerno_implement_baseline`** |
+| `/kerno-mcp-capture-baseline` | Deprecated alias — use **`/kerno-mcp-plan-implement-baseline`** |
 | `/kerno-mcp-help` | Pointers to MCP setup, job semantics, and references |
 
 ## Skills
@@ -128,8 +129,9 @@ Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 - **install-kerno** — Step-by-step install and MCP connection for a workspace ([GitBook guide](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)). **Run this first** after adding the plugin.
 - **kerno-mcp-bootstrap** — Full bootstrap procedure aligned with `mcp.md`.
 - **kerno-mcp-background-job** — How to use `kerno_start_environment` + `kerno_job` (wait, timeouts, logs).
-- **kerno-mcp-validate** — Run **`kerno_validate`** after code changes; do not patch **`.kerno/scenarios/`** before validate / **`kerno_capture_baseline`**.
-- **kerno-mcp-capture-baseline** — When and how to use **`kerno_capture_baseline`** (plan+implement+run scenarios).
+- **kerno-mcp-validate** — Run **`kerno_validate`** after code changes; do not patch **`.kerno/scenarios/`** before validate / plan-implement.
+- **kerno-mcp-plan-implement-baseline** — When and how to use **`kerno_plan_baseline`** and **`kerno_implement_baseline`** (two-stage scenario authoring).
+- **kerno-mcp-capture-baseline** — Deprecated; redirects to plan-implement-baseline.
 
 ## Rules (Cursor)
 
@@ -140,7 +142,8 @@ Canonical operator details (ports, env, workspace invariant) remain in **`agent/
 ## References
 
 - **[references/mcp-client-config.md](references/mcp-client-config.md)** — CLI install, host registration, operator env, timeouts (single connection reference).
-- **[references/tool-ordering.md](references/tool-ordering.md)** — Recommended tool order including optional scenario capture.
-- **[references/capture-baseline.md](references/capture-baseline.md)** — `kerno_capture_baseline` parameters, scopes, and job response fields.
-- **[references/changes-detected.md](references/changes-detected.md)** — Optional `.kerno/CHANGES_DETECTED.md` marker + hook pattern to trigger `kerno_validate`.
+- **[references/tool-ordering.md](references/tool-ordering.md)** — Recommended tool order aligned with shipped MCP tools.
+- **[references/compose-plan.md](references/compose-plan.md)** — Compose plan generate/feedback workflow before **`kerno_start_environment`**.
+- **[references/plan-implement-baseline.md](references/plan-implement-baseline.md)** — **`kerno_plan_baseline`** and **`kerno_implement_baseline`** parameters, scopes, and job response fields.
+- **[references/capture-baseline.md](references/capture-baseline.md)** — Deprecated redirect to plan-implement-baseline.
 - **[references/cursor-install-deeplink.md](references/cursor-install-deeplink.md)** — Cursor “Open in Cursor” prompt deeplinks (regenerate with `scripts/generate-cursor-install-deeplink.py`).

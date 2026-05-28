@@ -32,7 +32,10 @@ The aicore-agent binary is not included.
 | `skills/install-kerno/SKILL.md` | First-time CLI + MCP install |
 | `skills/*/SKILL.md` | Procedural skills |
 | `references/mcp-client-config.md` | CLI install, host registration, operator config, client timeouts |
-| `references/*.md` | Tool ordering and tool-specific notes (e.g. `capture-baseline.md`) |
+| `references/compose-plan.md` | Compose plan workflow before first start_environment |
+| `references/plan-implement-baseline.md` | kerno_plan_baseline + kerno_implement_baseline |
+| `references/tool-ordering.md` | Recommended MCP tool order |
+| `references/*.md` | Other connection and install notes |
 | `rules/*.mdc` | Cursor-discovered rules |
 | `.mcp.json` | MCP server template (Codex bundle; Cursor-compatible shape) |
 | `claude/README.md` | Claude Code install |

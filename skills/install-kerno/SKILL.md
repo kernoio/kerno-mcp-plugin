@@ -152,7 +152,7 @@ Once Tier C passes, say plainly that Kerno is connected. Include:
 
 4. If multiple supported apps, ask which app to work with. If one app, confirm it. If zero, explain what Kerno found and stop.
 
-**Hand off:** After the user picks an app and intent, read MCP tool schemas only — e.g. `kerno_list_endpoints` for explore, `kerno_compose_plan` chain for environment setup. Do not continue from this skill.
+**Hand off:** After the user picks an app and intent, read MCP tool schemas only — e.g. `kerno_list_endpoints` with required **`scope`** for explore; **`kerno_compose_plan`** → **`kerno_compose_plan_generate`** → **`kerno_compose_plan_feedback`** (see `${CLAUDE_PLUGIN_ROOT}/references/compose-plan.md`) for environment setup. Do not continue from this skill.
 
 ## Agent-safe checks
 
