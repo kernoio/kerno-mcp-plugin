@@ -28,6 +28,8 @@ Work in this repository root unless I specify another path.
 
 ### Cursor
 
+**Open in Cursor:** use the link under the prompt block, or copy the text below.
+
 ```
 Install and set up Kerno MCP for this project using https://github.com/kernoio/kerno-mcp-plugin.
 
@@ -38,7 +40,8 @@ Install and set up Kerno MCP for this project using https://github.com/kernoio/k
 Work in this repository root unless I specify another path.
 ```
 
-**Cursor MCP deeplink (optional):** [Add Kerno MCP server in Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=kerno&config=eyJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjgwODYvbWNwIn0=) — registers a Kerno MCP entry with a placeholder URL. Still run **`/install-kerno`** so the port matches your `kerno mcp -w` session. This link does not install plugin skills or rules; use the prompt above for full setup.
+**Open in Cursor:** [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno-mcp%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) · [cursor://](cursor://anysphere.cursor-deeplink/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno-mcp%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) — opens the IDE with the install prompt below pre-filled (review and send; does not run automatically). [Link details](references/cursor-install-deeplink.md).
+
 
 ### Codex
 
@@ -100,7 +103,7 @@ git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
 ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno-mcp
 ```
 
-Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · [MCP deeplink](cursor://anysphere.cursor-deeplink/mcp/install?name=kerno&config=eyJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjgwODYvbWNwIn0=) (optional).
+Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno-mcp%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.)
 
 ## Install — Codex
 
@@ -140,3 +143,4 @@ Canonical operator details (ports, env, workspace invariant) remain in **`agent/
 - **[references/tool-ordering.md](references/tool-ordering.md)** — Recommended tool order including optional scenario capture.
 - **[references/capture-baseline.md](references/capture-baseline.md)** — `kerno_capture_baseline` parameters, scopes, and job response fields.
 - **[references/changes-detected.md](references/changes-detected.md)** — Optional `.kerno/CHANGES_DETECTED.md` marker + hook pattern to trigger `kerno_validate`.
+- **[references/cursor-install-deeplink.md](references/cursor-install-deeplink.md)** — Cursor “Open in Cursor” prompt deeplinks (regenerate with `scripts/generate-cursor-install-deeplink.py`).
