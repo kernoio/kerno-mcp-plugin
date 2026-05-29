@@ -8,7 +8,7 @@ This package is a [Codex plugin](https://developers.openai.com/codex/plugins/): 
 
 ## First step after installing the plugin
 
-Installing **kerno-mcp** only adds skills and references. The **first thing to do next** is run the **install-kerno** skill in the workspace you want to validate:
+Installing **kerno** only adds skills and references. The **first thing to do next** is run the **install-kerno** skill in the workspace you want to validate:
 
 - Type `@` and choose **install-kerno**, or ask Codex to “set up Kerno MCP”.
 
@@ -41,7 +41,7 @@ codex
 
    To pin a branch: `codex plugin marketplace add kernoio/kerno-mcp-plugin --ref main`
 
-2. In `/plugins`, select the **Kerno MCP** marketplace, open **kerno-mcp**, and choose **Install plugin**.
+2. In `/plugins`, select the **Kerno MCP** marketplace, open **kerno**, and choose **Install plugin**.
 
 3. Run **`@install-kerno`** in your project ([First step after installing the plugin](#first-step-after-installing-the-plugin)).
 
@@ -50,7 +50,7 @@ Manage marketplaces from the CLI:
 ```bash
 codex plugin marketplace list
 codex plugin marketplace upgrade
-codex plugin marketplace remove kerno-mcp
+codex plugin marketplace remove kerno
 ```
 
 ### Option B — Clone + personal marketplace
@@ -70,7 +70,7 @@ Merge into `~/.agents/plugins/marketplace.json` (create the file if needed):
   "interface": { "displayName": "Kerno (local)" },
   "plugins": [
     {
-      "name": "kerno-mcp",
+      "name": "kerno",
       "source": {
         "source": "local",
         "path": "../../.kerno/mcp-plugin"
@@ -85,18 +85,18 @@ Merge into `~/.agents/plugins/marketplace.json` (create the file if needed):
 }
 ```
 
-Adjust `source.path` so it resolves from `~/.agents/plugins/` to your clone. Restart Codex, install **kerno-mcp** from `/plugins`, then run **`@install-kerno`**.
+Adjust `source.path` so it resolves from `~/.agents/plugins/` to your clone. Restart Codex, install **kerno** from `/plugins`, then run **`@install-kerno`**.
 
 ### Option C — Repo marketplace (monorepo / this checkout)
 
-When this repository is your project root, Codex can read [`.agents/plugins/marketplace.json`](../.agents/plugins/marketplace.json). The entry points at `./` (this repo). Trust the project (see below), restart Codex, open `/plugins`, select the **Kerno MCP** marketplace, install **kerno-mcp**, then run **`@install-kerno`**.
+When this repository is your project root, Codex can read [`.agents/plugins/marketplace.json`](../.agents/plugins/marketplace.json). The entry points at `./` (this repo). Trust the project (see below), restart Codex, open `/plugins`, select the **Kerno MCP** marketplace, install **kerno**, then run **`@install-kerno`**.
 
 ## Enable, disable, or remove
 
 | Goal | Action |
 |------|--------|
-| Turn off without uninstalling | In `~/.codex/config.toml`: `[plugins."kerno-mcp@kerno-mcp"]` → `enabled = false`, then restart Codex |
-| Uninstall | `/plugins` → open **kerno-mcp** → **Uninstall plugin** |
+| Turn off without uninstalling | In `~/.codex/config.toml`: `[plugins."kerno@kerno"]` → `enabled = false`, then restart Codex |
+| Uninstall | `/plugins` → open **kerno** → **Uninstall plugin** |
 | Refresh after git pull | Update your clone or run `codex plugin marketplace upgrade`, then restart Codex |
 
 Exact plugin keys in `config.toml` may include the marketplace name; check `~/.codex/config.toml` after install.

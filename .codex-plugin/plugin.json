@@ -1,7 +1,7 @@
 {
-  "name": "kerno-mcp",
+  "name": "kerno",
   "version": "0.1.0",
-  "description": "Procedures and references for using the Kerno aicore-agent MCP server (workspace, compose, async jobs)",
+  "description": "Give Codex the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
   "author": {
     "name": "Kerno"
   },
@@ -9,9 +9,9 @@
   "keywords": [
     "kerno",
     "mcp",
-    "docker",
-    "compose",
-    "aicore-agent",
+    "testing",
+    "integration-testing",
+    "validation",
     "codex"
   ],
   "skills": "./skills/",
@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "Kerno MCP",
     "shortDescription": "Kerno MCP skills, bootstrap workflows, and MCP setup",
-    "longDescription": "Slash-style skills and references for the Kerno aicore-agent MCP server: first-time install, environment bootstrap, async jobs, and validation.",
+    "longDescription": "Skills and references for connecting Codex to Kerno's backend validation engine: first-time install, environment bootstrap, async jobs, and validation.",
     "developerName": "Kerno",
     "category": "Developer Tools"
   }
