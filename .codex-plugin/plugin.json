@@ -1,7 +1,7 @@
 {
   "name": "kerno",
   "version": "0.1.0",
-  "description": "Procedures and references for using the Kerno aicore-agent MCP server (workspace, compose, async jobs)",
+  "description": "Give Codex the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
   "author": {
     "name": "Kerno"
   },

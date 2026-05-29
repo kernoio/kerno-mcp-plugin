@@ -15,7 +15,7 @@ The aicore-agent binary is not included.
 
 ## Where to start (user onboarding)
 
-1. Install the plugin — [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), or [codex/README.md](codex/README.md).
+1. Install skills — `npx skills add kernoio/kerno-mcp-plugin`, or see [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), [codex/README.md](codex/README.md).
 | `prompts/*.md` | Copy-paste install prompts per host |
 2. Run **`/install-kerno`** — skill `skills/install-kerno/SKILL.md`.
 3. User must open their MCP host in the **same workspace** bound by `kerno mcp -w`.
@@ -27,7 +27,7 @@ The aicore-agent binary is not included.
 | `.claude-plugin/plugin.json` | Claude Code manifest |
 | `.cursor-plugin/plugin.json` | Cursor manifest |
 | `.codex-plugin/plugin.json` | Codex manifest |
-| `.agents/plugins/marketplace.json` | Codex repo marketplace catalog |
+| `.agents/plugins/marketplace.json` | Reserved for future Codex marketplace (not used for install yet) |
 | `commands/*.md` | Slash commands (Claude Code / Cursor where supported) |
 | `skills/install-kerno/SKILL.md` | First-time CLI + MCP install |
 | `skills/*/SKILL.md` | Procedural skills |
@@ -40,7 +40,7 @@ The aicore-agent binary is not included.
 | `.mcp.json` | MCP server template (Codex bundle; Cursor-compatible shape) |
 | `claude/README.md` | Claude Code install |
 | `cursor/README.md` | Cursor install |
-| `codex/README.md` | Codex install, marketplace, and plugin management |
+| `codex/README.md` | Codex install (skills CLI) |
 | `prompts/*.md` | Copy-paste install prompts per host |
 
 ## Conventions

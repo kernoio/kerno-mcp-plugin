@@ -1,6 +1,9 @@
 Install and set up Kerno MCP for this project using https://github.com/kernoio/kerno-mcp-plugin.
 
-1. Follow cursor/README.md in that repo: clone it and symlink into ~/.cursor/plugins/local/kerno, then reload Cursor.
+Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
+
+1. Run `npx skills add kernoio/kerno-mcp-plugin -y` from the project root to install Kerno skills.
+   For slash commands, rules, and full plugin: clone to ~/.kerno/mcp-plugin and symlink into ~/.cursor/plugins/local/kerno, then reload Cursor (see cursor/README.md).
 2. Run /install-kerno to install @kerno/cli, bind the agent to this workspace with kerno mcp -w, and register MCP with the URL from CLI output.
 3. Confirm Kerno MCP tools are available in this project folder.
 

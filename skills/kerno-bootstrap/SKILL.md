@@ -1,6 +1,6 @@
 ---
-name: kerno-mcp-bootstrap
-description: This skill should be used when the user asks to bootstrap Kerno MCP, verify connectivity, or runs /kerno-bootstrap. Guides healthcheck, get_applications, and optional endpoint discovery. For environment bring-up use kerno-mcp-environment-setup.
+name: kerno-bootstrap
+description: This skill should be used when the user asks to bootstrap Kerno MCP, verify connectivity, or runs /kerno-bootstrap. Guides healthcheck, get_applications, and optional endpoint discovery. For environment bring-up use kerno-environment-setup.
 version: 0.1.0
 ---
 
@@ -12,7 +12,7 @@ Bootstrap Kerno MCP connectivity for aicore-agent. Use the MCP tools exposed by 
 
 - `${CLAUDE_PLUGIN_ROOT}/references/tool-ordering.md` — ordered steps and anti-patterns
 - `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` — URL and timeouts
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-environment-setup/SKILL.md` — compose plan approval gate + start environment
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — compose plan approval gate + start environment
 
 ## Preconditions
 
@@ -35,6 +35,6 @@ If the task needs HTTP route discovery, call `kerno_list_endpoints` with `worksp
 
 ## See also
 
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-environment-setup/SKILL.md` — compose plan + approval gate + start environment
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-plan-implement-baseline/SKILL.md` — scenario authoring after env is ready
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-validate/SKILL.md` — run tests after code changes
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — compose plan + approval gate + start environment
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-plan-implement-baseline/SKILL.md` — scenario authoring after env is ready
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-validate/SKILL.md` — run tests after code changes

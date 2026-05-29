@@ -1,5 +1,5 @@
 ---
-name: kerno-mcp-background-job
+name: kerno-background-job
 description: This skill should be used when the user asks about Kerno async jobs, kerno_job wait semantics, kerno_cancel, or debugging long-running MCP work. Explains launch plus kerno_job, client-side per-tool-call limits, and sparse polling to avoid token spam.
 version: 0.1.0
 ---

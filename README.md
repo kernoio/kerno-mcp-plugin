@@ -24,11 +24,11 @@ npx skills update kernoio/kerno-mcp-plugin
 
 Useful flags: `-g` / `--global`, `-a cursor` (or `claude-code`, `codex`, …), `-y` to skip prompts. See [vercel-labs/skills](https://github.com/vercel-labs/skills).
 
-This path installs **skills** (procedures). Slash commands, Cursor rules, and full plugin manifests still use the [per-client install](#install--claude-code) steps below if you need them.
+**Marketplace install is not available yet** — use the GitHub repo directly (`npx skills add` or clone). This path installs **skills** (procedures). Slash commands, Cursor rules, and full plugin manifests still use the [per-client install](#install--claude-code) steps below if you need them.
 
 ### Or: paste a prompt into your assistant
 
-Paste **one** prompt below into your assistant (Agent chat, Claude Code, Codex, etc.). It should clone or register this plugin, then run **install-kerno** to install the CLI, start the agent, and connect MCP for your workspace.
+Paste **one** prompt below into your assistant (Agent chat, Claude Code, Codex, etc.). It installs skills from the GitHub repo, then runs **install-kerno** to install the CLI, start the agent, and connect MCP for your workspace. Do **not** use plugin marketplaces.
 
 | Tool | Copy-paste prompt |
 |------|-------------------|
@@ -39,9 +39,12 @@ Paste **one** prompt below into your assistant (Agent chat, Claude Code, Codex, 
 ### Claude Code
 
 ```
-Install and set up the Kerno MCP plugin from https://github.com/kernoio/kerno-mcp-plugin for this workspace.
+Install and set up Kerno MCP for this workspace using https://github.com/kernoio/kerno-mcp-plugin.
 
-1. Clone https://github.com/kernoio/kerno-mcp-plugin and load it as a Claude Code plugin (see claude/README.md in the repo).
+Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
+
+1. Run `npx skills add kernoio/kerno-mcp-plugin -y` from the project root to install Kerno skills on this machine.
+   For slash commands too: clone the repo to ~/.kerno/mcp-plugin and restart Claude with `claude --plugin-dir ~/.kerno/mcp-plugin` (see claude/README.md). Do not use `/plugin marketplace`.
 2. Run the install-kerno skill (/install-kerno) to install @kerno/cli, log in, start the agent with kerno mcp -w on this project, and register MCP.
 3. Verify kerno_get_applications works for this workspace path.
 
@@ -55,14 +58,17 @@ Work in this repository root unless I specify another path.
 ```
 Install and set up Kerno MCP for this project using https://github.com/kernoio/kerno-mcp-plugin.
 
-1. Follow cursor/README.md in that repo: clone it and symlink into ~/.cursor/plugins/local/kerno, then reload Cursor.
+Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
+
+1. Run `npx skills add kernoio/kerno-mcp-plugin -y` from the project root to install Kerno skills.
+   For slash commands, rules, and full plugin: clone to ~/.kerno/mcp-plugin and symlink into ~/.cursor/plugins/local/kerno, then reload Cursor (see cursor/README.md).
 2. Run /install-kerno to install @kerno/cli, bind the agent to this workspace with kerno mcp -w, and register MCP with the URL from CLI output.
 3. Confirm Kerno MCP tools are available in this project folder.
 
 Work in this repository root unless I specify another path.
 ```
 
-**Open in Cursor:** [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) · [cursor://](cursor://anysphere.cursor-deeplink/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) — opens the IDE with the install prompt below pre-filled (review and send; does not run automatically). [Link details](references/cursor-install-deeplink.md).
+**Open in Cursor:** [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0ADo%20not%20use%20any%20plugin%20marketplace%20%E2%80%94%20Kerno%20is%20not%20published%20to%20marketplaces%20yet.%0A%0A1.%20Run%20%60npx%20skills%20add%20kernoio%2Fkerno-mcp-plugin%20-y%60%20from%20the%20project%20root%20to%20install%20Kerno%20skills.%0A%20%20%20For%20slash%20commands%2C%20rules%2C%20and%20full%20plugin%3A%20clone%20to%20~%2F.kerno%2Fmcp-plugin%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor%20%28see%20cursor%2FREADME.md%29.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) · [cursor://](cursor://anysphere.cursor-deeplink/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0ADo%20not%20use%20any%20plugin%20marketplace%20%E2%80%94%20Kerno%20is%20not%20published%20to%20marketplaces%20yet.%0A%0A1.%20Run%20%60npx%20skills%20add%20kernoio%2Fkerno-mcp-plugin%20-y%60%20from%20the%20project%20root%20to%20install%20Kerno%20skills.%0A%20%20%20For%20slash%20commands%2C%20rules%2C%20and%20full%20plugin%3A%20clone%20to%20~%2F.kerno%2Fmcp-plugin%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor%20%28see%20cursor%2FREADME.md%29.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) — opens the IDE with the install prompt above pre-filled (review and send; does not run automatically). [Link details](references/cursor-install-deeplink.md).
 
 
 ### Codex
@@ -70,10 +76,11 @@ Work in this repository root unless I specify another path.
 ```
 Set up Kerno for this workspace using https://github.com/kernoio/kerno-mcp-plugin.
 
-1. Run: codex plugin marketplace add kernoio/kerno-mcp-plugin
-2. Install plugin kerno-mcp from /plugins (Kerno MCP marketplace).
-3. Run the install-kerno skill (@install-kerno) to install @kerno/cli, log in, start the agent with kerno mcp -w on this project, and register MCP in Codex.
-4. Verify Kerno MCP tools work in this workspace.
+Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
+
+1. Run `npx skills add kernoio/kerno-mcp-plugin -y` from the project root to install Kerno skills on this machine.
+2. Run the install-kerno skill (@install-kerno) to install @kerno/cli, log in, start the agent with kerno mcp -w on this project, and register MCP in Codex.
+3. Verify Kerno MCP tools work in this workspace.
 
 Work in this repository root unless I specify another path.
 ```
@@ -110,6 +117,12 @@ For self-hosted or dev agent setups, see [references/mcp-client-config.md](refer
 ## Install — Claude Code
 
 ```bash
+npx skills add kernoio/kerno-mcp-plugin
+```
+
+For slash commands too, clone and use `--plugin-dir`:
+
+```bash
 git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
 claude --plugin-dir ~/.kerno/mcp-plugin
 ```
@@ -118,20 +131,23 @@ Then run **`/install-kerno`**. Details: [claude/README.md](claude/README.md).
 
 ## Install — Cursor
 
-Symlink or copy the repo into Cursor’s local plugins folder, then reload the window:
+```bash
+npx skills add kernoio/kerno-mcp-plugin
+```
+
+For slash commands, rules, and full plugin, symlink a checkout into Cursor’s local plugins folder, then reload the window:
 
 ```bash
 git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
 ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno
 ```
 
-Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.)
+Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · deeplinks in [references/cursor-install-deeplink.md](references/cursor-install-deeplink.md) (regenerate after prompt edits).
 
 ## Install — Codex
 
 ```bash
-codex plugin marketplace add kernoio/kerno-mcp-plugin
-# In Codex CLI: /plugins → Kerno MCP → Install kerno-mcp
+npx skills add kernoio/kerno-mcp-plugin
 ```
 
 Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
@@ -143,23 +159,23 @@ Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 | `/install-kerno` | First-time setup: CLI, agent, MCP registration, verification, next steps |
 | `/kerno-bootstrap` | Verify MCP connectivity (healthcheck → get_applications → optional endpoints) |
 | `/kerno-env` | Environment setup with compose plan approval gate → start environment |
-| `/kerno-mcp-plan-implement-baseline` | Plan and implement scenario tests via **`kerno_plan_baseline`** + **`kerno_implement_baseline`** |
-| `/kerno-mcp-capture-baseline` | Deprecated alias — use **`/kerno-mcp-plan-implement-baseline`** |
-| `/kerno-mcp-help` | Pointers to MCP setup, job semantics, and references |
+| `/kerno-plan-implement-baseline` | Plan and implement scenario tests via **`kerno_plan_baseline`** + **`kerno_implement_baseline`** |
+| `/kerno-capture-baseline` | Deprecated alias — use **`/kerno-plan-implement-baseline`** |
+| `/kerno-help` | Pointers to MCP setup, job semantics, and references |
 
 ## Skills
 
 - **install-kerno** — Step-by-step install and MCP connection for a workspace ([GitBook guide](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)). **Run this first** after adding the plugin.
-- **kerno-mcp-bootstrap** — Connectivity/bootstrap checks (no environment bring-up).
-- **kerno-mcp-environment-setup** — Compose plan approval gate + start environment (recommended for “setup the env” requests).
-- **kerno-mcp-background-job** — How to use `kerno_start_environment` + `kerno_job` (wait, timeouts, logs).
-- **kerno-mcp-validate** — Run **`kerno_validate`** after code changes; do not patch **`.kerno/scenarios/`** before validate / plan-implement.
-- **kerno-mcp-plan-implement-baseline** — When and how to use **`kerno_plan_baseline`** and **`kerno_implement_baseline`** (two-stage scenario authoring).
-- **kerno-mcp-capture-baseline** — Deprecated; redirects to plan-implement-baseline.
+- **kerno-bootstrap** — Connectivity/bootstrap checks (no environment bring-up).
+- **kerno-environment-setup** — Compose plan approval gate + start environment (recommended for “setup the env” requests).
+- **kerno-background-job** — How to use `kerno_start_environment` + `kerno_job` (wait, timeouts, logs).
+- **kerno-validate** — Run **`kerno_validate`** after code changes; do not patch **`.kerno/scenarios/`** before validate / plan-implement.
+- **kerno-plan-implement-baseline** — When and how to use **`kerno_plan_baseline`** and **`kerno_implement_baseline`** (two-stage scenario authoring).
+- **kerno-capture-baseline** — Deprecated; redirects to plan-implement-baseline.
 
 ## Rules (Cursor)
 
-- [rules/kerno-mcp.mdc](rules/kerno-mcp.mdc) — Tool ordering and async-job constraints (`alwaysApply: true`).
+- [rules/kerno.mdc](rules/kerno.mdc) — Tool ordering and async-job constraints (`alwaysApply: true`).
 
 Canonical operator details (ports, env, workspace invariant) remain in **`agent/apps/agent/docs/mcp.md`** in the main repo.
 
