@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "kerno",
+  "description": "Official Kerno plugins for Claude Code: catch breaking changes in your backend code before you open a PR.",
+  "owner": {
+    "name": "Kerno"
+  },
+  "plugins": [
+    {
+      "name": "kerno",
+      "source": {
+        "source": "github",
+        "repo": "kernoio/kerno-mcp-plugin"
+      },
+      "description": "Give Claude Code the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
+      "category": "testing",
+      "homepage": "https://github.com/kernoio/kerno-mcp-plugin",
+      "tags": ["testing", "integration-testing", "api-testing", "validation", "ci", "backend", "mcp"]
+    }
+  ]
+}

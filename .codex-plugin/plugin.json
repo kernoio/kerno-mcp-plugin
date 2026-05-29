@@ -1,5 +1,5 @@
 {
-  "name": "kerno-mcp",
+  "name": "kerno",
   "version": "0.1.0",
   "description": "Procedures and references for using the Kerno aicore-agent MCP server (workspace, compose, async jobs)",
   "author": {
@@ -17,7 +17,7 @@
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Kerno MCP",
+    "displayName": "Kerno",
     "shortDescription": "Kerno MCP skills, bootstrap workflows, and MCP setup",
     "longDescription": "Slash-style skills and references for the Kerno aicore-agent MCP server: first-time install, environment bootstrap, async jobs, and validation.",
     "developerName": "Kerno",
