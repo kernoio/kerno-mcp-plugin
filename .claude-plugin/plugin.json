@@ -5,7 +5,7 @@
   "author": {
     "name": "Kerno"
   },
-  "repository": "https://github.com/kernoio/agent-plugin",
+  "repository": "https://github.com/kernoio/kerno-mcp-plugin",
   "keywords": [
     "kerno",
     "mcp",
