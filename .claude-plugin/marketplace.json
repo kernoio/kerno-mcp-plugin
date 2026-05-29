@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "kerno",
-  "description": "Official Kerno plugins for Claude Code: catch breaking changes in your backend code before you open a PR.",
+  "description": "Official Kerno plugin for Claude Code: catch breaking changes in your backend code before you open a PR.",
   "owner": {
     "name": "Kerno"
   },

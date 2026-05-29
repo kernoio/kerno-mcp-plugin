@@ -1,5 +1,5 @@
 ---
-name: kerno-mcp-validate
+name: kerno-validate
 description: This skill should be used when the user asks to run Kerno HTTP scenario tests, fix failing tests after API changes, or wants validation (kerno_validate) after editing handlers. Prevents hand-editing .kerno scenario files before calling MCP validate and plan/implement baseline.
 version: 0.1.0
 ---
@@ -25,7 +25,7 @@ Typical situations:
 1. **`kerno_healthcheck`**, **`kerno_get_applications`** as needed.
 2. Bring the stack up — prefer **`kerno_compose_up`** when compose files exist; else compose-plan workflow + **`kerno_start_environment`** → **`kerno_job`**. Confirm **`ready_for_validation`** via **`kerno_compose_status`**.
 3. **`kerno_list_endpoints`** with the **same** **`scope`** string you will use for validate (optional but useful for **`existingTests`**). **`scope` is required** on list_endpoints.
-4. **`kerno_validate`** with **`scope`** (`all`, `changed`, `file:…`, or `endpoint:…`) → **`kerno_job`** until terminal (sparse **`wait=false`** or **`log_path`**; see **`skills/kerno-mcp-background-job/SKILL.md`**).
+4. **`kerno_validate`** with **`scope`** (`all`, `changed`, `file:…`, or `endpoint:…`) → **`kerno_job`** until terminal (sparse **`wait=false`** or **`log_path`**; see **`skills/kerno-background-job/SKILL.md`**).
 5. If validation fails and scenarios need regeneration, **`kerno_plan_baseline`** then **`kerno_implement_baseline`** with the **same** **`scope`**, each followed by **`kerno_job`** — not ad-hoc edits under **`.kerno/scenarios/`**.
 
 ## See also

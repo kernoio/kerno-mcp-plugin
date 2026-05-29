@@ -1,9 +1,11 @@
 {
   "name": "kerno",
-  "description": "Skills, commands, rules, and MCP config for the Kerno aicore-agent MCP server",
+  "description": "Give Cursor the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
   "version": "0.1.0",
   "author": {
     "name": "Kerno"
   },
-  "keywords": ["kerno", "mcp", "aicore-agent", "docker", "compose", "cursor", "codex"]
+  "homepage": "https://kerno.io",
+  "repository": "https://github.com/kernoio/kerno-mcp-plugin",
+  "keywords": ["kerno", "mcp", "testing", "integration-testing", "validation", "backend"]
 }

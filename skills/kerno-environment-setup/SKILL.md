@@ -1,5 +1,5 @@
 ---
-name: kerno-mcp-environment-setup
+name: kerno-environment-setup
 description: This skill should be used when the user asks to set up the environment, start the stack, bring up services, bootstrap the env, or run /kerno-env. Enforces the compose-plan user approval gate and handles needs_user_feedback as a hard stop before calling kerno_start_environment.
 version: 0.1.0
 ---

@@ -1,5 +1,5 @@
 ---
-name: kerno-mcp-plan-implement-baseline
+name: kerno-plan-implement-baseline
 description: This skill should be used when the user wants to author or refresh Kerno HTTP scenario tests via MCP (kerno_plan_baseline and kerno_implement_baseline), or asks about scopes, plan_review_instructions, workspace_id, or async completion. Planning does not require a running stack; implement requires ready_for_validation.
 version: 0.1.0
 ---
@@ -18,7 +18,7 @@ Typical situations:
 
 **Do not** use this skill as the primary guide for:
 
-- **`kerno_validate`** alone — use **`skills/kerno-mcp-validate/SKILL.md`**. Run validate **before** deciding scenarios need regeneration when the API changed.
+- **`kerno_validate`** alone — use **`skills/kerno-validate/SKILL.md`**. Run validate **before** deciding scenarios need regeneration when the API changed.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ Only after planning for every endpoint in scope and **`ready_for_validation`** i
 1. Call **`kerno_implement_baseline`** with **`scope`** (and optional **`app`**, **`workspace_id`**).
 2. Complete with **`kerno_job`** (**`kind`**: `implement_baseline`).
 
-Long-running LLM work — use sparse **`wait=false`** polling or **`log_path`**. See **`skills/kerno-mcp-background-job/SKILL.md`**.
+Long-running LLM work — use sparse **`wait=false`** polling or **`log_path`**. See **`skills/kerno-background-job/SKILL.md`**.
 
 ## Scopes
 
@@ -63,5 +63,5 @@ Parameter details and terminal JSON: **`${CLAUDE_PLUGIN_ROOT}/references/plan-im
 ## See also
 
 - **`${CLAUDE_PLUGIN_ROOT}/references/tool-ordering.md`** — full tool order.
-- **`${CLAUDE_PLUGIN_ROOT}/skills/kerno-mcp-validate/SKILL.md`** — validate before regenerating when the API changed.
+- **`${CLAUDE_PLUGIN_ROOT}/skills/kerno-validate/SKILL.md`** — validate before regenerating when the API changed.
 - **`${CLAUDE_PLUGIN_ROOT}/references/compose-plan.md`** — environment setup before implement.
