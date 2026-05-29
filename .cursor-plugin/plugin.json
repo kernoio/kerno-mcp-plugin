@@ -1,5 +1,5 @@
 {
-  "name": "kerno-mcp",
+  "name": "kerno",
   "description": "Skills, commands, rules, and MCP config for the Kerno aicore-agent MCP server",
   "version": "0.1.0",
   "author": {

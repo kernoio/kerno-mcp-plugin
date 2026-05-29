@@ -1,11 +1,11 @@
 {
-  "name": "kerno-mcp",
+  "name": "kerno",
   "interface": {
-    "displayName": "Kerno MCP"
+    "displayName": "Kerno"
   },
   "plugins": [
     {
-      "name": "kerno-mcp",
+      "name": "kerno",
       "source": {
         "source": "local",
         "path": "./"
