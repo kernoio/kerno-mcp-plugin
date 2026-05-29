@@ -55,14 +55,14 @@ Work in this repository root unless I specify another path.
 ```
 Install and set up Kerno MCP for this project using https://github.com/kernoio/kerno-mcp-plugin.
 
-1. Follow cursor/README.md in that repo: clone it and symlink into ~/.cursor/plugins/local/kerno-mcp, then reload Cursor.
+1. Follow cursor/README.md in that repo: clone it and symlink into ~/.cursor/plugins/local/kerno, then reload Cursor.
 2. Run /install-kerno to install @kerno/cli, bind the agent to this workspace with kerno mcp -w, and register MCP with the URL from CLI output.
 3. Confirm Kerno MCP tools are available in this project folder.
 
 Work in this repository root unless I specify another path.
 ```
 
-**Open in Cursor:** [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno-mcp%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) · [cursor://](cursor://anysphere.cursor-deeplink/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno-mcp%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) — opens the IDE with the install prompt below pre-filled (review and send; does not run automatically). [Link details](references/cursor-install-deeplink.md).
+**Open in Cursor:** [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) · [cursor://](cursor://anysphere.cursor-deeplink/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) — opens the IDE with the install prompt below pre-filled (review and send; does not run automatically). [Link details](references/cursor-install-deeplink.md).
 
 
 ### Codex
@@ -122,10 +122,10 @@ Symlink or copy the repo into Cursor’s local plugins folder, then reload the w
 
 ```bash
 git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
-ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno-mcp
+ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno
 ```
 
-Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno-mcp%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.)
+Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0A1.%20Follow%20cursor%2FREADME.md%20in%20that%20repo%3A%20clone%20it%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20mcp%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.)
 
 ## Install — Codex
 
