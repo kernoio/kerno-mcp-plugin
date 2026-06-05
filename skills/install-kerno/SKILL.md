@@ -16,7 +16,7 @@ Kerno is a local backend-validation engine: **`@kerno/cli`** supervises an agent
 
 **Reference:** `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` — **Install (CLI)** section for host registration, scope aliases, troubleshooting.
 
-Official docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)
+Official docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
 
 ## Before you start
 
