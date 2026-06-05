@@ -48,4 +48,4 @@ Canonical rule content: [rules/kerno.mdc](../rules/kerno.mdc).
 ## Further reading
 
 - [Plugin root README](../README.md)
-- [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)
+- [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
