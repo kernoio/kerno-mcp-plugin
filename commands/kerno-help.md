@@ -4,7 +4,7 @@ description: Show Kerno MCP setup pointers, job semantics, and reference links
 
 Summarize for the user:
 
-0. **First-time setup** — run `/install-kerno` or `${CLAUDE_PLUGIN_ROOT}/skills/install-kerno/SKILL.md`; host registration details in `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` (**Install (CLI)**). Docs: https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp
+0. **First-time setup** — run `/install-kerno` or `${CLAUDE_PLUGIN_ROOT}/skills/install-kerno/SKILL.md`; host registration details in `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` (**Install (CLI)**). Docs: https://kerno.gitbook.io/docs/getting-started/quickstart
 1. **MCP connection** — `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` (URL, env vars, timeouts).
 2. **Tool ordering** — `${CLAUDE_PLUGIN_ROOT}/references/tool-ordering.md`.
 3. **Compose plan** — `${CLAUDE_PLUGIN_ROOT}/references/compose-plan.md` before first **`kerno_start_environment`**.
