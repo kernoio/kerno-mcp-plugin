@@ -72,6 +72,6 @@ Codex discovers skills from `skills/*/SKILL.md` via the manifest `skills` field.
 
 ## Further reading
 
-- [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)
+- [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
 - [Build plugins (Codex)](https://developers.openai.com/codex/plugins/build)
 - [Plugin root README](../README.md)
