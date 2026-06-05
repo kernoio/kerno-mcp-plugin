@@ -93,7 +93,7 @@ Work in this repository root unless I specify another path.
 
 After MCP is connected, use `/kerno-bootstrap` to verify connectivity, then `/kerno-env` for environment setup, or other skills for endpoints and validation.
 
-Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)
+Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
 
 ## Layout (one repo, three manifests)
 
@@ -165,7 +165,7 @@ Then run **`@install-kerno`**. Details: [codex/README.md](codex/README.md).
 
 ## Skills
 
-- **install-kerno** — Step-by-step install and MCP connection for a workspace ([GitBook guide](https://kerno.gitbook.io/docs/user-manual/setup-kerno-mcp)). **Run this first** after adding the plugin.
+- **install-kerno** — Step-by-step install and MCP connection for a workspace ([GitBook guide](https://kerno.gitbook.io/docs/getting-started/quickstart)). **Run this first** after adding the plugin.
 - **kerno-bootstrap** — Connectivity/bootstrap checks (no environment bring-up).
 - **kerno-environment-setup** — Compose plan approval gate + start environment (recommended for “setup the env” requests).
 - **kerno-background-job** — How to use `kerno_start_environment` + `kerno_job` (wait, timeouts, logs).
