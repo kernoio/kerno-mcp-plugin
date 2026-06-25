@@ -126,7 +126,7 @@ The CLI may print host-specific registration snippets in its output — use them
 6. Resolve MCP server id from host tool descriptors (e.g. `kerno_get_applications.json` parent folder)
 7. If tools not visible → user refreshes or reconnects the host per its MCP docs **(user)**
 
-**Codex:** merge `[mcp_servers.kerno]` with `url = "<MCP_URL>"` into `.codex/config.toml` (project) or `~/.codex/config.toml` (user). If using project scope, confirm `trust_level = "trusted"` for `$WORKSPACE` in `~/.codex/config.toml`. Install skills first with `npx skills add kernoio/kerno-mcp-plugin` (see [codex/README.md](../codex/README.md)) if skills are missing — do not use plugin marketplaces. Restart Codex or start a new thread after config changes.
+**Codex:** merge `[mcp_servers.kerno]` with `url = "<MCP_URL>"` into `.codex/config.toml` (project) or `~/.codex/config.toml` (user). If using project scope, confirm `trust_level = "trusted"` for `$WORKSPACE` in `~/.codex/config.toml`. Install the plugin first via [codex/README.md](../codex/README.md) if skills are missing — do not use public marketplaces. Restart Codex or start a new thread after config changes.
 
 ## Phase 5 — Verify
 
@@ -145,14 +145,14 @@ Once Tier C passes, say plainly that Kerno is connected. Include:
 3. **Next steps** — ask what they want to do:
 
    > What would you like to do next?
-   > - **Set up your environment** — generate a compose plan and start the local stack (async jobs; can take many minutes)
+   > - **Set up your environment** — save config, environment setup, and readiness (async jobs for orchestrate; can take many minutes)
    > - **Search endpoints** — list HTTP routes for an app (lightweight)
-   > - **Plan an endpoint test** — explore routes and validation/scenario workflow
+   > - **Run endpoint tests** — generate or validate scenarios for a route
    > - **Stop here** — MCP is connected; nothing else for now
 
 4. If multiple supported apps, ask which app to work with. If one app, confirm it. If zero, explain what Kerno found and stop.
 
-**Hand off:** After the user picks an app and intent, read MCP tool schemas only — e.g. `kerno_list_endpoints` with required **`scope`** for explore; for environment setup load **`${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md`** (compose plan approval gate + start environment). Do not continue from this skill.
+**Hand off:** After the user picks an app and intent, read MCP tool schemas only — e.g. `kerno_list_endpoints` with required **`scope`** for explore; for environment setup load **`${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md`**; for endpoint tests load **`${CLAUDE_PLUGIN_ROOT}/skills/kerno-endpoint-test/SKILL.md`**. Do not continue from this skill.
 
 ## Agent-safe checks
 

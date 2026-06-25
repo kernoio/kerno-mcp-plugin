@@ -1,15 +1,12 @@
 # Changes detected marker (`.kerno/CHANGES_DETECTED.md`)
 
-Kerno MCP supports **`scope: "changed"`**, which maps the current git working tree diff vs `HEAD` (staged + unstaged)
-to impacted HTTP endpoints.
+Kerno supports **`scope: "changed"`** on **`kerno_list_endpoints`**, which maps the current git working tree diff vs `HEAD` (staged + unstaged) to impacted HTTP endpoints.
 
-This repo also includes an **optional, local marker file** convention that a hook can read at the end of a turn to
-decide whether it should run **`kerno_validate`**.
+This repo includes an **optional, local marker file** convention that a hook can read at the end of a turn to decide whether to run endpoint validation.
 
 ## What creates the file
 
-When the agent calls MCP tools with `scope: "changed"` (notably **`kerno_list_endpoints`** and **`kerno_validate`**),
-the aicore-agent writes:
+When the agent calls MCP tools with `scope: "changed"` (notably **`kerno_list_endpoints`**), the aicore-agent may write:
 
 - `.kerno/CHANGES_DETECTED.md`
 
@@ -38,8 +35,10 @@ Wire a hook to run at the end of an agent turn:
 
 1. If the file is missing or empty: do nothing.
 2. If the file has content: print it and instruct the LLM to:
-   - run **`kerno_validate`** with `scope: "changed"`
-   - wait for completion using **`kerno_job`**
+   - call **`kerno_list_endpoints`** with `scope: "changed"` to confirm impacted routes
+   - for each impacted endpoint (or as the user directs), run **`kerno_endpoint_test`** with **`type=validate`**
+   - complete each job with **`kerno_job`**
+   - if validation fails because scenarios are stale, run **`type=generate`** — do not hand-edit `.kerno/scenarios/`
    - clear the file afterward
 
 ### Repo-local bash script
@@ -59,7 +58,7 @@ if [[ ! -s "$FILE" ]]; then exit 0; fi
 echo "=== .kerno/CHANGES_DETECTED.md ==="
 cat "$FILE"
 echo
-echo "Run: kerno_validate(scope=\"changed\"), then kerno_job until terminal, then clear the file."
+echo "Run: kerno_list_endpoints(scope=\"changed\"), then kerno_endpoint_test(type=\"validate\") per impacted endpoint, kerno_job until terminal; use type=\"generate\" if scenarios need regeneration."
 ```
 
 ### Claude Code example
@@ -98,4 +97,3 @@ Create `.cursor/hooks.json`:
   }
 }
 ```
-

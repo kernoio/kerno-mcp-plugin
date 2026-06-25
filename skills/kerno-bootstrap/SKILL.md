@@ -1,7 +1,7 @@
 ---
 name: kerno-bootstrap
 description: This skill should be used when the user asks to bootstrap Kerno MCP, verify connectivity, or runs /kerno-bootstrap. Guides healthcheck, get_applications, and optional endpoint discovery. For environment bring-up use kerno-environment-setup.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # Kerno MCP bootstrap
@@ -10,9 +10,9 @@ Bootstrap Kerno MCP connectivity for aicore-agent. Use the MCP tools exposed by 
 
 **References:**
 
-- `${CLAUDE_PLUGIN_ROOT}/references/tool-ordering.md` — ordered steps and anti-patterns
+- `${CLAUDE_PLUGIN_ROOT}/references/unified-flow.md` — canonical tool order
 - `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` — URL and timeouts
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — compose plan approval gate + start environment
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — save_config → environment_setup → environment_status
 
 ## Preconditions
 
@@ -27,14 +27,21 @@ The tool intentionally waits **120 seconds** (SSE timeout testing). If the resul
 
 ## Step 2: kerno_get_applications
 
-Call `kerno_get_applications` with the same `workspace_path`. Parse supported applications and choose **app** for subsequent steps. Note **workspace_id** if you will pass it to later tools.
+Call `kerno_get_applications` with the same `workspace_path`. Parse supported applications and choose **app** for subsequent steps. Note **workspace_id** and per-app config summary (`target_environment`, recommended next action).
 
 ## Step 3 (optional): kerno_list_endpoints
 
-If the task needs HTTP route discovery, call `kerno_list_endpoints` with `workspace_path`, **required `scope`** (e.g. `all`), and optional `app`.
+If the task needs HTTP route discovery before environment setup, call `kerno_list_endpoints` with `workspace_path`, **required `scope`** (e.g. `all`), and optional `app`.
+
+For the full workflow, **`kerno_list_endpoints`** normally runs **after** **`ready_for_endpoint_test`** — see unified flow.
+
+## Next steps after bootstrap
+
+1. **`kerno_save_config`** — if not already configured for the chosen target environment
+2. **`kerno_environment_setup`** → **`kerno_environment_status`**
+3. **`kerno_endpoint_test`** — see `${CLAUDE_PLUGIN_ROOT}/skills/kerno-endpoint-test/SKILL.md`
 
 ## See also
 
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — compose plan + approval gate + start environment
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-plan-implement-baseline/SKILL.md` — scenario authoring after env is ready
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-validate/SKILL.md` — run tests after code changes
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — environment setup
+- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-endpoint-test/SKILL.md` — endpoint tests

@@ -1,4 +1,4 @@
-# CLAUDE.md — kerno-claude-plugin
+# CLAUDE.md — kerno-mcp-plugin
 
 This directory ships **three** plugin manifests for the same assets:
 
@@ -12,11 +12,11 @@ The aicore-agent binary is not included.
 
 - **Agent + MCP:** `agent/apps/agent/docs/mcp.md` in the aicore repo.
 - **Tool names and descriptions:** `agent/libs/kerno-mcp/.../KernoMcpRegistration.kt`.
+- **Unified tool inventory:** `UNIFIED_MCP_TOOL_NAMES` in `McpToolSurface.kt`.
 
 ## Where to start (user onboarding)
 
-1. Install skills — `npx skills add kernoio/kerno-mcp-plugin`, or see [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), [codex/README.md](codex/README.md).
-| `prompts/*.md` | Copy-paste install prompts per host |
+1. Install the plugin — [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), or [codex/README.md](codex/README.md).
 2. Run **`/install-kerno`** — skill `skills/install-kerno/SKILL.md`.
 3. User must open their MCP host in the **same workspace** bound by `kerno mcp -w`.
 
@@ -30,20 +30,27 @@ The aicore-agent binary is not included.
 | `.agents/plugins/marketplace.json` | Reserved for future Codex marketplace (not used for install yet) |
 | `commands/*.md` | Slash commands (Claude Code / Cursor where supported) |
 | `skills/install-kerno/SKILL.md` | First-time CLI + MCP install |
-| `skills/*/SKILL.md` | Procedural skills |
-| `references/mcp-client-config.md` | CLI install, host registration, operator config, client timeouts |
-| `references/compose-plan.md` | Compose plan workflow before first start_environment |
-| `references/plan-implement-baseline.md` | kerno_plan_baseline + kerno_implement_baseline |
-| `references/tool-ordering.md` | Recommended MCP tool order |
+| `skills/kerno-environment-setup/SKILL.md` | save_config → environment_setup → environment_status |
+| `skills/kerno-endpoint-test/SKILL.md` | endpoint_test workflow + feedback gates |
+| `skills/kerno-background-job/SKILL.md` | Async job polling |
+| `skills/kerno-bootstrap/SKILL.md` | Connectivity checks |
+| `references/unified-flow.md` | Canonical unified MCP checklist |
+| `references/workspace-config.md` | save_config and `.kerno/config.yaml` |
+| `references/target-environment.md` | local / remote / orchestrate |
+| `references/endpoint-test-types.md` | generate vs validate |
+| `references/state-and-jobs.md` | Job registry + read plane + feedback |
+| `references/mcp-client-config.md` | CLI install, host registration, timeouts |
 | `references/*.md` | Other connection and install notes |
-| `rules/*.mdc` | Cursor-discovered rules |
+| `rules/kerno.mdc` | Cursor-discovered rules (unified surface only) |
 | `.mcp.json` | MCP server template (Codex bundle; Cursor-compatible shape) |
+| `scripts/check-unified-drift.py` | CI drift check for unified tool docs |
 | `claude/README.md` | Claude Code install |
 | `cursor/README.md` | Cursor install |
-| `codex/README.md` | Codex install (skills CLI) |
+| `codex/README.md` | Codex install (local clone) |
 | `prompts/*.md` | Copy-paste install prompts per host |
 
 ## Conventions
 
 - **${CLAUDE_PLUGIN_ROOT}** — use for paths to plugin files inside skills/commands (Claude Code).
 - Skills: third-person descriptions in frontmatter (woterclip-style).
+- Document **only** the unified MCP surface — no legacy tool names in user-facing markdown.

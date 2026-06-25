@@ -4,23 +4,13 @@
 
 **Fastest:** paste [prompts/install-cursor.md](../prompts/install-cursor.md) into Cursor Agent.
 
-Manifest: [`.cursor-plugin/plugin.json`](../.cursor-plugin/plugin.json). Shared skills, commands, and rules live at the [plugin root](../README.md).
+Manifest: [`.cursor-plugin/plugin.json`](../.cursor-plugin/plugin.json). Shared skills, commands, rules, and references live at the [plugin root](../README.md).
 
 Regenerate **Open in Cursor** deeplinks after editing the prompt: `python3 scripts/generate-cursor-install-deeplink.py` — then copy from [references/cursor-install-deeplink.md](../references/cursor-install-deeplink.md).
 
-## Install skills (recommended)
+## Install the plugin
 
-From your project root:
-
-```bash
-npx skills add kernoio/kerno-mcp-plugin
-```
-
-Use `-g` for a user-wide install. Refresh after upstream changes: `npx skills update kernoio/kerno-mcp-plugin`.
-
-## Full plugin (slash commands + rules)
-
-Symlink or copy a checkout into Cursor’s local plugins folder, then reload the window:
+Symlink or copy a checkout into Cursor’s local plugins folder, then reload the window (loads skills, commands, rules, and references):
 
 ```bash
 git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
@@ -28,8 +18,6 @@ ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno
 ```
 
 Restart Cursor or run **Developer: Reload Window**.
-
-Components are discovered from `rules/`, `skills/`, and `commands/` at the plugin root.
 
 ## First step after installing
 

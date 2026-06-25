@@ -6,19 +6,43 @@ This package is a [Codex plugin](https://developers.openai.com/codex/plugins/): 
 
 **Fastest:** paste [prompts/install-codex.md](../prompts/install-codex.md) into Codex.
 
-## Install skills (recommended)
+## Install the plugin
 
-From your project root:
+Public marketplace install is **not** available yet — do not use `codex plugin marketplace add`. Clone the repo and register it as a **local** plugin source.
 
 ```bash
-npx skills add kernoio/kerno-mcp-plugin
+git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
+mkdir -p ~/.agents/plugins
 ```
 
-Use `-a codex` to target Codex explicitly, or `-g` for a user-wide install. Refresh after upstream changes: `npx skills update kernoio/kerno-mcp-plugin`.
+Merge into `~/.agents/plugins/marketplace.json` (create the file if needed):
 
-Marketplace install is **not** available yet — do not use `codex plugin marketplace add`.
+```json
+{
+  "name": "kerno-local",
+  "interface": { "displayName": "Kerno (local)" },
+  "plugins": [
+    {
+      "name": "kerno",
+      "source": {
+        "source": "local",
+        "path": "../../.kerno/mcp-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
+```
 
-After installing skills, **start a new Codex thread** or restart Codex so skills load.
+Adjust `source.path` so it resolves from `~/.agents/plugins/` to your clone. Restart Codex, open `/plugins`, select **Kerno (local)**, install **kerno**, then run **`@install-kerno`**.
+
+### Developing in this repo
+
+When this repository is your project root, Codex can read [`.agents/plugins/marketplace.json`](../.agents/plugins/marketplace.json) (local `./` checkout). Trust the project (see below), restart Codex, install **kerno** from `/plugins`, then run **`@install-kerno`**.
 
 ## First step after installing
 
@@ -41,7 +65,7 @@ trust_level = "trusted"
 
 ## Connect Kerno MCP
 
-Installing skills does **not** start the Kerno agent. Use the **install-kerno** skill first. The bundled [`.mcp.json`](../.mcp.json) is a template; the MCP port is **session-specific**.
+Installing the plugin does **not** start the Kerno agent. Use the **install-kerno** skill first. The bundled [`.mcp.json`](../.mcp.json) is a template; the MCP port is **session-specific**.
 
 1. In Codex, invoke **install-kerno** (`@install-kerno` or “set up Kerno MCP”).
 2. Follow the skill: install `@kerno/cli`, run `kerno mcp -w <workspace>`, parse `MCP_URL` from CLI output.
@@ -63,10 +87,10 @@ User-scoped alternative: same `[mcp_servers.kerno]` block in `~/.codex/config.to
 | Skill | Use when |
 |-------|----------|
 | **install-kerno** | **First** — CLI, agent, and MCP registration |
-| **kerno-bootstrap** | Recommended bootstrap workflow |
-| **kerno-background-job** | `kerno_start_environment` + `kerno_job` |
-| **kerno-validate** | After code changes |
-| **kerno-capture-baseline** | Scenario capture workflow |
+| **kerno-bootstrap** | Connectivity checks |
+| **kerno-environment-setup** | save_config → environment_setup → environment_status |
+| **kerno-endpoint-test** | Generate or validate endpoint tests |
+| **kerno-background-job** | Async job polling (`kerno_job`, `kerno_cancel`) |
 
 Codex discovers skills from `skills/*/SKILL.md` via the manifest `skills` field.
 
