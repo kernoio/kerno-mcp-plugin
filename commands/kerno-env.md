@@ -1,5 +1,5 @@
 ---
-description: Set up the environment (save_config, environment_setup, environment_status)
+description: Set up the environment — local dev flow first when possible, then save_config, environment_setup, environment_status
 argument-hint: "[workspace_path] [app] [local|remote|orchestrate]"
 ---
 

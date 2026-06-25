@@ -145,7 +145,7 @@ Once Tier C passes, say plainly that Kerno is connected. Include:
 3. **Next steps** — ask what they want to do:
 
    > What would you like to do next?
-   > - **Set up your environment** — save config, environment setup, and readiness (async jobs for orchestrate; can take many minutes)
+   > - **Set up your environment** — start the stack with the repo's dev flow when possible, then save config and readiness (orchestrate only when requested or when the repo has no easy startup; can take many minutes)
    > - **Search endpoints** — list HTTP routes for an app (lightweight)
    > - **Run endpoint tests** — generate or validate scenarios for a route
    > - **Stop here** — MCP is connected; nothing else for now

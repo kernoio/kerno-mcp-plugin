@@ -30,7 +30,7 @@ The aicore-agent binary is not included.
 | `.agents/plugins/marketplace.json` | Reserved for future Codex marketplace (not used for install yet) |
 | `commands/*.md` | Slash commands (Claude Code / Cursor where supported) |
 | `skills/install-kerno/SKILL.md` | First-time CLI + MCP install |
-| `skills/kerno-environment-setup/SKILL.md` | save_config → environment_setup → environment_status |
+| `skills/kerno-environment-setup/SKILL.md` | Local-first env setup; orchestrate when needed |
 | `skills/kerno-endpoint-test/SKILL.md` | endpoint_test workflow + feedback gates |
 | `skills/kerno-background-job/SKILL.md` | Async job polling |
 | `skills/kerno-bootstrap/SKILL.md` | Connectivity checks |

@@ -9,7 +9,9 @@ alwaysApply: true
 - **URL:** MCP is at `POST /mcp` on the agent `PORT` (or `MCP_PORT` if set). Server name: `kerno-aicore-agent`.
 - **Workspace:** Tools require `workspace_path` matching the agent `WORKSPACE` unless the tool defaults (see `kerno_healthcheck`).
 
-**Canonical flow:** `kerno_healthcheck` → `kerno_get_applications` → `kerno_save_config` → `kerno_environment_setup` → `kerno_environment_status` (until **`ready_for_endpoint_test`**) → `kerno_list_endpoints` (**`scope` required**) → `kerno_endpoint_test` → `kerno_job`. See **`references/unified-flow.md`**.
+**Canonical flow:** `kerno_healthcheck` → `kerno_get_applications` → choose target environment ([`target-environment.md`](references/target-environment.md)) → **`kerno_save_config`** → `kerno_environment_setup` → `kerno_environment_status` (until **`ready_for_endpoint_test`**) → `kerno_list_endpoints` (**`scope` required**) → `kerno_endpoint_test` → `kerno_job`.
+
+**Local default:** when the repo has easy startup (`docker-compose`, dev scripts, Makefile), start the stack with that flow **before** **`kerno_save_config`**. Use **`orchestrate`** only when the user explicitly asks Kerno to orchestrate **or** the repo has no easy full-stack startup.
 
 If tools behave as if they are operating on old code (stale analysis/snapshot), call **`kerno_sync_workspace`** first (optionally inspect snapshot state via **`kerno_list_workspaces`**), then retry.
 

@@ -37,8 +37,8 @@ For the full workflow, **`kerno_list_endpoints`** normally runs **after** **`rea
 
 ## Next steps after bootstrap
 
-1. **`kerno_save_config`** — if not already configured for the chosen target environment
-2. **`kerno_environment_setup`** → **`kerno_environment_status`**
+1. **Environment** — load `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md`. Prefer **`local`**: start the repo's dev flow first if compose/scripts exist; use **`orchestrate`** only on explicit user request or when no easy startup exists.
+2. **`kerno_save_config`** → **`kerno_environment_setup`** → **`kerno_environment_status`**
 3. **`kerno_endpoint_test`** — see `${CLAUDE_PLUGIN_ROOT}/skills/kerno-endpoint-test/SKILL.md`
 
 ## See also

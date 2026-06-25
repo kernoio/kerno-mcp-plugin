@@ -78,12 +78,12 @@ Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart
 ## Unified MCP flow (summary)
 
 ```
-healthcheck → get_applications → save_config → environment_setup
-  → environment_status (until ready_for_endpoint_test)
+healthcheck → get_applications → [local: start repo dev flow] → save_config
+  → environment_setup → environment_status (until ready_for_endpoint_test)
   → list_endpoints → endpoint_test → job
 ```
 
-Full checklist: [references/unified-flow.md](references/unified-flow.md).
+Use **`orchestrate`** only when the user asks Kerno to orchestrate **or** the repo has no easy startup (`docker-compose`, dev scripts, etc.). Full checklist: [references/unified-flow.md](references/unified-flow.md).
 
 ## Layout (one repo, three manifests)
 
@@ -171,7 +171,7 @@ Verify against a running agent (`kerno mcp -w <repo>`):
 
 1. `/install-kerno` → MCP connected
 2. `/kerno-bootstrap` → **`kerno_get_applications`** succeeds
-3. Local SUT path: **`kerno_save_config`** (local + sut_url) → **`kerno_environment_setup`** → **`kerno_environment_status.ready_for_endpoint_test`**
+3. Local path: start stack with repo dev flow → **`kerno_save_config`** (`local` + `sut_url`) → **`kerno_environment_setup`** → **`kerno_environment_status.ready_for_endpoint_test`**
 4. **`kerno_endpoint_test`** `type=generate` on one endpoint → **`kerno_job`** terminal
 5. Orchestrate path: feedback gate fires → **`kerno_feedback_pending`** or **`kerno_get_state`** → answer → job completes
 

@@ -19,14 +19,18 @@ Call **`kerno_save_config`** with:
 - **`applications`** — array of per-app entries:
   - **`app`** — module id or name from **`kerno_get_applications`**
   - **`target_environment`** — `local` | `remote` | `orchestrate` (exact values only)
-  - **`sut_url`** — required for `local`/`remote` when the SUT already runs; omit for `orchestrate`
+  - **`sut_url`** — required for `local`/`remote` after the SUT is reachable; omit for `orchestrate`
   - Optional DB env blocks: `postgres`, `mariadb`, `mysql`, `mongodb`, `redis`, `kafka`, `rabbitmq`, `clickhouse`, `azurite`, `zitadel` — each an object of string env vars for scenario runs
 
 ## When to call
 
-After **`kerno_get_applications`**, before **`kerno_environment_setup`**.
+After **`kerno_get_applications`**.
 
-If the user asks to orchestrate, bootstrap, or start the stack and default config still shows `local`, call **`kerno_save_config`** with **`target_environment: orchestrate`** before environment setup.
+**Local path** (repo has easy startup): start the stack with the repository's dev flow **first**, then call **`kerno_save_config`** with **`local`**, **`sut_url`**, and dependency env vars, then **`kerno_environment_setup`**.
+
+**Orchestrate path:** call **`kerno_save_config`** with **`target_environment: orchestrate`** (omit **`sut_url`**) when the user explicitly asks Kerno to orchestrate the environment, **or** when the repository has no easy full-stack startup. Then **`kerno_environment_setup`**.
+
+See [target-environment.md](target-environment.md) for the full decision tree.
 
 ## Probe behavior
 
