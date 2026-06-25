@@ -53,4 +53,4 @@ The aicore-agent binary is not included.
 
 - **${CLAUDE_PLUGIN_ROOT}** — use for paths to plugin files inside skills/commands (Claude Code).
 - Skills: third-person descriptions in frontmatter (woterclip-style).
-- Document **only** the unified MCP surface — no legacy tool names in user-facing markdown.
+- Document the unified MCP surface only — one canonical flow in **`references/unified-flow.md`**.

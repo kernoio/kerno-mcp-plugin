@@ -1,6 +1,6 @@
 # Kerno MCP — unified flow (canonical checklist)
 
-The default MCP surface exposes **only** unified tools (`McpToolSurface.FULL`). Use this sequence when the user does not specify otherwise. Authoritative registration: `KernoMcpRegistration.kt` in aicore; operator details: `agent/apps/agent/docs/mcp.md`.
+The MCP surface is the unified tool set documented here. Use this sequence when the user does not specify otherwise. Authoritative registration: `KernoMcpRegistration.kt` in aicore; operator details: `agent/apps/agent/docs/mcp.md`.
 
 ## Primary sequence
 

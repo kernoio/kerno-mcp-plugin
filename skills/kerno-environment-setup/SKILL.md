@@ -42,7 +42,7 @@ Optional:
 
 ## Step 3: Orchestrate feedback (when needed)
 
-On the orchestrate path, compose-plan may open questions or require approval. The unified surface has **no** separate compose-plan MCP tools — use the read plane:
+On the orchestrate path, compose-plan may open questions or require approval. Use the read plane:
 
 1. **`kerno_get_state`** on composeplan resource_id `workspace/<ws>/module/<app>/composeplan`
 2. When state carries **`open_feedback`**, read `.../feedback` or call **`kerno_feedback_pending`**
