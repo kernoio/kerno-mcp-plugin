@@ -3,7 +3,7 @@ description: Generate or validate endpoint tests (kerno_endpoint_test workflow)
 argument-hint: "[generate|validate] [app] [METHOD /path]"
 ---
 
-Run the **kerno-endpoint-test** skill from `${CLAUDE_PLUGIN_ROOT}/skills/kerno-endpoint-test/SKILL.md`.
+Run the **kerno-endpoint-test** skill from `skills/kerno-endpoint-test/SKILL.md`.
 
 Parse `$ARGUMENTS` if present:
 

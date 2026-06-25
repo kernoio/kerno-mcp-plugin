@@ -6,7 +6,7 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 ## Give this repo to your coding tool
 
-Clone [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin) and install the **full plugin** (skills, commands, references, and Cursor rules) using the [per-client steps](#install--claude-code) below. Public marketplace install is **not** available yet.
+Clone [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin) and install the **full plugin** (skills, commands, references, and Cursor rules) using a [paste prompt](#paste-a-prompt-into-your-assistant) or a [client install guide](#layout-one-repo-three-manifests) below. Public marketplace install is **not** available yet.
 
 ### Paste a prompt into your assistant
 
@@ -67,7 +67,7 @@ Work in this repository root unless I specify another path.
 
 ## Where to start
 
-1. **Install the plugin** — use a [prompt](#paste-a-prompt-into-your-assistant) or the steps under [Install](#install--claude-code) ([Claude](#install--claude-code) · [Cursor](#install--cursor) · [Codex](#install--codex)).
+1. **Install the plugin** — use a [prompt](#paste-a-prompt-into-your-assistant) or a client install guide ([Claude](claude/README.md) · [Cursor](cursor/README.md) · [Codex](codex/README.md)).
 2. **First thing after the plugin is installed:** run **install-kerno** (`/install-kerno` or `@install-kerno`).
 3. **Open your assistant in the same workspace** you bound with `kerno mcp -w <path>`.
 
@@ -104,76 +104,9 @@ Shared content: `skills/`, `commands/`, `references/`, [prompts/](prompts/).
 
 For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md) and aicore `agent/apps/agent/docs/mcp.md`.
 
-## Install — Claude Code
+## Plugin contents
 
-```bash
-git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
-claude --plugin-dir ~/.kerno/mcp-plugin
-```
-
-Then run **`/install-kerno`**. Details: [claude/README.md](claude/README.md).
-
-## Install — Cursor
-
-Symlink a checkout into Cursor’s local plugins folder, then reload the window:
-
-```bash
-git clone https://github.com/kernoio/kerno-mcp-plugin ~/.kerno/mcp-plugin
-ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno
-```
-
-Then run **`/install-kerno`**. Details: [cursor/README.md](cursor/README.md) · deeplinks in [references/cursor-install-deeplink.md](references/cursor-install-deeplink.md) (regenerate after prompt edits).
-
-## Install — Codex
-
-Clone the repo and register it as a local plugin source — see [codex/README.md](codex/README.md) for the `~/.agents/plugins/marketplace.json` snippet. Do **not** use `codex plugin marketplace add`.
-
-Then run **`@install-kerno`**.
-
-## Commands
-
-| Command | Purpose |
-|---------|---------|
-| `/install-kerno` | First-time setup: CLI, agent, MCP registration, verification, next steps |
-| `/kerno-bootstrap` | Verify MCP connectivity (healthcheck → get_applications → optional endpoints) |
-| `/kerno-env` | Environment setup: save_config → environment_setup → environment_status |
-| `/kerno-endpoint-test` | Generate or validate endpoint tests via **`kerno_endpoint_test`** |
-| `/kerno-help` | Pointers to unified flow, job semantics, and references |
-
-## Skills
-
-- **install-kerno** — Step-by-step install and MCP connection for a workspace ([GitBook guide](https://kerno.gitbook.io/docs/getting-started/quickstart)). **Run this first** after adding the plugin.
-- **kerno-bootstrap** — Connectivity/bootstrap checks (no environment bring-up).
-- **kerno-environment-setup** — save_config → environment_setup → environment_status (orchestrate feedback via read plane).
-- **kerno-endpoint-test** — **`kerno_endpoint_test`** workflow including plan-review feedback gates.
-- **kerno-background-job** — **`kerno_job`** / **`kerno_cancel`** for `start_environment` and `endpoint_test` jobs.
-
-## Rules (Cursor)
-
-- [rules/kerno.mdc](rules/kerno.mdc) — Unified tool ordering and async-job constraints (`alwaysApply: true`).
-
-Canonical operator details (ports, env, workspace invariant) remain in **`agent/apps/agent/docs/mcp.md`** in the main repo.
-
-## References
-
-- **[references/unified-flow.md](references/unified-flow.md)** — Canonical unified MCP checklist.
-- **[references/workspace-config.md](references/workspace-config.md)** — `.kerno/config.yaml` and **`kerno_save_config`** params.
-- **[references/target-environment.md](references/target-environment.md)** — local / remote / orchestrate decision tree.
-- **[references/endpoint-test-types.md](references/endpoint-test-types.md)** — generate vs validate, implementation strategies.
-- **[references/state-and-jobs.md](references/state-and-jobs.md)** — Job registry, read plane, feedback.
-- **[references/mcp-client-config.md](references/mcp-client-config.md)** — CLI install, host registration, operator env, timeouts.
-- **[references/changes-detected.md](references/changes-detected.md)** — Optional hook for post-edit endpoint validation.
-- **[references/cursor-install-deeplink.md](references/cursor-install-deeplink.md)** — Cursor “Open in Cursor” prompt deeplinks (regenerate with `scripts/generate-cursor-install-deeplink.py`).
-
-## Manual smoke checklist
-
-Verify against a running agent (`kerno mcp -w <repo>`):
-
-1. `/install-kerno` → MCP connected
-2. `/kerno-bootstrap` → **`kerno_get_applications`** succeeds
-3. Local path: start stack with repo dev flow → **`kerno_save_config`** (`local` + `sut_url`) → **`kerno_environment_setup`** → **`kerno_environment_status.ready_for_endpoint_test`**
-4. **`kerno_endpoint_test`** `type=generate` on one endpoint → **`kerno_job`** terminal
-5. Orchestrate path: feedback gate fires → **`kerno_feedback_pending`** or **`kerno_get_state`** → answer → job completes
+**Slash commands** (`/install-kerno`, `/kerno-bootstrap`, `/kerno-env`, `/kerno-endpoint-test`, `/kerno-help`) delegate to matching skills under `skills/`. **Cursor rules:** [rules/kerno.mdc](rules/kerno.mdc). **Canonical MCP workflow:** [references/unified-flow.md](references/unified-flow.md). Other references: [workspace-config](references/workspace-config.md), [target-environment](references/target-environment.md), [endpoint-test-types](references/endpoint-test-types.md), [state-and-jobs](references/state-and-jobs.md), [mcp-client-config](references/mcp-client-config.md), [changes-detected](references/changes-detected.md), [cursor-install-deeplink](references/cursor-install-deeplink.md). Operator details: `agent/apps/agent/docs/mcp.md` in the main repo.
 
 ## Drift prevention
 
