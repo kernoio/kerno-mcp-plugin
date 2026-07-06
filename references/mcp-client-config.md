@@ -95,7 +95,7 @@ enabled = true
 
 User-scoped: put the same `[mcp_servers.kerno]` block in `~/.codex/config.toml` instead.
 
-**Skills install:** `npx skills add kernoio/kerno-mcp-plugin` — see [codex/README.md](../codex/README.md). The plugin may ship a bundled [`.mcp.json`](../.mcp.json) template; still update the URL after `kerno mcp -w` because the port is session-specific.
+**Plugin install:** see [codex/README.md](../codex/README.md) — clone the repo and register as a local plugin source. The plugin may ship a bundled [`.mcp.json`](../.mcp.json) template; still update the URL after `kerno mcp -w` because the port is session-specific.
 
 **Plugin MCP policy** (optional, after install): `~/.codex/config.toml` may include `[plugins."kerno@kerno".mcp_servers.kerno]` — see [Codex plugin MCP docs](https://developers.openai.com/codex/plugins/build).
 
@@ -157,7 +157,7 @@ Send JSON-RPC `initialize` with:
 
 ## Timeouts and long jobs
 
-**Per-tool-call limit is usually on the MCP host (client),** not the agent. Many hosts end a single tool HTTP round-trip around **~60 seconds**, regardless of how long the server would otherwise wait. **`kerno_job`** cannot rely on one blocking call lasting through a **15+ minute** `kerno_start_environment`; jobs often run **many minutes** and may **exceed 15 minutes**.
+**Per-tool-call limit is usually on the MCP host (client),** not the agent. Many hosts end a single tool HTTP round-trip around **~60 seconds**, regardless of how long the server would otherwise wait. **`kerno_job`** cannot rely on one blocking call lasting through a **15+ minute** orchestrate or endpoint-test job; jobs often run **many minutes** and may **exceed 15 minutes**.
 
 **`MCP_TIMEOUT`** in some hosts applies to **MCP server startup**, not how long an individual tool call may run.
 

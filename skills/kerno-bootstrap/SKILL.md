@@ -1,40 +1,35 @@
 ---
 name: kerno-bootstrap
 description: This skill should be used when the user asks to bootstrap Kerno MCP, verify connectivity, or runs /kerno-bootstrap. Guides healthcheck, get_applications, and optional endpoint discovery. For environment bring-up use kerno-environment-setup.
-version: 0.1.0
+version: 0.3.0
 ---
 
 # Kerno MCP bootstrap
 
-Bootstrap Kerno MCP connectivity for aicore-agent. Use the MCP tools exposed by the connected server (names may be prefixed by the client; match tool definitions to `kerno_*`).
+Bootstrap Kerno MCP connectivity for aicore-agent. Match connected tools to **`kerno_*`** names (clients may prefix them).
 
 **References:**
 
-- `${CLAUDE_PLUGIN_ROOT}/references/tool-ordering.md` — ordered steps and anti-patterns
-- `${CLAUDE_PLUGIN_ROOT}/references/mcp-client-config.md` — URL and timeouts
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — compose plan approval gate + start environment
+- `references/unified-flow.md` — canonical tool order and anti-patterns
+- `references/mcp-client-config.md` — URL and timeouts
 
 ## Preconditions
 
-1. Confirm the agent is running with MCP enabled and the client can list tools.
-2. Obtain **workspace_path**: absolute path to the workspace root. It must match the agent’s configured `WORKSPACE` (expected root).
+1. Agent running with MCP enabled; client can list tools.
+2. **workspace_path** — absolute path matching the agent **`WORKSPACE`**.
 
 ## Step 1: kerno_healthcheck
 
-Call `kerno_healthcheck` with `workspace_path` if required, or omit if the tool defaults to the agent workspace.
-
-The tool intentionally waits **120 seconds** (SSE timeout testing). If the result indicates failure, stop and report remediation (Docker, git, auth).
+Call with `workspace_path` if required. Waits **120 seconds** intentionally. On failure, stop (Docker, git, auth).
 
 ## Step 2: kerno_get_applications
 
-Call `kerno_get_applications` with the same `workspace_path`. Parse supported applications and choose **app** for subsequent steps. Note **workspace_id** if you will pass it to later tools.
+Parse supported apps; choose **`app`**. Note **`workspace_id`** and per-app config summary.
 
 ## Step 3 (optional): kerno_list_endpoints
 
-If the task needs HTTP route discovery, call `kerno_list_endpoints` with `workspace_path`, **required `scope`** (e.g. `all`), and optional `app`.
+Only if route discovery is needed **before** environment setup — requires **`scope`**. Normally runs **after** **`ready_for_endpoint_test`** — see **`unified-flow.md`**.
 
-## See also
+## Next steps
 
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md` — compose plan + approval gate + start environment
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-plan-implement-baseline/SKILL.md` — scenario authoring after env is ready
-- `${CLAUDE_PLUGIN_ROOT}/skills/kerno-validate/SKILL.md` — run tests after code changes
+Load `skills/kerno-environment-setup/SKILL.md` for environment bring-up, or `skills/kerno-endpoint-test/SKILL.md` when the environment is already ready.

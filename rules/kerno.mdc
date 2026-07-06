@@ -1,22 +1,32 @@
 ---
-description: When using Kerno MCP tools from aicore-agent, follow tool ordering and async job rules
+description: When using Kerno MCP tools from aicore-agent, follow unified tool ordering and async job rules
 globs:
 alwaysApply: true
 ---
 
-# Kerno MCP
+# Kerno MCP (unified surface)
 
 - **URL:** MCP is at `POST /mcp` on the agent `PORT` (or `MCP_PORT` if set). Server name: `kerno-aicore-agent`.
 - **Workspace:** Tools require `workspace_path` matching the agent `WORKSPACE` unless the tool defaults (see `kerno_healthcheck`).
 
-Order: `kerno_healthcheck` → `kerno_get_applications` → optional `kerno_list_endpoints` (**`scope` required**) → prefer `kerno_compose_up` when compose files exist, else compose-plan workflow → `kerno_start_environment` when needed → `kerno_job` until terminal → confirm **`ready_for_validation`** → after **handler or API changes**, call **`kerno_validate`** (then `kerno_job`) before editing anything under `.kerno/scenarios/` → (optional) **`kerno_plan_baseline`** then **`kerno_implement_baseline`** when scenarios must be regenerated → `kerno_job` until terminal → optional `kerno_approve` / `kerno_reject` → `kerno_compose_status`, logs, etc. Use **`kerno_cancel`** to stop in-flight jobs. Plugin: **`skills/kerno-validate/SKILL.md`**, **`skills/kerno-plan-implement-baseline/SKILL.md`**, **`references/plan-implement-baseline.md`**, **`references/compose-plan.md`**.
+**Canonical flow:** `kerno_healthcheck` → `kerno_get_applications` → choose target environment ([`target-environment.md`](references/target-environment.md)) → **`kerno_save_config`** → `kerno_environment_setup` → `kerno_environment_status` (until **`ready_for_endpoint_test`**) → `kerno_list_endpoints` (**`scope` required**) → `kerno_endpoint_test` → `kerno_job`.
+
+**Local default:** when the repo has easy startup (`docker-compose`, dev scripts, Makefile), start the stack with that flow **before** **`kerno_save_config`**. Use **`orchestrate`** only when the user explicitly asks Kerno to orchestrate **or** the repo has no easy full-stack startup.
 
 If tools behave as if they are operating on old code (stale analysis/snapshot), call **`kerno_sync_workspace`** first (optionally inspect snapshot state via **`kerno_list_workspaces`**), then retry.
 
-**Do not** hand-edit `.kerno/scenarios/**/*.scenario.ts` (baselines, asserts) to match API changes—run **`kerno_validate`** first, then **`kerno_plan_baseline`** / **`kerno_implement_baseline`** with the same scope if Kerno should rewrite scenarios.
+**Do not** hand-edit `.kerno/scenarios/**/*.scenario.ts` to match API changes — run **`kerno_endpoint_test`** with **`type=validate`** first, then **`type=generate`** if Kerno should rewrite scenarios.
 
-**Do not** call `kerno_compose_up` / `kerno_compose_down` for an app while `kerno_start_environment` is still running for that app; wait for `kerno_job` first.
+**Do not** call **`kerno_endpoint_test`** before **`kerno_environment_status`** reports **`ready_for_endpoint_test: true`**.
 
-**Do not** treat `status: Up` as ready for validate or implement — check **`ready_for_validation`** on `kerno_compose_status`.
+**Do not** treat compose **`status: Up`** or job **`healthy`** as ready for endpoint tests without **`ready_for_endpoint_test`**.
 
-`kerno_start_environment` can run **many minutes** (often past 15). MCP **hosts** usually cap one tool call around **~60s**; use **`kerno_job`** with **`wait=false`** every few minutes or read **`log_path`**. **Do not** spam **`kerno_job`** in a tight loop (token cost).
+During orchestrate: handle compose-plan feedback via **`kerno_get_state`**, **`kerno_feedback_pending`**, or **`answer_feedback_request`**.
+
+When **`kerno_job`** shows **`needs_user_feedback`** (start_environment), stop and relay **`result.question`** — do not proceed to endpoint tests.
+
+When an endpoint-test job looks stuck on **`kerno_job`**, check feedback via **`kerno_feedback_pending`** or **`kerno_get_state`** on the endpoint-test resource (gates are not visible on the job registry alone).
+
+Long jobs run **many minutes**. MCP **hosts** usually cap one tool call around **~60s**; use **`kerno_job`** with **`wait=false`** every few minutes or read **`log_path`**. **Do not** spam **`kerno_job`** in a tight loop.
+
+Use **`kerno_cancel`** to stop in-flight jobs. Plugin: **`skills/kerno-environment-setup/SKILL.md`**, **`skills/kerno-endpoint-test/SKILL.md`**, **`skills/kerno-background-job/SKILL.md`**.

@@ -1,9 +1,8 @@
 ---
-description: Set up the environment (compose plan approval gate, then start_environment; handles needs_user_feedback)
-argument-hint: "[workspace_path] [app]"
+description: Set up the environment — local dev flow first when possible, then save_config, environment_setup, environment_status
+argument-hint: "[workspace_path] [app] [local|remote|orchestrate]"
 ---
 
-Run the **kerno-environment-setup** skill from `${CLAUDE_PLUGIN_ROOT}/skills/kerno-environment-setup/SKILL.md`.
+Run the **kerno-environment-setup** skill from `skills/kerno-environment-setup/SKILL.md`.
 
-Parse `$ARGUMENTS` if present: optional `workspace_path` and `app`. If missing, derive from context or ask once.
-
+Parse `$ARGUMENTS` if present: optional `workspace_path`, `app`, and target environment hint. If missing, derive from context or ask once.

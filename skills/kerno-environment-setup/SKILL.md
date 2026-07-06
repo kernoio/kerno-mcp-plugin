@@ -1,67 +1,57 @@
 ---
 name: kerno-environment-setup
-description: This skill should be used when the user asks to set up the environment, start the stack, bring up services, bootstrap the env, or run /kerno-env. Enforces the compose-plan user approval gate and handles needs_user_feedback as a hard stop before calling kerno_start_environment.
-version: 0.1.0
+description: This skill should be used when the user asks to set up the environment, start the stack, bring up services, or run /kerno-env. Prefers local dev flow when the repo has docker-compose or scripts; orchestrate only on user request or when no easy startup exists.
+version: 0.3.0
 ---
 
-# Kerno MCP — environment setup (compose plan approval gate)
+# Kerno MCP — environment setup (unified)
 
-Use this workflow whenever the user asks to “set up the env”, “bootstrap”, “start the stack”, or similar. Those phrases are **not** approval of a compose plan.
+Use this workflow when the user asks to “set up the env”, “start the stack”, “bring up services”, or similar.
+
+**References (read before acting):**
+
+- `references/target-environment.md` — choose **`local`**, **`remote`**, or **`orchestrate`**
+- `references/workspace-config.md` — **`kerno_save_config`** fields
+- `references/state-and-jobs.md` — orchestrate feedback and **`kerno_job`** polling
+- `references/unified-flow.md` — anti-patterns
 
 ## Preconditions
 
-1. `kerno_healthcheck`
-2. If you changed code since Kerno last analyzed/snapshotted the workspace (or results look stale), call **`kerno_sync_workspace`** first (optionally inspect snapshot state via **`kerno_list_workspaces`**).
-3. `kerno_get_applications` → pick **`app`**
+1. **`kerno_healthcheck`**
+2. If results look stale, call **`kerno_sync_workspace`** first (optionally **`kerno_list_workspaces`**).
+3. **`kerno_get_applications`** → pick **`app`**
 
-## Plan gate (mandatory — do not skip)
+## Step 1: Choose target_environment
 
-1. Call **`kerno_compose_plan`** with `workspace_path` and `app`.
-2. If it returns `no_plan_yet`, call **`kerno_compose_plan_generate`** → complete with **`kerno_job`**.
-3. Show the plan to the user and stop for approval.
-   - Include a short summary (services, ports, test user if present).
-   - Include the plan’s **Open Questions** section verbatim when it exists (or a faithful bullet list extracted from it).
-   - Ask for explicit approval or requested changes.
-4. If the user wants changes, call **`kerno_compose_plan_feedback`** with their free-text instruction → **`kerno_job`** → show updated plan → ask again.
-5. **Only after explicit user approval** (e.g. “approved”, “looks good”, “use defaults”, or they answer each open question), call **`kerno_start_environment`**.
+Follow the decision flow in **`target-environment.md`**. Default **`local`**: start the repo's dev flow **before** **`kerno_save_config`** when easy startup exists. Use **`orchestrate`** only on explicit user request or when the repo has no easy full-stack startup.
 
-### Required approval message template
+## Step 2: kerno_save_config
 
-```markdown
-### Compose plan review
+Call **`kerno_save_config`** with `workspace_path` and `applications: [{ app, target_environment, sut_url?, ...db env blocks }]`.
 
-**Summary:** <1–3 sentences>
+Field details: **`workspace-config.md`**.
 
-**Open questions** (answer these or say “use Kerno defaults”):
+## Step 3: environment_setup
 
-1. <question 1>
-2. <question 2>
+Call **`kerno_environment_setup`** with `workspace_path` and `app`.
 
-**Planned services:** <postgres, redis, ...>
+- **local / remote:** synchronous SUT probe; fix config if `missing_config`
+- **orchestrate:** may return **`job_id`** for compose-plan + start-environment background work
 
-**Waiting for:** your approval before starting the build.
-```
+Optional: **`regenerate_instructions`**, **`sut_url`** (persist before probing for local/remote).
 
-## Start environment
+## Step 4: Orchestrate feedback (when needed)
 
-1. Call **`kerno_start_environment`** with `workspace_path` and `app` (optional `regenerate=true` when explicitly requested).
-2. Poll with **`kerno_job`** using sparse checks (`wait=false` every few minutes) or read `log_path`. Do not loop tightly.
+On the orchestrate path, use the read plane per **`state-and-jobs.md`** (composeplan resource, **`kerno_feedback_pending`**, **`kerno_feedback_answer`** / **`answer_feedback_request`**).
 
-### During `kerno_job` (start_environment)
+Show plan summaries and **open questions** to the user before proceeding. User phrases like “setup the env” are **not** implicit approval — ask explicitly when the plan has open questions.
 
-- If `status === needs_user_feedback`: **stop immediately**.
-  - Paste `result.question` (and options if present) to the user.
-  - Do not keep polling.
-  - Call **`kerno_compose_plan_feedback`** with their answer, show the updated plan again, then re-run the approval gate before retrying `kerno_start_environment`.
+Poll **`kerno_job`** with **`wait=false`** every few minutes or read **`log_path`**. On terminal **`needs_user_feedback`**, stop and relay **`result.question`**.
 
-## After environment is up
+## Step 5: environment_status
 
-1. Call **`kerno_compose_status`** and confirm **`ready_for_validation: true`**. Do not treat `status: Up` as sufficient.
-2. Proceed to validation (`kerno_validate`) or scenario authoring (plan/implement baseline) as needed.
+Call **`kerno_environment_status`** until **`ready_for_endpoint_test: true`**. Check **`next_action`** when not ready.
 
-## Anti-patterns
+## After environment is ready
 
-- Treating “setup the env” / “bootstrap” as approval of the compose plan or open questions.
-- Calling `kerno_start_environment` without pasting **Open Questions** to the user.
-- Continuing `kerno_job` polling when status is `needs_user_feedback`.
-
+Proceed to **`kerno_list_endpoints`** then **`kerno_endpoint_test`** — load `skills/kerno-endpoint-test/SKILL.md`.
