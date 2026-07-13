@@ -15,7 +15,7 @@
       },
       "description": "Runtime QA harness for backend coding agents. Kerno automatically generates, runs, and maintains integration tests locally against your real stack, so your agent catches and fixes its own regressions every session, before they reach a PR.",
       "category": "testing",
-      "homepage": "https://kerno.io",
+      "homepage": "https://kerno.gitbook.io/docs",
       "tags": ["testing", "integration-testing", "api-testing", "validation", "ci", "backend", "mcp"]
     }
   ]
