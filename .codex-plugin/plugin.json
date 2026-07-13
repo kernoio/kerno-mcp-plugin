@@ -9,9 +9,6 @@
   "keywords": [
     "kerno",
     "mcp",
-    "docker",
-    "compose",
-    "aicore-agent",
     "codex"
   ],
   "skills": "./skills/",
@@ -19,7 +16,7 @@
   "interface": {
     "displayName": "Kerno",
     "shortDescription": "Kerno MCP skills, bootstrap workflows, and MCP setup",
-    "longDescription": "Slash-style skills and references for the Kerno aicore-agent MCP server: first-time install, environment bootstrap, async jobs, and validation.",
+    "longDescription": "Slash-style skills and references for the Kerno agent MCP server: first-time install, environment bootstrap, async jobs, and validation.",
     "developerName": "Kerno",
     "category": "Developer Tools"
   }

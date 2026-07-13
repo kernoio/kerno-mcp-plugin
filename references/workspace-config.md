@@ -90,4 +90,4 @@ requires direct database access but no schema could be derived from source code
 1. **Point Kerno at it (interactive).** The blocked run surfaces a free-text feedback question (**`awaiting_answer`**). Answer with **`kerno_feedback_answer`** / **`answer_feedback_request`**, giving a **repo-relative path** to your schema/migration file or directory, or **pasting the DDL**. Kerno saves it to a `derived-schema.md` sidecar and reuses it on later runs. Replying **`skip`** hard-blocks the DB scenarios.
 2. **Go API-only.** Drive the endpoint through its HTTP surface instead of direct DB access, supplying any credentials via the dependency env blocks above.
 
-Native knex/Sequelize/TypeORM recognition and a static schema-path config option are tracked in aicore, not this plugin.
+Native knex/Sequelize/TypeORM recognition and a static schema-path config option are tracked in the Kerno backend, not this plugin.

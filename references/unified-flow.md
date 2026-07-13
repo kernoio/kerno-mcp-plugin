@@ -1,6 +1,6 @@
 # Kerno MCP — unified flow (canonical checklist)
 
-The MCP surface is the unified tool set documented here. Use this sequence when the user does not specify otherwise. Authoritative registration: `KernoMcpRegistration.kt` in aicore; operator details: `agent/apps/agent/docs/mcp.md`.
+The MCP surface is the unified tool set documented here. Use this sequence when the user does not specify otherwise.
 
 **Default `target_environment`:** **`local`** — start the stack with the repository's own tooling (`docker-compose`, dev scripts, quickstart), then point Kerno at it. Use **`remote`** when the env runs somewhere other than this machine (e.g. cloud). Prefer **greybox** (wire DB access so DB-backed scenarios run); fall back to **black box** (HTTP-only) when DB access isn't possible. See [target-environment.md](target-environment.md).
 

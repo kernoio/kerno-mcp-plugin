@@ -112,7 +112,7 @@ Shared content: `skills/`, `commands/`, `references/`, [prompts/](prompts/).
 - Agent running for your workspace: `kerno init -w /absolute/path/to/repo` — read the MCP URL from CLI output (port is not fixed).
 - MCP registered in your editor — **install-kerno** handles this step by step.
 
-For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md) and aicore `agent/apps/agent/docs/mcp.md`.
+For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
 
 ## Plugin contents
 

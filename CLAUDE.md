@@ -6,11 +6,11 @@ This directory ships **three** plugin manifests for the same assets:
 - **Cursor:** `.cursor-plugin/plugin.json`
 - **Codex:** `.codex-plugin/plugin.json`
 
-The aicore-agent binary is not included. Human-facing index: [README.md](README.md).
+The Kerno agent binary is not included. Human-facing index: [README.md](README.md).
 
 ## Source of truth
 
-- **Agent + MCP:** `agent/apps/agent/docs/mcp.md` in the aicore repo.
+- **Agent + MCP:** `agent/apps/agent/docs/mcp.md` in the Kerno backend repo.
 - **Tool names and descriptions:** `agent/libs/kerno-mcp/.../KernoMcpRegistration.kt`.
 - **Unified tool inventory:** `UNIFIED_MCP_TOOL_NAMES` in `McpToolSurface.kt`.
 - **Canonical MCP workflow in this plugin:** `references/unified-flow.md`

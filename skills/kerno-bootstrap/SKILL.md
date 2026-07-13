@@ -6,7 +6,7 @@ version: 0.3.0
 
 # Kerno MCP bootstrap
 
-Bootstrap Kerno MCP connectivity for aicore-agent. Match connected tools to **`kerno_*`** names (clients may prefix them).
+Bootstrap Kerno MCP connectivity for the Kerno agent. Match connected tools to **`kerno_*`** names (clients may prefix them).
 
 **References:**
 

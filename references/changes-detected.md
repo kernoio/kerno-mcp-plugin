@@ -6,7 +6,7 @@ This repo includes an **optional, local marker file** convention that a hook can
 
 ## What creates the file
 
-When the agent calls MCP tools with `scope: "changed"` (notably **`kerno_list_endpoints`**), the aicore-agent may write:
+When the agent calls MCP tools with `scope: "changed"` (notably **`kerno_list_endpoints`**), the Kerno agent may write:
 
 - `.kerno/CHANGES_DETECTED.md`
 
@@ -14,7 +14,7 @@ at the **workspace root** (`WORKSPACE/.kerno/CHANGES_DETECTED.md`).
 
 ## What creates the hook script
 
-When the aicore-agent starts for a workspace (first snapshot creation), it ensures this file exists:
+When the Kerno agent starts for a workspace (first snapshot creation), it ensures this file exists:
 
 - `.kerno/hooks/check-changes-detected.sh`
 
