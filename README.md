@@ -6,7 +6,7 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 ## Give this repo to your coding tool
 
-Clone [kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin) and install the **full plugin** (skills, commands, references, and Cursor rules) using a [paste prompt](#paste-a-prompt-into-your-assistant) or a [client install guide](#layout-one-repo-three-manifests) below. Public marketplace install is **not** available yet.
+**Claude Code:** install from the Kerno marketplace — `/plugin marketplace add kernoio/kerno-mcp-plugin` then `/plugin install kerno@kerno` (see [Claude Code](#claude-code) below). **Cursor** and **Codex** have no public Kerno marketplace yet — clone and install via a [paste prompt](#paste-a-prompt-into-your-assistant) or a [client install guide](#layout-one-repo-three-manifests) below.
 
 ### Paste a prompt into your assistant
 
@@ -20,12 +20,22 @@ Paste **one** prompt below into your assistant (Agent chat, Claude Code, Codex, 
 
 ### Claude Code
 
+Install from the Kerno marketplace, then run the setup skill:
+
+```
+/plugin marketplace add kernoio/kerno-mcp-plugin
+/plugin install kerno@kerno
+/install-kerno
+```
+
+`/install-kerno` installs `@kerno/cli`, logs in, starts the agent with `kerno init -w`, and registers MCP.
+
+**Or paste a prompt** (agent-driven — it clones and loads the plugin for you):
+
 ```
 Install and set up the Kerno MCP plugin from https://github.com/kernoio/kerno-mcp-plugin for this workspace.
 
-Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
-
-1. Clone https://github.com/kernoio/kerno-mcp-plugin to ~/.kerno/mcp-plugin and load it as a Claude Code plugin with `claude --plugin-dir ~/.kerno/mcp-plugin` (see claude/README.md). Do not use `/plugin marketplace`.
+1. Clone https://github.com/kernoio/kerno-mcp-plugin to ~/.kerno/mcp-plugin and load it as a Claude Code plugin with `claude --plugin-dir ~/.kerno/mcp-plugin` (see claude/README.md).
 2. Run the install-kerno skill (/install-kerno) to install @kerno/cli, log in, start the agent with kerno init -w on this project, and register MCP.
 3. Verify kerno_get_applications works for this workspace path.
 
