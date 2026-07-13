@@ -1,11 +1,14 @@
 {
   "name": "kerno",
   "version": "0.1.0",
-  "description": "Give Codex the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
+  "description": "Runtime QA harness for backend coding agents. Kerno automatically generates, runs, and maintains integration tests locally against your real stack, so your agent catches and fixes its own regressions every session, before they reach a PR.",
   "author": {
-    "name": "Kerno"
+    "name": "Kerno",
+    "url": "https://kerno.io"
   },
   "repository": "https://github.com/kernoio/kerno-mcp-plugin",
+  "homepage": "https://kerno.gitbook.io/docs",
+  "license": "Apache-2.0",
   "keywords": [
     "kerno",
     "mcp",
