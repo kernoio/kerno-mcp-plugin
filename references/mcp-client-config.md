@@ -13,7 +13,7 @@ Install and start via **`@kerno/cli`**:
 ```bash
 npm install -g @kerno/cli
 kerno login
-kerno mcp -w /absolute/path/to/your/repo
+kerno init -w /absolute/path/to/your/repo
 ```
 
 Read the **full command output** before proposing MCP config. The port is **session-specific** — never copy a port from docs or old config.
@@ -33,7 +33,7 @@ If the port changes after restart, re-parse and update host config.
 
 Read this section **after** the user names their host. Do not assume a host from the current session.
 
-1. Run `kerno mcp -w "$WORKSPACE"` and parse `MCP_URL`.
+1. Run `kerno init -w "$WORKSPACE"` and parse `MCP_URL`.
 2. Find the host's MCP config location or CLI for the chosen scope (project/repo vs user/machine).
 3. Merge the server entry below; do not overwrite unrelated servers.
 4. Add transport/type fields only if the host rejects url-only config.
@@ -95,7 +95,7 @@ enabled = true
 
 User-scoped: put the same `[mcp_servers.kerno]` block in `~/.codex/config.toml` instead.
 
-**Plugin install:** see [codex/README.md](../codex/README.md) — clone the repo and register as a local plugin source. The plugin may ship a bundled [`.mcp.json`](../.mcp.json) template; still update the URL after `kerno mcp -w` because the port is session-specific.
+**Plugin install:** see [codex/README.md](../codex/README.md) — clone the repo and register as a local plugin source. The plugin may ship a bundled [`.mcp.json`](../.mcp.json) template; still update the URL after `kerno init -w` because the port is session-specific.
 
 **Plugin MCP policy** (optional, after install): `~/.codex/config.toml` may include `[plugins."kerno@kerno".mcp_servers.kerno]` — see [Codex plugin MCP docs](https://developers.openai.com/codex/plugins/build).
 
@@ -103,11 +103,11 @@ User-scoped: put the same `[mcp_servers.kerno]` block in `~/.codex/config.toml` 
 
 | Symptom | Action |
 |---------|--------|
-| MCP fails but something is listening | Re-run `kerno mcp -w "$WORKSPACE"`, re-parse `MCP_URL`, update config if port changed |
+| MCP fails but something is listening | Re-run `kerno init -w "$WORKSPACE"`, re-parse `MCP_URL`, update config if port changed |
 | Tools not visible after register | Confirm config uses current `MCP_URL`, refresh host |
-| `workspace not found` | Same absolute path in `kerno mcp -w` and every MCP call |
+| `workspace not found` | Same absolute path in `kerno init -w` and every MCP call |
 | Two Kerno entries | Duplicate at project + user scope — ask which to keep |
-| `kerno start` + `kerno mcp` race | `kerno stop`; run `kerno mcp -w "$WORKSPACE"` alone |
+| Wrong workspace bound / agent won't rebind | `kerno stop`, then re-run `kerno init -w "$WORKSPACE"` alone (escalate to `kerno doctor --clean` if orphan/inconsistent state persists) |
 | Stale URL in config | Re-parse from fresh CLI output |
 
 #### CLI maintenance
@@ -115,9 +115,20 @@ User-scoped: put the same `[mcp_servers.kerno]` block in `~/.codex/config.toml` 
 | Action | Command |
 |--------|---------|
 | Stop | `kerno stop` |
-| Re-bind + refresh URL | `kerno mcp -w "$WORKSPACE"` |
+| Re-bind + refresh URL | `kerno init -w "$WORKSPACE"` |
 | Logs (user terminal) | `kerno logs` |
 | Sign out | `kerno logout` |
+
+#### Single-workspace rebind
+
+The agent binds to **one workspace at a time** — binding a new workspace tears down the previously bound agent. In an agent shell (no TTY), `kerno init` runs **headless automatically**.
+
+To point Kerno at a different workspace non-interactively:
+
+- **Graceful (preferred when the old workspace has work running):** `kerno stop`, then `kerno init -w "$WORKSPACE"`. `kerno stop` cancels the old workspace's in-flight tests and stops its app services before shutting the agent down.
+- **One-shot:** `kerno init -w "$WORKSPACE" --force-switch` — stops the other-workspace agent and switches without a prompt. This only kills the old agent process; it does **not** gracefully cancel its in-flight work.
+
+Without `--force-switch`, a headless `kerno init` targeting a different workspace exits with a clear message to `kerno stop` first or re-run with `--force-switch` — it does not hang or crash.
 
 ---
 
@@ -157,7 +168,7 @@ Send JSON-RPC `initialize` with:
 
 ## Timeouts and long jobs
 
-**Per-tool-call limit is usually on the MCP host (client),** not the agent. Many hosts end a single tool HTTP round-trip around **~60 seconds**, regardless of how long the server would otherwise wait. **`kerno_job`** cannot rely on one blocking call lasting through a **15+ minute** orchestrate or endpoint-test job; jobs often run **many minutes** and may **exceed 15 minutes**.
+**Per-tool-call limit is usually on the MCP host (client),** not the agent. Many hosts end a single tool HTTP round-trip around **~60 seconds**, regardless of how long the server would otherwise wait. **`kerno_job`** cannot rely on one blocking call lasting through a **15+ minute** endpoint-test job; jobs often run **many minutes** and may **exceed 15 minutes**.
 
 **`MCP_TIMEOUT`** in some hosts applies to **MCP server startup**, not how long an individual tool call may run.
 

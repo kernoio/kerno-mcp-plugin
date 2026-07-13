@@ -63,3 +63,7 @@ Answer with **`kerno_feedback_answer`** or **`answer_feedback_request`**, then t
 Rejection on plan review triggers replan (GOAP replan loop).
 
 See [state-and-jobs.md](state-and-jobs.md) and **`skills/kerno-endpoint-test/SKILL.md`**.
+
+## Blocked scenarios (DB access)
+
+A scenario that needs the database (**`requiredDependencies: [database]`**) is reported **`[BLOCKED]`** in a **black box** (HTTP-only) run — or in a greybox run where Kerno can't derive the DB schema. **Blocked is not failed:** the scenario didn't run, so it's neither pass nor fail. To unblock, provide DB access (greybox) — see [workspace-config.md](workspace-config.md#database-access-requires-a-derivable-schema). If DB access isn't possible, tell the user those scenarios can't run and only API-level validation is covered.

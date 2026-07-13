@@ -1,7 +1,7 @@
 ---
 name: kerno-endpoint-test
 description: This skill should be used when the user asks to generate or validate endpoint tests, run scenarios, test an API route, or run /kerno-endpoint-test. Guides kerno_list_endpoints, kerno_endpoint_test (generate vs validate), kerno_job, and plan-review feedback gates.
-version: 0.2.0
+version: 0.2.1
 ---
 
 # Kerno MCP — endpoint test workflow
@@ -40,4 +40,4 @@ If a **generate** job stalls while still `running`, check plan-review gates via 
 
 ## User-facing messaging
 
-Describe progress in plain language (planning coverage, running scenarios, pass/fail). Avoid MCP wiring jargon unless the user is debugging integration.
+Describe progress in plain language (planning coverage, running scenarios, pass/fail). Flag any **`[BLOCKED]`** scenarios — they need DB access (greybox) and did not run; see **`endpoint-test-types.md`**. Avoid MCP wiring jargon unless the user is debugging integration.
