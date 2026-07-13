@@ -8,6 +8,7 @@
   },
   "repository": "https://github.com/kernoio/kerno-mcp-plugin",
   "homepage": "https://kerno.gitbook.io/docs",
+  "license": "Apache-2.0",
   "keywords": [
     "kerno",
     "mcp",

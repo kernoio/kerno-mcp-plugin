@@ -8,5 +8,6 @@
   },
   "homepage": "https://kerno.gitbook.io/docs",
   "repository": "https://github.com/kernoio/kerno-mcp-plugin",
+  "license": "Apache-2.0",
   "keywords": ["kerno", "mcp", "testing", "integration-testing", "validation", "backend"]
 }
