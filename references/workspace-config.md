@@ -18,17 +18,15 @@ Call **`kerno_save_config`** with:
 - **`workspace_path`** — absolute path matching agent `WORKSPACE`
 - **`applications`** — array of per-app entries:
   - **`app`** — module id or name from **`kerno_get_applications`**
-  - **`target_environment`** — `local` | `remote` | `orchestrate` (exact values only)
-  - **`sut_url`** — required for `local`/`remote` after the SUT is reachable; omit for `orchestrate`
-  - Optional DB env blocks: `postgres`, `mariadb`, `mysql`, `mongodb`, `redis`, `kafka`, `rabbitmq`, `clickhouse`, `azurite`, `zitadel` — each an object of string env vars for scenario runs
+  - **`target_environment`** — `local` | `remote` (exact values only)
+  - **`sut_url`** — required for `local`/`remote` after the SUT is reachable
+  - Optional DB env blocks: `postgres`, `mariadb`, `mysql`, `mongodb`, `redis`, `kafka`, `rabbitmq`, `clickhouse`, `azurite`, `zitadel` — each an object of string env vars for scenario runs. These supply **credentials only**; DB-backed scenarios also require a derivable schema — see [Database access requires a derivable schema](#database-access-requires-a-derivable-schema).
 
 ## When to call
 
 After **`kerno_get_applications`**.
 
-**Local path** (repo has easy startup): start the stack with the repository's dev flow **first**, then call **`kerno_save_config`** with **`local`**, **`sut_url`**, and dependency env vars, then **`kerno_environment_setup`**.
-
-**Orchestrate path:** call **`kerno_save_config`** with **`target_environment: orchestrate`** (omit **`sut_url`**) when the user explicitly asks Kerno to orchestrate the environment, **or** when the repository has no easy full-stack startup. Then **`kerno_environment_setup`**.
+Start the stack with the repository's dev flow **first** (or point at a **`remote`** SUT hosted somewhere other than this machine, e.g. cloud), then call **`kerno_save_config`** with **`local`** (or **`remote`**), **`sut_url`**, and — for **greybox** — dependency env vars, then **`kerno_environment_setup`**. Omit the DB env blocks for **black box** (HTTP-only); DB-backed scenarios will then be reported **`[BLOCKED]`**.
 
 See [target-environment.md](target-environment.md) for the full decision tree.
 
@@ -63,3 +61,33 @@ The saved **`effectiveUrl`** becomes **`SUT_BASE_URL`** for scenario execution; 
 **`kerno_environment_setup`** accepts optional **`sut_url`** to persist before probing for local/remote targets.
 
 See [target-environment.md](target-environment.md) for when to pick each **`target_environment`**.
+
+## Database access requires a derivable schema
+
+Setting a DB env block (above) supplies **credentials only**. A scenario that declares **`requiredDependencies: [database]`** additionally needs Kerno to derive the database **schema** from the repo. If it can't, the scenario is **`[BLOCKED]`** and the DB block alone does nothing.
+
+Detection is deterministic (no LLM) and matches by **filename and path convention, not by ORM/tool**. Recognized:
+
+| Schema source | Matches |
+|---------------|---------|
+| Prisma | any `*.prisma` (e.g. `schema.prisma`) |
+| ActiveRecord snapshot | `schema.rb` (anywhere) |
+| Raw SQL snapshot | `schema.sql` (outside a `migration`/`migrate` path) |
+| SQL migrations / DDL | `*.sql` under a path containing `migration`, `migrate`, `db/`, `sql/`, or `clickhouse/` — covers Flyway, Liquibase SQL, ClickHouse DDL, plain `db/*.sql` |
+| Rails migrations | `db/migrate/*.rb` |
+| Digit-prefixed migrations | filename **starting with a digit**, ending in `.sql .rb .ts .mts .js .mjs .py .go .php .exs`, under a `migration`/`migrate` path (or `mongo/`, `mongodb/`) — covers Django, goose, Laravel, Ecto, timestamped TypeORM, migrate-mongo |
+
+Skipped dirs: `node_modules`, `.git`, `build`, `dist`, `vendor`, `.gradle`, `target`. Caps: 60 files, depth 12, 40k chars.
+
+**No ORM-specific detection.** knex, Sequelize, and TypeORM match **only** if their migration files happen to satisfy the digit-prefixed-in-a-migration-path rule. Descriptively-named migrations (e.g. knex's `add-x-column.js`) are **not** recognized and block with:
+
+```
+requires direct database access but no schema could be derived from source code
+```
+
+### When your schema isn't recognized
+
+1. **Point Kerno at it (interactive).** The blocked run surfaces a free-text feedback question (**`awaiting_answer`**). Answer with **`kerno_feedback_answer`** / **`answer_feedback_request`**, giving a **repo-relative path** to your schema/migration file or directory, or **pasting the DDL**. Kerno saves it to a `derived-schema.md` sidecar and reuses it on later runs. Replying **`skip`** hard-blocks the DB scenarios.
+2. **Go API-only.** Drive the endpoint through its HTTP surface instead of direct DB access, supplying any credentials via the dependency env blocks above.
+
+Native knex/Sequelize/TypeORM recognition and a static schema-path config option are tracked in aicore, not this plugin.

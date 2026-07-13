@@ -1,75 +1,54 @@
-# Target environment decision tree
+# Target environment
 
-Choose **`target_environment`** in **`kerno_save_config`**. Valid values only: **`local`**, **`remote`**, **`orchestrate`**.
+Two choices drive **`kerno_save_config`**:
 
-**Default:** **`local`** when the repository can start the full stack and dependencies with existing tooling. **`orchestrate`** is a **fallback** when that is not possible, or when the user explicitly asks Kerno to orchestrate.
+1. **Where the SUT runs** — **`target_environment`**: **`local`** or **`remote`** (exact values only).
+2. **DB-access posture** — **greybox** (recommended) or **black box** (fallback).
 
-On the **local** path, the MCP client starts the stack with the repository's own scripts or development flow **first**, then calls **`kerno_save_config`** with the live SUT URL and dependency env vars. On the **orchestrate** path, **`kerno_save_config`** comes before **`kerno_environment_setup`** — Kerno owns bootstrap.
+These are orthogonal: the first is *where* the system-under-test runs, the second is *whether Kerno can reach its database directly*.
 
-## Decision flow
+## Where the SUT runs
+
+| Choice | When | Client action before save_config | `sut_url` |
+|--------|------|-----------------------------------|-----------|
+| **`local`** (default) | The env runs on **this machine** | Start the stack with the repo's own dev flow (`docker-compose`, dev scripts, Makefile, devcontainer, quickstart) **first**, then save config | Required — probed from ts-sandbox |
+| **`remote`** | The env runs **somewhere other than this machine** (e.g. a cloud / hosted environment) | Make sure it's reachable at its URL | Required — probed from ts-sandbox |
+
+On the **local** path the MCP client starts the stack with the repository's own scripts or dev flow **first**, then calls **`kerno_save_config`** with the live SUT URL (and, for greybox, dependency env vars). Use **`remote`** when the environment lives somewhere other than this machine — e.g. a cloud or hosted environment — reachable at a URL.
+
+**`kerno_save_config`** probes reachability from inside ts-sandbox before persisting — see [workspace-config.md](workspace-config.md).
+
+## DB-access posture: greybox vs black box
+
+| Posture | What Kerno gets | Use when |
+|---------|-----------------|----------|
+| **Greybox** (recommended) | HTTP API **+ direct DB access** | You can give Kerno DB credentials (dependency env blocks) **and** it can derive the DB schema from the repo (or you point it at one). Scenarios that need the database run. |
+| **Black box** (fallback) | HTTP API only | DB access can't be provisioned — no derivable schema and none can be supplied, or the DB isn't reachable. |
+
+**Greybox is the recommended default.** Wire DB credentials via the dependency env blocks in **`kerno_save_config`**; DB-backed scenarios additionally require a schema Kerno can derive from the repo (or that you point it at). See [workspace-config.md](workspace-config.md#database-access-requires-a-derivable-schema).
+
+**Black box is the fallback.** When DB access isn't possible, drive the endpoint through its HTTP surface only, and **tell the user the limitation**: scenarios that require direct database access will be reported **`[BLOCKED]`**; only API-level validation runs.
+
+## Flow
 
 ```mermaid
 flowchart TD
     Start[User wants endpoint tests]
-    UserOrchestrate{User asked Kerno to orchestrate the environment?}
-    EasyStart{Repository has an easy full-stack startup?\nscripts, compose, makefile, devcontainer}
-    ClientStart[Client starts the stack with the existing dev flow]
-    SaveLocal["kerno_save_config — local or remote\nsut_url + dependency env vars"]
-    SaveOrchestrate["kerno_save_config — orchestrate\nomit sut_url"]
-    EnvSetup[kerno_environment_setup]
-    SyncProbe[Sync SUT probe]
-    AsyncJob[Async start_environment job]
+    Where{Env on this local machine?}
+    ClientStart[Start the stack with the repo's dev flow]
+    SaveLocal["kerno_save_config — local\nsut_url + (greybox) DB env vars"]
+    SaveRemote["kerno_save_config — remote\nsut_url + (greybox) DB env vars"]
+    EnvSetup[kerno_environment_setup — sync SUT probe]
     EnvStatus["kerno_environment_status\nuntil ready_for_endpoint_test"]
     Endpoints[kerno_list_endpoints → kerno_endpoint_test]
 
-    Start --> UserOrchestrate
-    UserOrchestrate -->|yes| SaveOrchestrate
-    UserOrchestrate -->|no| EasyStart
-    EasyStart -->|yes| ClientStart
-    ClientStart --> SaveLocal
-    EasyStart -->|no| SaveOrchestrate
-    SaveLocal --> EnvSetup
-    SaveOrchestrate --> EnvSetup
-    EnvSetup --> SyncProbe
-    EnvSetup --> AsyncJob
-    SyncProbe --> EnvStatus
-    AsyncJob --> EnvStatus
-    EnvStatus --> Endpoints
+    Start --> Where
+    Where -->|yes, start it locally| ClientStart --> SaveLocal --> EnvSetup
+    Where -->|no, runs elsewhere e.g. cloud| SaveRemote --> EnvSetup
+    EnvSetup --> EnvStatus --> Endpoints
 ```
-
-**User override:** if the user explicitly asks Kerno to orchestrate, bootstrap, or bring up the full environment, use **`orchestrate`** even when the repository already has scripts or compose to start locally.
-
-**Easy startup** means the project documents a routine way to run the full stack — for example `docker-compose.yml` / `compose.yaml`, `package.json` dev scripts, `Makefile` targets, or a README quickstart — without Kerno generating Docker Compose or driving first-time environment build.
-
-**Signals to prefer `local`:** existing compose files, `npm run dev` / `pnpm dev` / `make run`, devcontainer config, or any documented one-command backend startup.
-
-**`orchestrate` is for:** (1) user explicitly asks Kerno to orchestrate, or (2) none of the above exists and the repo cannot be started without Kerno bootstrap.
-
-## Comparison
-
-| Choice | When | Client action before save_config | `sut_url` | `environment_setup` behavior |
-|--------|------|----------------------------------|-----------|------------------------------|
-| **`local`** | Repo has easy startup; user did not ask Kerno to orchestrate | Start stack with existing dev flow, then save config | Required — probed from ts-sandbox | Sync SUT probe |
-| **`remote`** | SUT already runs elsewhere (staging, teammate) | None — user or CI already started it | Required — probed from ts-sandbox | Sync SUT probe |
-| **`orchestrate`** | No easy full-stack startup, **or** user asked Kerno to orchestrate | None — Kerno owns bootstrap | Omit | Compose-plan + async `start_environment` job |
-
-## Orchestrate flow
-
-When **`target_environment`** is **`orchestrate`**:
-
-1. **`kerno_environment_setup`** — may return **`job_id`** for background work
-2. **`kerno_get_state`** on composeplan resource_id — track plan generation and open questions
-3. **`answer_feedback_request`** or **`kerno_feedback_pending`** / **`kerno_feedback_answer`** when feedback is open
-4. Re-run **`kerno_environment_setup`** if needed after answering compose-plan questions
-5. Poll **`kerno_job`** and **`kerno_environment_status`** until **`ready_for_endpoint_test`**
-
-Compose-plan open questions and plan approval are handled via the read plane and feedback tools. See [state-and-jobs.md](state-and-jobs.md).
-
-## Hard stops
-
-**`needs_user_feedback`** on a **`start_environment`** job terminal payload is a **hard stop** — relay **`result.question`** to the user; do not proceed to endpoint tests until resolved.
 
 ## See also
 
-- [workspace-config.md](workspace-config.md) — save_config fields and host gateway
+- [workspace-config.md](workspace-config.md) — save_config fields, DB env blocks, host gateway, and schema derivation
 - [unified-flow.md](unified-flow.md) — full checklist

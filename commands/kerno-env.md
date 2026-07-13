@@ -1,6 +1,6 @@
 ---
 description: Set up the environment — local dev flow first when possible, then save_config, environment_setup, environment_status
-argument-hint: "[workspace_path] [app] [local|remote|orchestrate]"
+argument-hint: "[workspace_path] [app] [local|remote]"
 ---
 
 Run the **kerno-environment-setup** skill from `skills/kerno-environment-setup/SKILL.md`.
