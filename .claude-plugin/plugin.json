@@ -3,16 +3,14 @@
   "version": "0.1.0",
   "description": "Give Claude the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
   "author": {
-    "name": "Kerno"
+    "name": "Kerno",
+    "url": "https://kerno.io"
   },
   "repository": "https://github.com/kernoio/kerno-mcp-plugin",
   "homepage": "https://kerno.io",
   "keywords": [
     "kerno",
     "mcp",
-    "docker",
-    "compose",
-    "aicore-agent",
     "claude-code",
     "cursor",
     "codex"

@@ -134,7 +134,7 @@ Without `--force-switch`, a headless `kerno init` targeting a different workspac
 
 ## Connection (advanced / self-hosted)
 
-For running **aicore-agent** directly (dev or custom deploy), not via `@kerno/cli`:
+For running the **Kerno agent** directly (dev or custom deploy), not via `@kerno/cli`:
 
 - **Streamable HTTP:** `POST http://127.0.0.1:<PORT>/mcp` when MCP shares the main agent port.
 - **Dedicated MCP port:** If `MCP_PORT` differs from `PORT`, use `http://127.0.0.1:<MCP_PORT>/mcp`.

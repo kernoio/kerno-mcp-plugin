@@ -1,5 +1,5 @@
 ---
-description: When using Kerno MCP tools from aicore-agent, follow unified tool ordering and async job rules
+description: When using Kerno MCP tools from the Kerno agent, follow unified tool ordering and async job rules
 globs:
 alwaysApply: true
 ---

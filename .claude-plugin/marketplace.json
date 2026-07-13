@@ -3,7 +3,8 @@
   "name": "kerno",
   "description": "Official Kerno plugin for Claude Code: catch breaking changes in your backend code before you open a PR.",
   "owner": {
-    "name": "Kerno"
+    "name": "Kerno",
+    "url": "https://kerno.io"
   },
   "plugins": [
     {
@@ -14,7 +15,7 @@
       },
       "description": "Give Claude Code the local validation and CI feedback loop it needs to verify and fix its work in context, and ship code that works as part of your system.",
       "category": "testing",
-      "homepage": "https://github.com/kernoio/kerno-mcp-plugin",
+      "homepage": "https://kerno.io",
       "tags": ["testing", "integration-testing", "api-testing", "validation", "ci", "backend", "mcp"]
     }
   ]
