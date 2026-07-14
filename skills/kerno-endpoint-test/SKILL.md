@@ -34,9 +34,15 @@ Call with `workspace_path`, `app`, `endpoint_method`, `endpoint_path`, `type`, a
 
 ## Step 4: kerno_job and feedback gates
 
-Poll with sparse **`wait=false`** or read **`log_path`** — load `skills/kerno-background-job/SKILL.md`.
+Poll with sparse **`wait=false`** or read **`log_path`** — load `skills/kerno-background-job/SKILL.md`. Don't tight-loop.
 
-If a **generate** job stalls while still `running`, check plan-review gates via **`endpoint-test-types.md`** and **`state-and-jobs.md`** (not visible on **`kerno_job`** alone).
+A **generate** run parks on a human gate while **`kerno_job`** still shows `running` — the gate is not visible there. When the job stays `running`:
+
+1. **Detect** — **`kerno_feedback_pending`**, or **`kerno_get_state`** on the endpoint-test resource with **`until_status: ["awaiting_approval","awaiting_answer","ready","failed"]`**.
+2. **Answer** — plan approval → `{"approved": true}` (or `{"approved": false, "reason": "..."}` to replan); free-text question → `{"answer": "..."}`. Submit with **`kerno_feedback_answer`**.
+3. **Re-poll** — a run can hit several gates in sequence; re-check after each answer.
+
+Full detail and the resource-scoped path (**`answer_feedback_request`**): **`state-and-jobs.md`** § Feedback. Blocked scenarios and generate-vs-validate: **`endpoint-test-types.md`**.
 
 ## User-facing messaging
 

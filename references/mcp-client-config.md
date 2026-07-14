@@ -131,6 +131,8 @@ To point Kerno at a different workspace non-interactively:
 
 Without `--force-switch`, a headless `kerno init` targeting a different workspace exits with a clear message to `kerno stop` first or re-run with `--force-switch` — it does not hang or crash.
 
+**Session drops on rebind.** Any agent stop, restart, or workspace switch invalidates the host's current MCP session, independent of whether the port changes. Symptom: tool calls return `Unknown session` (or the host shows the server disconnected) right after a rebind. Fix: re-parse `MCP_URL` from the new `kerno init` output, update host config if the port changed, and reconnect/refresh the host. Expect this whenever you switch workspaces mid-session — it is not an error state.
+
 ---
 
 ## Connection (advanced / self-hosted)
