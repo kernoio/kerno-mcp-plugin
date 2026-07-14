@@ -50,16 +50,6 @@ healthcheck → get_applications → [local: start repo dev flow] → save_confi
 
 Prefer **greybox** (local + DB access, so DB-backed scenarios run); fall back to **black box** (HTTP-only) when DB access isn't possible, telling the user that scenarios requiring direct DB access will be reported **`[BLOCKED]`**. Full checklist: [references/unified-flow.md](references/unified-flow.md).
 
-## Layout (one repo, three manifests)
-
-| Client | Install guide | Manifest |
-|--------|---------------|----------|
-| Claude Code | [claude/README.md](claude/README.md) | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) |
-| Cursor | [cursor/README.md](cursor/README.md) | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) |
-| Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) |
-
-Shared content: `skills/`, `commands/`, `references/`, [prompts/](prompts/).
-
 ## Plugin contents
 
 **Slash commands** (`/install-kerno`, `/kerno-bootstrap`, `/kerno-env`, `/kerno-endpoint-test`, `/kerno-help`) delegate to matching skills under `skills/`. **Cursor rules:** [rules/kerno.mdc](rules/kerno.mdc). **Canonical MCP workflow:** [references/unified-flow.md](references/unified-flow.md). Other references: [workspace-config](references/workspace-config.md), [target-environment](references/target-environment.md), [endpoint-test-types](references/endpoint-test-types.md), [state-and-jobs](references/state-and-jobs.md), [mcp-client-config](references/mcp-client-config.md), [changes-detected](references/changes-detected.md). Operator details: `agent/apps/agent/docs/mcp.md` in the main repo.
