@@ -66,10 +66,6 @@ Per-tool details: [Claude](claude/README.md) · [Cursor](cursor/README.md) · [C
 
 Prerequisites: Node.js ≥ 18, npm, Docker running, a git repository, and a Kerno account. For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
 
-## After install
-
-Open your assistant in the **same workspace** you bound with `kerno init -w <path>`. Then use `/kerno-bootstrap` to verify connectivity, `/kerno-env` for environment setup, or `/kerno-endpoint-test` for endpoint tests.
-
 Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
 
 ## Unified MCP flow (summary)
@@ -95,7 +91,3 @@ Shared content: `skills/`, `commands/`, `references/`.
 ## Plugin contents
 
 **Slash commands** (`/install-kerno`, `/kerno-bootstrap`, `/kerno-env`, `/kerno-endpoint-test`, `/kerno-help`) delegate to matching skills under `skills/`. **Cursor rules:** [rules/kerno.mdc](rules/kerno.mdc). **Canonical MCP workflow:** [references/unified-flow.md](references/unified-flow.md). Other references: [workspace-config](references/workspace-config.md), [target-environment](references/target-environment.md), [endpoint-test-types](references/endpoint-test-types.md), [state-and-jobs](references/state-and-jobs.md), [mcp-client-config](references/mcp-client-config.md), [changes-detected](references/changes-detected.md). Operator details: `agent/apps/agent/docs/mcp.md` in the main repo.
-
-## Drift prevention
-
-Run **`scripts/check-unified-drift.py`** locally or in CI to ensure plugin docs match the unified tool surface.

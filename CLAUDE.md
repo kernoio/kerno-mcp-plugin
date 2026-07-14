@@ -27,6 +27,7 @@ The Kerno agent binary is not included. Human-facing index: [README.md](README.m
 - Skills: third-person descriptions in frontmatter (woterclip-style).
 - Skills link to **`references/`** for tables, anti-patterns, and tool semantics — do not duplicate reference content in skills.
 - Document the unified MCP surface only — one canonical flow in **`references/unified-flow.md`**.
+- **Drift check** — `scripts/check-unified-drift.py` keeps plugin docs in sync with the unified MCP tool surface. It runs in CI (`.github/workflows/check-drift.yml`); run it locally after changing tool references.
 
 ## Releasing (so marketplace installs see updates)
 
