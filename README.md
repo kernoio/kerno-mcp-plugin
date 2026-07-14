@@ -52,11 +52,11 @@ Prefer **greybox** (local + DB access, so DB-backed scenarios run); fall back to
 
 ## Layout (one repo, three clients)
 
-| Client | Install guide | Plugin manifest | Marketplace |
-|--------|---------------|-----------------|-------------|
-| Claude Code | [claude/README.md](claude/README.md) | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) | [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) |
-| Cursor | [cursor/README.md](cursor/README.md) | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) | [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json) |
-| Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) | [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) |
+| Client | Install guide | Plugin manifest |
+|--------|---------------|-----------------|
+| Claude Code | [claude/README.md](claude/README.md) | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) |
+| Cursor | [cursor/README.md](cursor/README.md) | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) |
+| Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) |
 
 Shared content: `skills/`, `commands/`, `references/`, [prompts/](prompts/).
 
