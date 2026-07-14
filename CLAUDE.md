@@ -27,3 +27,14 @@ The Kerno agent binary is not included. Human-facing index: [README.md](README.m
 - Skills: third-person descriptions in frontmatter (woterclip-style).
 - Skills link to **`references/`** for tables, anti-patterns, and tool semantics — do not duplicate reference content in skills.
 - Document the unified MCP surface only — one canonical flow in **`references/unified-flow.md`**.
+
+## Releasing (so marketplace installs see updates)
+
+All three installs (Claude, Cursor, Codex) pull from this repo on `master`, but a tool only surfaces "update available" when the plugin `version` changes. Bump it every release, in lockstep across all three manifests:
+
+1. `python3 scripts/bump-version.py <new-version>` (e.g. `0.2.0`) — updates `version` in `.claude-plugin/`, `.cursor-plugin/`, `.codex-plugin/` plugin.json.
+2. Commit the bump.
+3. `claude plugin tag --push` — validates plugin.json vs the marketplace entry, tags `kerno--v<version>`, and pushes the tag.
+4. Draft a GitHub Release for that tag (this is the notification channel: repo watchers get pinged; the editors themselves don't nag).
+
+Users update via `claude plugin update kerno` / `codex plugin marketplace upgrade` / Cursor's marketplace Refresh.

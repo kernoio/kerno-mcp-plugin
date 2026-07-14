@@ -4,84 +4,39 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 **Source:** [github.com/kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
 
-## Give this repo to your coding tool
+## Install
 
-**Claude Code:** install from the Kerno marketplace — `/plugin marketplace add kernoio/kerno-mcp-plugin` then `/plugin install kerno@kerno` (see [Claude Code](#claude-code) below). **Cursor** and **Codex** have no public Kerno marketplace yet — clone and install via a [paste prompt](#paste-a-prompt-into-your-assistant) or a [client install guide](#layout-one-repo-three-manifests) below.
+Two steps: install the **kerno** plugin in your tool, then run **`/install-kerno`**.
 
-### Paste a prompt into your assistant
+### 1. Install the plugin
 
-Paste **one** prompt below into your assistant (Agent chat, Claude Code, Codex, etc.). It clones the repo, loads the full plugin, then runs **install-kerno** to install the CLI, start the agent, and connect MCP for your workspace.
-
-| Tool | Copy-paste prompt |
-|------|-------------------|
-| Claude Code | [prompts/install-claude.md](prompts/install-claude.md) |
-| Cursor | [prompts/install-cursor.md](prompts/install-cursor.md) |
-| Codex | [prompts/install-codex.md](prompts/install-codex.md) |
-
-### Claude Code
-
-Install from the Kerno marketplace, then run the setup skill:
-
+**Claude Code**
 ```
 /plugin marketplace add kernoio/kerno-mcp-plugin
 /plugin install kerno@kerno
-/install-kerno
 ```
 
-`/install-kerno` installs `@kerno/cli`, logs in, starts the agent with `kerno init -w`, and registers MCP.
+**Cursor**: Settings → Plugins → **Add marketplace → Import from repo**, enter `kernoio/kerno-mcp-plugin`, install **kerno**, then reload the window (**Developer: Reload Window**).
 
-**Or paste a prompt** (agent-driven — it clones and loads the plugin for you):
-
+**Codex**
 ```
-Install and set up the Kerno MCP plugin from https://github.com/kernoio/kerno-mcp-plugin for this workspace.
-
-1. Clone https://github.com/kernoio/kerno-mcp-plugin to ~/.kerno/mcp-plugin and load it as a Claude Code plugin with `claude --plugin-dir ~/.kerno/mcp-plugin` (see claude/README.md).
-2. Run the install-kerno skill (/install-kerno) to install @kerno/cli, log in, start the agent with kerno init -w on this project, and register MCP.
-3. Verify kerno_get_applications works for this workspace path.
-
-Work in this repository root unless I specify another path.
+codex plugin marketplace add kernoio/kerno-mcp-plugin
 ```
+Then open **`/plugins`**, install **kerno**, and start a new session.
 
-### Cursor
+Per-tool details: [Claude](claude/README.md) · [Cursor](cursor/README.md) · [Codex](codex/README.md).
 
-**Open in Cursor:** use the link under the prompt block, or copy the text below.
+### 2. Run install-kerno
 
-```
-Install and set up Kerno MCP for this project using https://github.com/kernoio/kerno-mcp-plugin.
+Run **`/install-kerno`** (**`@install-kerno`** in Codex). It loads the install-kerno skill, and the agent does the rest: installs `@kerno/cli`, logs you in, starts the local agent bound to this workspace (`kerno init -w`), registers MCP, and verifies the connection. It pauses to ask you a few things (browser login, which host, MCP scope).
 
-Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
+Or hand both steps to the agent: paste [prompts/install-claude.md](prompts/install-claude.md) (or [prompts/install-codex.md](prompts/install-codex.md) for Codex).
 
-1. Follow cursor/README.md: clone https://github.com/kernoio/kerno-mcp-plugin to ~/.kerno/mcp-plugin and symlink into ~/.cursor/plugins/local/kerno, then reload Cursor.
-2. Run /install-kerno to install @kerno/cli, bind the agent to this workspace with kerno init -w, and register MCP with the URL from CLI output.
-3. Confirm Kerno MCP tools are available in this project folder.
+Prerequisites: Node.js ≥ 18, npm, Docker running, a git repository, and a Kerno account. For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
 
-Work in this repository root unless I specify another path.
-```
+## After install
 
-**Open in Cursor:** [Open in Cursor](https://cursor.com/link/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0ADo%20not%20use%20any%20plugin%20marketplace%20%E2%80%94%20Kerno%20is%20not%20published%20to%20marketplaces%20yet.%0A%0A1.%20Follow%20cursor%2FREADME.md%3A%20clone%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin%20to%20~%2F.kerno%2Fmcp-plugin%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20init%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) · [cursor://](cursor://anysphere.cursor-deeplink/prompt?text=Install%20and%20set%20up%20Kerno%20MCP%20for%20this%20project%20using%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin.%0A%0ADo%20not%20use%20any%20plugin%20marketplace%20%E2%80%94%20Kerno%20is%20not%20published%20to%20marketplaces%20yet.%0A%0A1.%20Follow%20cursor%2FREADME.md%3A%20clone%20https%3A%2F%2Fgithub.com%2Fkernoio%2Fkerno-mcp-plugin%20to%20~%2F.kerno%2Fmcp-plugin%20and%20symlink%20into%20~%2F.cursor%2Fplugins%2Flocal%2Fkerno%2C%20then%20reload%20Cursor.%0A2.%20Run%20%2Finstall-kerno%20to%20install%20%40kerno%2Fcli%2C%20bind%20the%20agent%20to%20this%20workspace%20with%20kerno%20init%20-w%2C%20and%20register%20MCP%20with%20the%20URL%20from%20CLI%20output.%0A3.%20Confirm%20Kerno%20MCP%20tools%20are%20available%20in%20this%20project%20folder.%0A%0AWork%20in%20this%20repository%20root%20unless%20I%20specify%20another%20path.) — opens the IDE with the install prompt above pre-filled (review and send; does not run automatically). [Link details](references/cursor-install-deeplink.md).
-
-
-### Codex
-
-```
-Set up Kerno for this workspace using https://github.com/kernoio/kerno-mcp-plugin.
-
-Do not use any plugin marketplace — Kerno is not published to marketplaces yet.
-
-1. Clone https://github.com/kernoio/kerno-mcp-plugin to ~/.kerno/mcp-plugin and register it as a local Codex plugin (see codex/README.md). Do not use `codex plugin marketplace add`.
-2. Run the install-kerno skill (@install-kerno) to install @kerno/cli, log in, start the agent with kerno init -w on this project, and register MCP in Codex.
-3. Verify Kerno MCP tools work in this workspace.
-
-Work in this repository root unless I specify another path.
-```
-
-## Where to start
-
-1. **Install the plugin** — use a [prompt](#paste-a-prompt-into-your-assistant) or a client install guide ([Claude](claude/README.md) · [Cursor](cursor/README.md) · [Codex](codex/README.md)).
-2. **First thing after the plugin is installed:** run **install-kerno** (`/install-kerno` or `@install-kerno`).
-3. **Open your assistant in the same workspace** you bound with `kerno init -w <path>`.
-
-After MCP is connected, use `/kerno-bootstrap` to verify connectivity, then `/kerno-env` for environment setup or `/kerno-endpoint-test` for endpoint tests.
+Open your assistant in the **same workspace** you bound with `kerno init -w <path>`. Then use `/kerno-bootstrap` to verify connectivity, `/kerno-env` for environment setup, or `/kerno-endpoint-test` for endpoint tests.
 
 Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
 
@@ -95,28 +50,19 @@ healthcheck → get_applications → [local: start repo dev flow] → save_confi
 
 Prefer **greybox** (local + DB access, so DB-backed scenarios run); fall back to **black box** (HTTP-only) when DB access isn't possible, telling the user that scenarios requiring direct DB access will be reported **`[BLOCKED]`**. Full checklist: [references/unified-flow.md](references/unified-flow.md).
 
-## Layout (one repo, three manifests)
+## Layout (one repo, three clients)
 
-| Client | Install guide | Manifest |
-|--------|---------------|----------|
+| Client | Install guide | Plugin manifest |
+|--------|---------------|-----------------|
 | Claude Code | [claude/README.md](claude/README.md) | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) |
 | Cursor | [cursor/README.md](cursor/README.md) | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) |
 | Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) |
 
 Shared content: `skills/`, `commands/`, `references/`, [prompts/](prompts/).
 
-## Prerequisites
-
-- Node.js ≥ 18, `npm`, Docker, and a git repository for the target project.
-- **`@kerno/cli`** installed and logged in (`kerno login`) — **install-kerno** handles this after you add the plugin.
-- Agent running for your workspace: `kerno init -w /absolute/path/to/repo` — read the MCP URL from CLI output (port is not fixed).
-- MCP registered in your editor — **install-kerno** handles this step by step.
-
-For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
-
 ## Plugin contents
 
-**Slash commands** (`/install-kerno`, `/kerno-bootstrap`, `/kerno-env`, `/kerno-endpoint-test`, `/kerno-help`) delegate to matching skills under `skills/`. **Cursor rules:** [rules/kerno.mdc](rules/kerno.mdc). **Canonical MCP workflow:** [references/unified-flow.md](references/unified-flow.md). Other references: [workspace-config](references/workspace-config.md), [target-environment](references/target-environment.md), [endpoint-test-types](references/endpoint-test-types.md), [state-and-jobs](references/state-and-jobs.md), [mcp-client-config](references/mcp-client-config.md), [changes-detected](references/changes-detected.md), [cursor-install-deeplink](references/cursor-install-deeplink.md). Operator details: `agent/apps/agent/docs/mcp.md` in the main repo.
+**Slash commands** (`/install-kerno`, `/kerno-bootstrap`, `/kerno-env`, `/kerno-endpoint-test`, `/kerno-help`) delegate to matching skills under `skills/`. **Cursor rules:** [rules/kerno.mdc](rules/kerno.mdc). **Canonical MCP workflow:** [references/unified-flow.md](references/unified-flow.md). Other references: [workspace-config](references/workspace-config.md), [target-environment](references/target-environment.md), [endpoint-test-types](references/endpoint-test-types.md), [state-and-jobs](references/state-and-jobs.md), [mcp-client-config](references/mcp-client-config.md), [changes-detected](references/changes-detected.md). Operator details: `agent/apps/agent/docs/mcp.md` in the main repo.
 
 ## Drift prevention
 
