@@ -7,9 +7,8 @@
     {
       "name": "kerno",
       "source": {
-        "source": "git-subdir",
+        "source": "url",
         "url": "https://github.com/kernoio/kerno-mcp-plugin.git",
-        "path": "./",
         "ref": "master"
       },
       "policy": {
