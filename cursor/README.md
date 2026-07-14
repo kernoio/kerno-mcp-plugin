@@ -11,4 +11,4 @@ ln -s ~/.kerno/mcp-plugin ~/.cursor/plugins/local/kerno
 
 Reload the window (**Developer: Reload Window**), then run **`/install-kerno`**.
 
-MCP config: `.cursor/mcp.json` or `~/.cursor/mcp.json` — same shape as [`.mcp.json`](../.mcp.json); replace the URL after `kerno init -w`. Details: [references/mcp-client-config.md](../references/mcp-client-config.md) (**Cursor** row). Example: [mcp.json.example](mcp.json.example). Rules: [rules/kerno.mdc](../rules/kerno.mdc).
+MCP config: `.cursor/mcp.json` or `~/.cursor/mcp.json` — same shape as [`mcp.json.example`](../mcp.json.example); replace the URL after `kerno init -w`. Details: [references/mcp-client-config.md](../references/mcp-client-config.md) (**Cursor** row). Example: [mcp.json.example](mcp.json.example). Rules: [rules/kerno.mdc](../rules/kerno.mdc).
