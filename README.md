@@ -6,11 +6,9 @@ This repo is the **plugin** that connects Kerno to your coding tool (Claude Code
 
 ## Install
 
-Pick your tool. Two steps each: install the **kerno** plugin, then paste the setup prompt into your agent to configure Kerno for your project.
+Install the **kerno** plugin, then paste the setup prompt into your agent to configure Kerno for your project.
 
 Prerequisites: Node.js ≥ 18, npm, Docker running, a git repository, and a Kerno account.
-
-Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart). For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
 
 ### Claude Code
 
@@ -71,13 +69,3 @@ Work in this repository root unless I specify another path.
 ```
 
 Details: [codex/README.md](codex/README.md).
-
-## Layout (one repo, three clients)
-
-| Client | Install guide | Plugin manifest |
-|--------|---------------|-----------------|
-| Claude Code | [claude/README.md](claude/README.md) | [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json) |
-| Cursor | [cursor/README.md](cursor/README.md) | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) |
-| Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) |
-
-Shared content: `skills/`, `commands/`, `references/`.
