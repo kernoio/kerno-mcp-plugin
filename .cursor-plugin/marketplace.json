@@ -1,8 +1,7 @@
 {
   "name": "kerno",
   "owner": {
-    "name": "Kerno",
-    "email": "karim@kerno.io"
+    "name": "Kerno"
   },
   "metadata": {
     "description": "Runtime QA harness for backend coding agents."
