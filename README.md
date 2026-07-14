@@ -29,8 +29,6 @@ Set up Kerno for this workspace.
 Work in this repository root unless I specify another path.
 ```
 
-Details: [claude/README.md](claude/README.md).
-
 ### Cursor
 
 **1. Install the plugin**
@@ -46,8 +44,6 @@ Set up Kerno for this workspace.
 
 Work in this repository root unless I specify another path.
 ```
-
-Details: [cursor/README.md](cursor/README.md).
 
 ### Codex
 
@@ -67,5 +63,3 @@ Set up Kerno for this workspace.
 
 Work in this repository root unless I specify another path.
 ```
-
-Details: [codex/README.md](codex/README.md).
