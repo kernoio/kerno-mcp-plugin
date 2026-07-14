@@ -32,6 +32,6 @@ Adjust `source.path` so it resolves from `~/.agents/plugins/` to your clone. Res
 
 **Developing in this repo:** use [`.agents/plugins/marketplace.json`](../.agents/plugins/marketplace.json) (local `./` checkout). Trust the project in `~/.codex/config.toml` — see **`mcp-client-config.md`** § Codex.
 
-Installing the plugin does **not** start the Kerno agent. **`@install-kerno`** installs `@kerno/cli`, runs `kerno init -w <workspace>`, and registers the session MCP URL. Full steps: [references/mcp-client-config.md](../references/mcp-client-config.md). Bundled MCP template: [`.mcp.json`](../.mcp.json) (replace URL after each `kerno init -w`).
+Installing the plugin does **not** start the Kerno agent. **`@install-kerno`** installs `@kerno/cli`, runs `kerno init -w <workspace>`, and registers the session MCP URL. Full steps: [references/mcp-client-config.md](../references/mcp-client-config.md). Bundled MCP template: [`mcp.json.example`](../mcp.json.example) (replace URL after each `kerno init -w`).
 
 Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart) · [Build plugins (Codex)](https://developers.openai.com/codex/plugins/build)

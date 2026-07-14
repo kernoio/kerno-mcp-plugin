@@ -1,6 +1,7 @@
 {
   "mcpServers": {
     "kerno": {
+      "type": "http",
       "url": "http://localhost:8086/mcp"
     }
   }
