@@ -4,72 +4,39 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 **Source:** [github.com/kernoio/kerno-mcp-plugin](https://github.com/kernoio/kerno-mcp-plugin)
 
-## Give this repo to your coding tool
+## Install
 
-**Claude Code, Cursor, and Codex** all install Kerno from the Kerno marketplace: add `kernoio/kerno-mcp-plugin` as a marketplace, install the **kerno** plugin, then run **install-kerno**. Jump to your tool below, or paste a [one-shot prompt](#paste-a-prompt-into-your-assistant) for Claude Code or Codex.
+Two steps: install the **kerno** plugin in your tool, then run **`/install-kerno`**.
 
-### Paste a prompt into your assistant
+### 1. Install the plugin
 
-Paste **one** prompt below into **Claude Code or Codex**. It installs the Kerno plugin from the marketplace, then runs **install-kerno** to install the CLI, start the agent, and connect MCP for your workspace. Cursor installs from its Plugins dashboard, see [Cursor](#cursor) below.
-
-| Tool | Copy-paste prompt |
-|------|-------------------|
-| Claude Code | [prompts/install-claude.md](prompts/install-claude.md) |
-| Codex | [prompts/install-codex.md](prompts/install-codex.md) |
-
-### Claude Code
-
-Install from the Kerno marketplace, then run the setup skill:
-
+**Claude Code**
 ```
 /plugin marketplace add kernoio/kerno-mcp-plugin
 /plugin install kerno@kerno
-/install-kerno
 ```
 
-`/install-kerno` installs `@kerno/cli`, logs in, starts the agent with `kerno init -w`, and registers MCP.
+**Cursor**: Settings → Plugins → **Add marketplace → Import from repo**, enter `kernoio/kerno-mcp-plugin`, install **kerno**, then reload the window (**Developer: Reload Window**).
 
-**Or paste a prompt** (agent-driven — it clones and loads the plugin for you):
-
+**Codex**
 ```
-Install and set up the Kerno MCP plugin from https://github.com/kernoio/kerno-mcp-plugin for this workspace.
-
-1. Install from the Kerno marketplace: run `claude plugin marketplace add kernoio/kerno-mcp-plugin` then `claude plugin install kerno@kerno` (see claude/README.md), then restart Claude Code so the plugin loads.
-2. Run the install-kerno skill (/install-kerno) to install @kerno/cli, log in, start the agent with kerno init -w on this project, and register MCP.
-3. Verify kerno_get_applications works for this workspace path.
-
-Work in this repository root unless I specify another path.
+codex plugin marketplace add kernoio/kerno-mcp-plugin
 ```
+Then open **`/plugins`**, install **kerno**, and start a new session.
 
-### Cursor
+Per-tool details: [Claude](claude/README.md) · [Cursor](cursor/README.md) · [Codex](codex/README.md).
 
-Install from the Kerno marketplace, then run the setup skill:
+### 2. Run install-kerno
 
-1. Open Cursor **Settings → Plugins** (or [cursor.com/dashboard](https://cursor.com/dashboard) → Plugins).
-2. **Add marketplace → Import from repo**, and enter `kernoio/kerno-mcp-plugin`.
-3. Install **kerno**, reload the window (**Developer: Reload Window**), then run **`/install-kerno`**.
+Run **`/install-kerno`** (**`@install-kerno`** in Codex). It loads the install-kerno skill, and the agent does the rest: installs `@kerno/cli`, logs you in, starts the local agent bound to this workspace (`kerno init -w`), registers MCP, and verifies the connection. It pauses to ask you a few things (browser login, which host, MCP scope).
 
-`/install-kerno` installs `@kerno/cli`, logs in, binds the agent to this workspace with `kerno init -w`, and registers MCP with the URL from CLI output.
+Or hand both steps to the agent: paste [prompts/install-claude.md](prompts/install-claude.md) (or [prompts/install-codex.md](prompts/install-codex.md) for Codex).
 
-### Codex
+Prerequisites: Node.js ≥ 18, npm, Docker running, a git repository, and a Kerno account. For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
 
-```
-Set up Kerno for this workspace using https://github.com/kernoio/kerno-mcp-plugin.
+## After install
 
-1. Install from the Kerno marketplace: run `codex plugin marketplace add kernoio/kerno-mcp-plugin`, then open /plugins and install kerno (see codex/README.md).
-2. Run the install-kerno skill (@install-kerno) to install @kerno/cli, log in, start the agent with kerno init -w on this project, and register MCP in Codex.
-3. Verify Kerno MCP tools work in this workspace.
-
-Work in this repository root unless I specify another path.
-```
-
-## Where to start
-
-1. **Install the plugin** — use a [prompt](#paste-a-prompt-into-your-assistant) or a client install guide ([Claude](claude/README.md) · [Cursor](cursor/README.md) · [Codex](codex/README.md)).
-2. **First thing after the plugin is installed:** run **install-kerno** (`/install-kerno` or `@install-kerno`).
-3. **Open your assistant in the same workspace** you bound with `kerno init -w <path>`.
-
-After MCP is connected, use `/kerno-bootstrap` to verify connectivity, then `/kerno-env` for environment setup or `/kerno-endpoint-test` for endpoint tests.
+Open your assistant in the **same workspace** you bound with `kerno init -w <path>`. Then use `/kerno-bootstrap` to verify connectivity, `/kerno-env` for environment setup, or `/kerno-endpoint-test` for endpoint tests.
 
 Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
 
@@ -92,15 +59,6 @@ Prefer **greybox** (local + DB access, so DB-backed scenarios run); fall back to
 | Codex | [codex/README.md](codex/README.md) | [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json) |
 
 Shared content: `skills/`, `commands/`, `references/`, [prompts/](prompts/).
-
-## Prerequisites
-
-- Node.js ≥ 18, `npm`, Docker, and a git repository for the target project.
-- **`@kerno/cli`** installed and logged in (`kerno login`) — **install-kerno** handles this after you add the plugin.
-- Agent running for your workspace: `kerno init -w /absolute/path/to/repo` — read the MCP URL from CLI output (port is not fixed).
-- MCP registered in your editor — **install-kerno** handles this step by step.
-
-For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
 
 ## Plugin contents
 

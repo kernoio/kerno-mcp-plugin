@@ -96,7 +96,7 @@ enabled = true
 
 User-scoped: put the same `[mcp_servers.kerno]` block in `~/.codex/config.toml` instead.
 
-**Plugin install:** see [codex/README.md](../codex/README.md) — clone the repo and register as a local plugin source. The plugin may ship a bundled [`mcp.json.example`](../mcp.json.example) template; still update the URL after `kerno init -w` because the port is session-specific.
+**Plugin install:** see [codex/README.md](../codex/README.md) for the marketplace install. The plugin may ship a bundled [`mcp.json.example`](../mcp.json.example) template; still update the URL after `kerno init -w` because the port is session-specific.
 
 **Plugin MCP policy** (optional, after install): `~/.codex/config.toml` may include `[plugins."kerno@kerno".mcp_servers.kerno]` — see [Codex plugin MCP docs](https://developers.openai.com/codex/plugins/build).
 
