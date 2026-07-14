@@ -15,7 +15,6 @@
     "codex"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Kerno",
     "shortDescription": "Kerno MCP skills, bootstrap workflows, and MCP setup",
