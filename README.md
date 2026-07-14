@@ -1,6 +1,8 @@
 # Kerno MCP (Claude Code + Cursor + Codex plugin)
 
-Markdown-only plugin: slash commands, skills, and rules that guide use of the **unified Kerno MCP** tool surface. The agent runtime is **not** included here — install and start it with **`@kerno/cli`**.
+**Kerno** is a runtime QA engine for backend coding agents: it generates and runs integration tests against your real stack, so your agent catches its own regressions before they reach a PR.
+
+This repo is the **plugin** that connects Kerno to your coding tool (Claude Code, Cursor, or Codex): it adds the slash commands and skills that teach the agent how to work with Kerno. The engine itself runs locally via **`@kerno/cli`**; the `/install-kerno` step below sets it up.
 
 ## Install
 
