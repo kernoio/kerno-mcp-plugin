@@ -8,6 +8,10 @@ Markdown-only plugin: slash commands, skills, and rules that guide use of the **
 
 Pick your tool. Two steps each: install the **kerno** plugin, then paste the setup prompt into your agent to configure Kerno for your project.
 
+Prerequisites: Node.js ≥ 18, npm, Docker running, a git repository, and a Kerno account.
+
+Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart). For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
+
 ### Claude Code
 
 **1. Install the plugin**
@@ -27,6 +31,8 @@ Set up Kerno for this workspace.
 Work in this repository root unless I specify another path.
 ```
 
+Details: [claude/README.md](claude/README.md).
+
 ### Cursor
 
 **1. Install the plugin**
@@ -42,6 +48,8 @@ Set up Kerno for this workspace.
 
 Work in this repository root unless I specify another path.
 ```
+
+Details: [cursor/README.md](cursor/README.md).
 
 ### Codex
 
@@ -62,11 +70,7 @@ Set up Kerno for this workspace.
 Work in this repository root unless I specify another path.
 ```
 
-Per-tool details: [Claude](claude/README.md) · [Cursor](cursor/README.md) · [Codex](codex/README.md).
-
-Prerequisites: Node.js ≥ 18, npm, Docker running, a git repository, and a Kerno account. For self-hosted or dev agent setups, see [references/mcp-client-config.md](references/mcp-client-config.md).
-
-Docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/quickstart)
+Details: [codex/README.md](codex/README.md).
 
 ## Unified MCP flow (summary)
 
