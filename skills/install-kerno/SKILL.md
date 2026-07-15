@@ -34,6 +34,8 @@ Official docs: [Setup Kerno MCP](https://kerno.gitbook.io/docs/getting-started/q
 
 > **Single-workspace rebind.** The agent binds to one workspace at a time, and `kerno init` runs headless automatically in agent shells. To point Kerno at a *different* workspace, either run `kerno stop` then `kerno init -w "$WORKSPACE"` (graceful — cancels the old workspace's in-flight work first), or `kerno init -w "$WORKSPACE" --force-switch` (stops and switches without a prompt). A plain `kerno init -w` at a new workspace exits with guidance instead of switching. See **`mcp-client-config.md`** § Single-workspace rebind.
 
+> **A rebind or restart drops your live MCP session.** Any agent stop or workspace switch (`kerno stop`, `--force-switch`, or `stop` + `kerno init -w`), and any agent restart, invalidates the host's existing MCP session — even when the port is unchanged. In-flight and subsequent tool calls then fail (`Unknown session` / "server disconnected") until the host reconnects to the (re-parsed) `MCP_URL`. Reconnect before resuming; in Claude Code: `/mcp` → `kerno` → reconnect. Expected after a switch, not an error state.
+
 **Parallel preflight:** `kerno --version`, `docker info`, confirm `$WORKSPACE` is a git repo, scan existing MCP configs for duplicate Kerno entries.
 
 ## Checklist
