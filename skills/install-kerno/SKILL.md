@@ -113,14 +113,14 @@ Once Tier C passes, say plainly that Kerno is connected. Include:
 3. **Next steps** — ask what they want to do:
 
    > What would you like to do next?
-   > - **Set up your environment** — `/kerno-env` or **`kerno-environment-setup`** skill
-   > - **Search endpoints** — `kerno_list_endpoints` with required **`scope`**
-   > - **Run endpoint tests** — `/kerno-endpoint-test` or **`kerno-endpoint-test`** skill
+   > - **Point Kerno at your running SUT** — `kerno_save_config` with `local`/`remote` + `sut_url`, then `kerno_environment_setup`
+   > - **Search endpoints** — list HTTP routes for an app (lightweight)
+   > - **Plan an endpoint test** — explore routes and validation/scenario workflow
    > - **Stop here** — MCP is connected; nothing else for now
 
 4. If multiple supported apps, ask which app to work with. If one app, confirm it. If zero, explain what Kerno found and stop.
 
-**Hand off:** Load the chosen skill from `skills/` — do not continue from this skill.
+**Hand off:** After the user picks an app and intent, read MCP tool schemas only — e.g. `kerno_list_endpoints` for explore, or `/kerno-bootstrap` for save_config → environment_setup. Do **not** use orchestrate / compose-plan bootstrap. Do not continue from this skill.
 
 ## Agent-safe checks
 
