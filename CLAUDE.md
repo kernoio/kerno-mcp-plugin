@@ -31,7 +31,7 @@ The Kerno agent binary is not included. Human-facing index: [README.md](README.m
 
 ## Releasing (so marketplace installs see updates)
 
-All three installs (Claude, Cursor, Codex) pull from this repo on `master`, but a tool only surfaces "update available" when the plugin `version` changes. Bump it every release, in lockstep across all three manifests:
+All three installs (Claude, Cursor, Codex) pull from this repo on `main`, but a tool only surfaces "update available" when the plugin `version` changes. Bump it every release, in lockstep across all three manifests:
 
 1. `python3 scripts/bump-version.py <new-version>` (e.g. `0.2.0`) — updates `version` in `.claude-plugin/`, `.cursor-plugin/`, `.codex-plugin/` plugin.json.
 2. Commit the bump.
