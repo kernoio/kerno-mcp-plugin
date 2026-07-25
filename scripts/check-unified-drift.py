@@ -28,9 +28,15 @@ FORBIDDEN_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("compose_plan_feedback", re.compile(r"compose_plan_feedback")),
     ("plan-implement-baseline", re.compile(r"plan-implement-baseline")),
     ("kerno-capture-baseline", re.compile(r"kerno-capture-baseline")),
+    # Removed by ADR-0030: `implementation: reflective|standard` was replaced by
+    # `effort: low|medium|high`. The word "reflective" is gone from the API surface.
+    ("`implementation` arg", re.compile(r"`implementation`")),
+    ("reflective", re.compile(r"\breflective\b", re.IGNORECASE)),
 )
 
 UNIFIED_MCP_TOOL_NAMES: tuple[str, ...] = (
+    "kerno_guide",
+    "kerno_ignore_potential_bug",
     "kerno_healthcheck",
     "kerno_get_applications",
     "kerno_list_endpoints",

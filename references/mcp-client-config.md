@@ -151,7 +151,13 @@ The MCP server advertises the name **`kerno-aicore-agent`**. Clients may show to
 
 ## Tools vs MCP resources (observability)
 
-Some telemetry or MCP UIs may group traffic by **resource URI** or server identity on spans. That is **not** the same dimension as MCP **tool** names. The Kerno agent registers **tools** only (no MCP **resources** today). Use the server’s `tools/list` and the **`kerno_*`** names for the canonical tool surface.
+Some telemetry or MCP UIs may group traffic by **resource URI** or server identity on spans. That is **not** the same dimension as MCP **tool** names. Use the server’s `tools/list` and the **`kerno_*`** names for the canonical tool surface.
+
+The Kerno agent registers **both** tools and MCP **resources**. Current resources:
+
+- **`kerno://guide/<topic>`** — the same content as the **`kerno_guide`** tool (`endpoint_test_intent`, `rules_template`, `env_visibility`, `scenario_philosophy`)
+- **`kerno://scenarios/{path}`**
+- **`kerno://preconditions/{path}`
 
 ## Environment (operator)
 

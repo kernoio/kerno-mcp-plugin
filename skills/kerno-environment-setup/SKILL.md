@@ -1,6 +1,6 @@
 ---
 name: kerno-environment-setup
-description: This skill should be used when the user asks to set up the environment, start the stack, bring up services, or run /kerno-env. Starts the app locally (or points at a remote SUT), wires DB access for greybox testing, and falls back to HTTP-only black box when DB access isn't possible.
+description: This skill should be used when the user asks to set up the environment, start the stack, bring up services, or run /kerno-env. Starts the app locally (or points at a remote SUT), wires DB access so database-backed scenarios can run, and falls back to HTTP-only when DB access isn't possible.
 version: 0.4.0
 ---
 
@@ -10,7 +10,7 @@ Use this workflow when the user asks to “set up the env”, “start the stack
 
 **References (read before acting):**
 
-- `references/target-environment.md` — choose **`local`** or **`remote`**; greybox vs black box (DB access)
+- `references/target-environment.md` — choose **`local`** or **`remote`**; whether to wire DB access
 - `references/workspace-config.md` — **`kerno_save_config`** fields and DB-access requirements
 - `references/unified-flow.md` — anti-patterns
 
@@ -25,7 +25,7 @@ Use this workflow when the user asks to “set up the env”, “start the stack
 Follow the decision flow in **`target-environment.md`**. Two choices:
 
 - **Where the SUT runs** — **`local`** (default: start the repo's dev flow **before** **`kerno_save_config`**) or **`remote`** (env runs somewhere other than this machine, e.g. cloud).
-- **DB-access posture** — **greybox** (recommended): wire DB credentials so DB-backed scenarios run. **Black box** (fallback): HTTP-only when DB access isn't possible — **tell the user** that scenarios requiring direct DB access will be reported **`[BLOCKED]`**.
+- **DB access** — recommended: wire DB credentials so DB-backed scenarios run. Fallback: HTTP-only when DB access isn't possible — **tell the user** that scenarios requiring direct DB access will be reported **`[BLOCKED]`**.
 
 ## Step 2: kerno_save_config
 
