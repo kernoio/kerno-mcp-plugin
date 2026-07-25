@@ -26,7 +26,7 @@ Call **`kerno_save_config`** with:
 
 After **`kerno_get_applications`**.
 
-Start the stack with the repository's dev flow **first** (or point at a **`remote`** SUT hosted somewhere other than this machine, e.g. cloud), then call **`kerno_save_config`** with **`local`** (or **`remote`**), **`sut_url`**, and — for **greybox** — dependency env vars, then **`kerno_environment_setup`**. Omit the DB env blocks for **black box** (HTTP-only); DB-backed scenarios will then be reported **`[BLOCKED]`**.
+Start the stack with the repository's dev flow **first** (or point at a **`remote`** SUT hosted somewhere other than this machine, e.g. cloud), then call **`kerno_save_config`** with **`local`** (or **`remote`**), **`sut_url`**, and, where possible, dependency env vars, then **`kerno_environment_setup`**. Omit the DB env blocks to run HTTP-only; DB-backed scenarios will then be reported **`[BLOCKED]`**.
 
 See [target-environment.md](target-environment.md) for the full decision tree.
 
