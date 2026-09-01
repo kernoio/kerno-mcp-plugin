@@ -17,9 +17,8 @@ The Kerno agent binary is not included. Human-facing index: [README.md](README.m
 
 ## Where to start (user onboarding)
 
-1. Install the plugin — [claude/README.md](claude/README.md), [cursor/README.md](cursor/README.md), or [codex/README.md](codex/README.md).
-2. Run **`/install-kerno`** — skill `skills/install-kerno/SKILL.md`.
-3. User must open their MCP host in the **same workspace** bound by `kerno init -w`.
+1. Run **`/install-kerno`** — skill `skills/install-kerno/SKILL.md`.
+2. User must open their MCP host in the **same workspace** bound by `kerno init -w`.
 
 ## Conventions
 

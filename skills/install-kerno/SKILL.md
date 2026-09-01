@@ -94,7 +94,7 @@ First run may download the agent runtime. Read the **full command output**, then
 5. Resolve MCP server id from host descriptors
 6. If tools not visible → user refreshes the host **(user)**
 
-**Codex:** install the plugin first via [codex/README.md](codex/README.md) if skills are missing. Project trust and `[mcp_servers.kerno]` — **`mcp-client-config.md`** § Codex.
+**Codex:** Project trust and `[mcp_servers.kerno]` — **`mcp-client-config.md`** § Codex.
 
 ## Phase 5 — Verify
 
